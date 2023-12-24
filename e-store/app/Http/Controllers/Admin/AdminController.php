@@ -41,10 +41,14 @@ class AdminController extends Controller
         $comany->delete();
         return redirect()->back()->with('success', 'company deleted successfully.');
     }
+
     public function companyupdate($id)
     {
-        return view('admin.update-company',compact('id'));
+        $company = Company::findOrfail($id);
+        return view('admin.update-company',compact('company'));
     }
+
+
     public function addcategory()
     {
         $company=Company::all();
@@ -83,6 +87,8 @@ class AdminController extends Controller
 
         return view('admin.add-phone', compact(['company', 'category']));
     }
+
+
 
     public function storephone(Request $request)
     {
@@ -126,22 +132,29 @@ class AdminController extends Controller
         $product->save();
         return redirect()->route('add.phone')->with('success', 'Product added successfully.');
     }
+
+
+
     public function productdistroy($id)
     {
         $product=Product::findOrfail($id);
         $product->delete();
         return redirect()->back()->with('success', 'product deleted successfully.');
     }
+
+
     public function productupdate($id)
     {
         return view('admin.update-product',compact('id'));
     }
+
+
     public function addcsv()
     {
-
-
         return view('admin.add-csv-file-product');
     }
+
+
 
     public function storecsv(Request $request)
 
@@ -191,18 +204,35 @@ class AdminController extends Controller
          if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
          $category=Category::find($id);
-
         if ($request->input('name')) {
             $category->name = $request->input('name');
         }
-
         if ($request->input('Company_id')) {
             $category->Company_id = $request->input('Company_id');
         }
          $category->save();
          return redirect()->back()->with(['success'=>'updtae category done']);
+    }
+
+    public function updatecomp(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'sometimes|unique:categories,name',
+            'company_address' => 'sometimes|required'
+         ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+         $company=Company::find($id);
+        if ($request->input('company_name')) {
+            $company->company_name = $request->input('company_name');
+        }
+        if ($request->input('company_address')) {
+            $company->company_address = $request->input('company_address');
+        }
+         $company->save();
+         return redirect()->back()->with(['success'=>'updtae company done']);
     }
 
 }
