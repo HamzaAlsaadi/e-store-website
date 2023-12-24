@@ -52,7 +52,7 @@
     <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <span class="card-text"><strong>total: </strong>wwwwwwwww</span>
+                <span class="card-text"><strong>{{ $totalPrice }}</strong></span>
                 <a href="{{ route('web') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i> Continue Shopping</a>
                 <button class="btn btn-danger">Checkout</button>
 

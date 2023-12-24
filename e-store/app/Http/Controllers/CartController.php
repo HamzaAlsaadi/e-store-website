@@ -13,8 +13,18 @@ class CartController extends Controller
 
     public function index()
     {
-
-        return view('web.cart');
+        if (!session()->has('cart')) {
+            return 0;
+        }
+        $products = session()->get('cart');
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $str1 = $product["price"];
+            $str2 =  $product["quantity"];
+            $result = $str1 * $str2;
+            $totalPrice =$totalPrice + $result;
+        };
+        return view('web.cart',compact('totalPrice'));
     }
     public function addProducttoCart(Request $request , $id)
     {
@@ -58,6 +68,7 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Product has been deleted!');
         }
     }
+
 
 
 
