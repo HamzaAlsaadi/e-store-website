@@ -39,6 +39,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => [ 'AdminMiddleware']], fu
     Route::get('/products-update/{id}',[AdminController::class, 'productupdate'])->name('product.update');
     Route::PUT('/update-category/{id}',[AdminController::class, 'updatecate'])->name('update.category');
     Route::PUT('/update-company/{id}',[AdminController::class, 'updatecomp'])->name('update.company');
+    Route::PUT('/update-product/{id}',[AdminController::class, 'updateprod'])->name('update.product');
 
 });
 

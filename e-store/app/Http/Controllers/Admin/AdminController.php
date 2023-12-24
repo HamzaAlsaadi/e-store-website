@@ -145,7 +145,10 @@ class AdminController extends Controller
 
     public function productupdate($id)
     {
-        return view('admin.update-product',compact('id'));
+        $product=Product::findOrfail($id);
+        $company = Company::all();
+        $category=Category::all();
+        return view('admin.update-product',compact('product','company','category'));
     }
 
 
@@ -233,6 +236,54 @@ class AdminController extends Controller
         }
          $company->save();
          return redirect()->back()->with(['success'=>'updtae company done']);
+    }
+
+    public function updateprod(Request $request ,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'mobile_name' => 'required',
+            'Cpu_spsecfication' => 'required',
+            'Gpu_spsecfication' => 'required',
+            'battery_spsecfication' => 'required',
+            'Front_camera_spsecfication' => 'required',
+            'Back_camera_spsecfication' => 'required',
+            'Screen_Size' => 'required',
+            'Type_of_charge' => 'required',
+            'Price' => 'required',
+            'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'category_id' => 'required|exists:categories,id',
+            'Company_id' => 'required|exists:companies,id',
+
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $product = Product::find($id);
+            $product->mobile_name = $request->input('mobile_name');
+            $product->Cpu_spsecfication = $request->input('Cpu_spsecfication');
+            $product->Gpu_spsecfication = $request->input('Gpu_spsecfication');
+            $product->battery_spsecfication = $request->input('battery_spsecfication');
+            $product->Front_camera_spsecfication = $request->input('Front_camera_spsecfication');
+            $product->Back_camera_spsecfication = $request->input('Back_camera_spsecfication');
+            $product->Screen_Size = $request->input('Screen_Size');
+            $product->Type_of_charge = $request->input('Type_of_charge');
+            $product->Price = $request->input('Price');
+            $product->Company_id = $request->input('Company_id');
+            $product->category_id = $request->input('category_id');
+
+        if ($request->hasFile('imge')) {
+            $request->validate([
+                'imge' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $imageName = time().'.'.$request->imge->extension();
+            $request->imge->move(public_path('imageproduct'), $imageName);
+            $product->imge = $imageName;
+        }
+        $product->save();
+
+        return redirect()->route('add.phone')->with('success', 'Product added successfully.');
     }
 
 }
