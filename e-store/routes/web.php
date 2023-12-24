@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,7 +59,10 @@ Route::group(['prefix' => 'home', 'middleware' => [ 'auth']], function ()
     Route::get('/category', [WebController::class, 'category'])->name('web.category');
     Route::get('/product_of_company/{id}', [WebController::class, 'get_product_of_company'])->name('company.product');
     Route::get('/product_of_category/{id}', [WebController::class, 'get_product_of_category'])->name('category.product');
+    Route::post('/add_product_to_cart/{id}', [CartController::class, 'addProducttoCart'])->name('add.cart');
+
 });
+
 
 
 
