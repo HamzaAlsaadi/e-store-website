@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Routing\Controller;
 
 class CartController extends Controller
 {
 
+    public function index()
+    {
+
+        return view('web.cart');
+    }
     public function addProducttoCart(Request $request , $id)
     {
         $product = Product::findOrFail($id);
@@ -21,7 +27,7 @@ class CartController extends Controller
                 "id"=>$id,
                 "name" => $product->mobile_name,
                 "quantity" => $request->quantity,
-                "price" => $product->price,
+                "price" => $product->Price,
                 "Company_id" => $product->Company_id,
                 "category_id" => $product->category_id
             ];
@@ -29,4 +35,30 @@ class CartController extends Controller
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product has been added to cart!');
     }
+
+    public function updateCart(Request $request ,$id)
+    {
+            $x= $request->quantity;
+            $cart = session()->get('cart');
+            $cart[$id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Product has been update quantity!');
+
+    }
+
+
+    public function deletecart(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            return redirect()->back()->with('success', 'Product has been deleted!');
+        }
+    }
+
+
+
 }

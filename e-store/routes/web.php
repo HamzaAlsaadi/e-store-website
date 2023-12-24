@@ -59,8 +59,10 @@ Route::group(['prefix' => 'home', 'middleware' => [ 'auth']], function ()
     Route::get('/category', [WebController::class, 'category'])->name('web.category');
     Route::get('/product_of_company/{id}', [WebController::class, 'get_product_of_company'])->name('company.product');
     Route::get('/product_of_category/{id}', [WebController::class, 'get_product_of_category'])->name('category.product');
+    Route::get('/show_cart', [CartController::class, 'index'])->name('show.cart');
     Route::post('/add_product_to_cart/{id}', [CartController::class, 'addProducttoCart'])->name('add.cart');
-
+    Route::put('/update_product_from_cart/{id}', [CartController::class, 'updateCart'])->name('update.sopping.cart');
+    Route::delete('/delete-cart-product/{id}', [CartController::class, 'deletecart'])->name('delete.cart.product');
 });
 
 

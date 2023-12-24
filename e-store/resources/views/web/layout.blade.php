@@ -31,7 +31,7 @@
             </div>
             <div class="col-12">
                 <div class="dropdown" >
-                    <a class="btn btn-outline-dark" href="">
+                    <a class="btn btn-outline-dark" href="{{ route('show.cart') }}">
                         <i class="fa-solid fa-cart-shopping"></i> Cart <span class="badge text-bg-danger">{{ count((array) session('cart')) }}</span>
                     </a>
                 </div>
@@ -73,7 +73,7 @@
         </nav>
     </div>
 
-    @yield('content')
+
 
 
     <div class="container mt-4">
