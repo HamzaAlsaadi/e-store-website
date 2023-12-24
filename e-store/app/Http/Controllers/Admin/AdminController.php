@@ -68,10 +68,14 @@ class AdminController extends Controller
         $category->delete();
         return redirect()->back()->with('success', 'category deleted successfully.');
     }
+
     public function categoryupdate($id)
     {
-        return view('admin.update-category',compact('id'));
+        $category=Category::findOrfail($id);
+        $companies = Company::all();
+        return view('admin.update-category',compact('category','companies'));
     }
+
     public function addphone()
     {
         $company=Company::all();
@@ -176,6 +180,29 @@ class AdminController extends Controller
         $products = Product::with('company','category')->get();
         return view('admin.main', compact('products', 'category','companies'));
 
+    }
+
+    public function updatecate(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|unique:categories,name',
+            'Company_id' => 'sometimes|required'
+         ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+         $category=Category::find($id);
+
+        if ($request->input('name')) {
+            $category->name = $request->input('name');
+        }
+
+        if ($request->input('Company_id')) {
+            $category->Company_id = $request->input('Company_id');
+        }
+         $category->save();
+         return redirect()->back()->with(['success'=>'updtae category done']);
     }
 
 }

@@ -35,8 +35,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => [ 'AdminMiddleware']], fu
     Route::delete('/category-destroy/{id}',[AdminController::class, 'categorydistroy'])->name('category.destroy');
     Route::delete('/prduct-destroy/{id}',[AdminController::class, 'productdistroy'])->name('products.destroy');
     Route::get('/company-update/{id}',[AdminController::class, 'companyupdate'])->name('company.update');
-    Route::get('/category-update/{id}',[AdminController::class, 'categoryupdate'])->name('category.update');
+    Route::get('/category-update/{id}}',[AdminController::class, 'categoryupdate'])->name('category.update');
     Route::get('/products-update/{id}',[AdminController::class, 'productupdate'])->name('product.update');
+    Route::PUT('/update-category/{id}',[AdminController::class, 'updatecate'])->name('update.category');
+
 });
 
 
