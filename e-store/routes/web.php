@@ -56,6 +56,8 @@ Route::group(['prefix' => 'home', 'middleware' => [ 'auth']], function ()
     Route::get('/product_info/{id}', [WebController::class, 'productinfo'])->name('web.product_deatails');
     Route::get('/company', [WebController::class, 'company'])->name('web.company');
     Route::get('/category', [WebController::class, 'category'])->name('web.category');
+    Route::get('/product_of_company/{id}', [WebController::class, 'get_product_of_company'])->name('company.product');
+    Route::get('/product_of_category/{id}', [WebController::class, 'get_product_of_category'])->name('category.product');
 });
 
 

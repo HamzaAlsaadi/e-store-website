@@ -37,6 +37,18 @@ class WebController extends Controller
 
     }
 
+    public function get_product_of_company($id)
+    {
+        $product = Product::where('company_id', $id)->get();
+        return view ('web.product_company',compact('product'));
+    }
+
+    public function get_product_of_category($id)
+    {
+        $product = Product::where('category_id', $id)->get();
+        return view ('web.product_category',compact('product'));
+    }
+
 
 
 }
