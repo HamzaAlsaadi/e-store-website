@@ -16,13 +16,26 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="{{ url('dashboard') }}">Home</a>
-              <a class="nav-link" href="{{ route('add.comany') }}">add comany</a>
-              <a class="nav-link" href="{{ route('add.category') }}">add category</a>
-              <a class="nav-link "href="{{ route('add.phone') }}">add phone</a>
-              <a class="nav-link "href="{{ route('add.csv') }}">add csv product</a>
-            </div>
+                <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{{ url('dashboard') }}">{{ __('word.Home') }}</a>
+                <a class="nav-link" href="{{ route('add.comany') }}">add comany</a>
+                <a class="nav-link" href="{{ route('add.category') }}">add category</a>
+                <a class="nav-link "href="{{ route('add.phone') }}">add phone</a>
+                <a class="nav-link "href="{{ route('add.csv') }}">add csv product</a>
+                <div class="container">
+                    <li  class="nav-item">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li class="nav-item">
+                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                     </li>
+                </div>
+                </div>
+
+
           </div>
         </div>
       </nav>

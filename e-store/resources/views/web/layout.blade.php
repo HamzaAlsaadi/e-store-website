@@ -78,7 +78,7 @@
             <div class="col-12">
                 <div class="dropdown" >
                     <a class="btn btn-outline-dark" href="{{ route('show.cart') }}">
-                        <i class="fa-solid fa-cart-shopping"></i> Cart <span class="badge text-bg-danger">{{ count((array) session('cart')) }}</span>
+                        <i class="fa-solid fa-cart-shopping"></i> {{ __('word.Cart') }} <span class="badge text-bg-danger">{{ count((array) session('cart')) }}</span>
                     </a>
                 </div>
 
