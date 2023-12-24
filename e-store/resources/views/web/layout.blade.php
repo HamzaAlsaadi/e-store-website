@@ -21,14 +21,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{{ route('web') }}">Home</a>
-                <a class="nav-link" href="{{ route('web.company') }}">company</a>
-                <a class="nav-link" href="{{ route('web.category') }}">category</a>
+                <a class="nav-link active" aria-current="page" href="{{ route('web') }}">{{__('word.Home')  }}</a>
+                <a class="nav-link" href="{{ route('web.company') }}">{{__('word.company')  }}</a>
+                <a class="nav-link" href="{{ route('web.category') }}">{{ __('word.category') }}</a>
                 <a class="nav-link "href="">product</a>
                 <a class="nav-link "href="">offer product</a>
                 </div>
             </div>
+
+            <div class="container">
+                <li  class="nav-item">
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li class="nav-item">
+                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                 </li>
             </div>
+
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
@@ -69,6 +81,7 @@
                         <i class="fa-solid fa-cart-shopping"></i> Cart <span class="badge text-bg-danger">{{ count((array) session('cart')) }}</span>
                     </a>
                 </div>
+
             </div>
         </nav>
     </div>
