@@ -1,7 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\web\WebController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('web.layout');
 });
 
 
@@ -43,8 +43,21 @@ Route::group(['prefix' => 'dashboard', 'middleware' => [ 'AdminMiddleware']], fu
 
 });
 
+Route::get('/index',)->name('home');
 
 
 Auth::routes();
+Route::get('/home', [WebController::class, 'index'])->name('web');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['prefix' => 'home', 'middleware' => [ 'auth']], function ()
+{
+    Route::get('/product_info/{id}', [WebController::class, 'productinfo'])->name('web.product_deatails');
+    Route::get('/company', [WebController::class, 'company'])->name('web.company');
+    Route::get('/category', [WebController::class, 'category'])->name('web.category');
+});
+
+
+
+
