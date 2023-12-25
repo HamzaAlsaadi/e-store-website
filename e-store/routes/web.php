@@ -68,6 +68,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::get('/problem',  [ProblemController::class, 'show'])->name('problem');
         Route::post('/problem/store',  [ProblemController::class, 'store'])->name('problem.store');
         Route::GET('/quiry',  [SearchController::class, 'result'])->name('search.search');
+        Route::GET('/filter',  [SearchController::class, 'filter'])->name('filter');
+        Route::GET('/filter_respone',  [SearchController::class, 'respone'])->name('respone.filter');
     });
 
 

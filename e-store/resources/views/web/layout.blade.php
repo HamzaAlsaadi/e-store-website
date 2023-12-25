@@ -25,26 +25,12 @@
                 <a class="nav-link" href="{{ route('web.company') }}">{{__('word.company')  }}</a>
                 <a class="nav-link" href="{{ route('web.category') }}">{{ __('word.category') }}</a>
                 <a class="nav-link" href="{{ route('problem') }}">{{ __('word.problem') }}</a>
-                <a class="nav-link "href="">filter serach</a>
+                <a class="nav-link "href="{{ route('filter') }}">filter serach</a>
                 <a class="nav-link "href="">offer product</a>
                 </div>
             </div>
 
-            <div class="container">
-                <div class="input-group">
-                    <div class="form-outline" data-mdb-input-init>
-                    <form action="{{ route('search.search') }}" method="GET" >
-                        @csrf
-                        @method('GET')
-                        <input type="text" id="form1"  name="quiry" class="form-control" />
-                        <label class="form-label" for="form1">Search</label>
-                        <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
-                        <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                    </div>
-                </div>
-            </div>
+
 
             <div class="container">
                 <li  class="nav-item">
