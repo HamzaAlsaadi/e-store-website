@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +67,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::delete('/delete-cart-product/{id}', [CartController::class, 'deletecart'])->name('delete.cart.product');
         Route::get('/problem',  [ProblemController::class, 'show'])->name('problem');
         Route::post('/problem/store',  [ProblemController::class, 'store'])->name('problem.store');
+        Route::GET('/quiry',  [SearchController::class, 'result'])->name('search.search');
     });
 
 
