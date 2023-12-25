@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Problem;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -14,28 +15,29 @@ class ProblemController extends Controller
         return view('web.problem');
     }
 
+
     public function store(Request $request)
     {
-        $request->validate([
-            'Text_of_problem' => 'required',
-            'file' => 'file|nullable|mimes:txt,pdf,doc,docx|max:2048'
-        ]);
-        $user_id = Auth::id();
-        $problem = new Problem([
-            'User_id' => $user_id,
-            'Text_of_problem' => $request->input('Text_of_problem'),
-        ]);
-        if ($request->hasFile('file')) {
-            $problem->file = $this->uploadFile($request->file('file'));
-        }
-        DB::transaction(function () use ($problem) {
+            // Validate the form data
+            $user=Auth::id();
+            $request->validate([
+
+                'Text_of_problem' => 'required',
+                'file' => 'required|mimes:jpeg,png,jpg,gif,svg,doc,docx,pdf,txt,zip|max:2048',
+            ]);
+            // Save the file
+            $fileName = time().'.'.$request->file->extension();
+            $request->file->move(public_path('problem'), $fileName);
+            // Save the file name and problem text and user id in the database
+            // Assuming you have a 'problems' table in your database with columns 'user_id', 'problem_text', 'file_name'
+            // Also assuming that you have a 'User' model for the user_id
+            $problem = new Problem;
+            $problem->User_id = $user;
+            $problem->Text_of_problem = $request->Text_of_problem;
+            $problem->file = $fileName;
             $problem->save();
-        });
-        return redirect()->back()->with('success', 'Problem submission successfully submitted.');
+            // Redirect back to the form page with a success messag
+            return redirect()->back()->with('success', 'File and text have been uploaded successfully');
+        }
     }
-    private function uploadFile($file)
-    {
-        $attachmentPath = $file->storeAs('public/attachments', Auth::id() . '.' . $file->getClientOriginalExtension());
-        return $attachmentPath;
-    }
-}
+
