@@ -1,4 +1,4 @@
-<?php
+`<?php
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
