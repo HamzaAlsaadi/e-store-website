@@ -10,6 +10,7 @@ class Problem extends Model
     use HasFactory;
     protected $fillable = [
         'Text_of_problem',
+        'file',
         'Status',
         'User_id',
     ];

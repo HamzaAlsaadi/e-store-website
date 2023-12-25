@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('User_id');
             $table->string('Text_of_problem');
-            $table->string('Status');
+            $table->string('file');
+            $table->string('Status')->default('panding');
             $table->foreign('User_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

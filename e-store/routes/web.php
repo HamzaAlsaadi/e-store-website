@@ -3,6 +3,7 @@ use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProblemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::post('/add_product_to_cart/{id}', [CartController::class, 'addProducttoCart'])->name('add.cart');
         Route::put('/update_product_from_cart/{id}', [CartController::class, 'updateCart'])->name('update.sopping.cart');
         Route::delete('/delete-cart-product/{id}', [CartController::class, 'deletecart'])->name('delete.cart.product');
+        Route::get('/problem',  [ProblemController::class, 'show'])->name('problem');
+        Route::post('/problem/store',  [ProblemController::class, 'store'])->name('problem.store');
     });
 
 

@@ -5,5 +5,6 @@ return[
     "company"=>"company",
     "category"=>"category",
     "Cart"=>"Cart",
+    "problem"=>"problem",
 ];
 ?>

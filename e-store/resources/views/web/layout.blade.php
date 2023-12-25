@@ -24,6 +24,7 @@
                 <a class="nav-link active" aria-current="page" href="{{ route('web') }}">{{__('word.Home')  }}</a>
                 <a class="nav-link" href="{{ route('web.company') }}">{{__('word.company')  }}</a>
                 <a class="nav-link" href="{{ route('web.category') }}">{{ __('word.category') }}</a>
+                <a class="nav-link" href="{{ route('problem') }}">{{ __('word.problem') }}</a>
                 <a class="nav-link "href="">product</a>
                 <a class="nav-link "href="">offer product</a>
                 </div>
