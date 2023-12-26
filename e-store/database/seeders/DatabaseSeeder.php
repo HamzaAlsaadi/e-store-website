@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             AddressUserSeeder::class,
             Product::class,
             PivotOrderProductSeeder::class,
+            RateProductSeeder::class
         ]);
         // address_user::class);
     }
