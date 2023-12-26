@@ -7,9 +7,9 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pivot_Prodcut_Order>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PivotOrderProduct>
  */
-class PivotProdcutOrderFactory extends Factory
+class PivotOrderProductFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pivot_Prodcut_Order;
-use App\Http\Requests\StorePivot_Prodcut_OrderRequest;
-use App\Http\Requests\UpdatePivot_Prodcut_OrderRequest;
+use App\Models\AddressUser;
+use App\Http\Requests\StoreAddressUserRequest;
+use App\Http\Requests\UpdateAddressUserRequest;
 
-class PivotProdcutOrderController extends Controller
+class AddressUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PivotProdcutOrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePivot_Prodcut_OrderRequest $request)
+    public function store(StoreAddressUserRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class PivotProdcutOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pivot_Prodcut_Order $pivot_Prodcut_Order)
+    public function show(AddressUser $addressUser)
     {
         //
     }
@@ -43,7 +43,7 @@ class PivotProdcutOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pivot_Prodcut_Order $pivot_Prodcut_Order)
+    public function edit(AddressUser $addressUser)
     {
         //
     }
@@ -51,7 +51,7 @@ class PivotProdcutOrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePivot_Prodcut_OrderRequest $request, Pivot_Prodcut_Order $pivot_Prodcut_Order)
+    public function update(UpdateAddressUserRequest $request, AddressUser $addressUser)
     {
         //
     }
@@ -59,7 +59,7 @@ class PivotProdcutOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pivot_Prodcut_Order $pivot_Prodcut_Order)
+    public function destroy(AddressUser $addressUser)
     {
         //
     }

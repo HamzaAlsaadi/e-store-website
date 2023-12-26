@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             company::class,
             CatgorySeeder::class,
-
+            AddressUserSeeder::class,
             Product::class,
-            PivotProdcutOrderSeeder::class,
+            PivotOrderProductSeeder::class,
         ]);
         // address_user::class);
     }
