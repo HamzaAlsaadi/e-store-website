@@ -5,6 +5,7 @@ use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\RateProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,6 +71,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::GET('/quiry',  [SearchController::class, 'result'])->name('search.search');
         Route::GET('/filter',  [SearchController::class, 'filter'])->name('filter');
         Route::GET('/filter_respone',  [SearchController::class, 'respone'])->name('respone.filter');
+        Route::post('/review/store/{id}',  [RateProductController::class, 'store'])->name('review.store');
+        Route::get('/review/show/{id},' , [RateProductController::class, 'show'])->name('review.show');
     });
 
 

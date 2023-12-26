@@ -18,6 +18,7 @@ class WebController extends Controller
 
     public function productinfo($id)
     {
+
         $products=Product::findOrfail($id);
         return view('web.product_info',compact('products'));
 

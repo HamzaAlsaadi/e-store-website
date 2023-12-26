@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(Address_of_user::class);
     }
 
+    public function rate()
+    {
+        return $this->hasMany(RateProduct::class);
+    }
+
     public function problem()
     {
         return $this->hasMany(Problem::class);
