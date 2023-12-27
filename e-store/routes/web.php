@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RateProductController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,6 +74,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::GET('/filter_respone',  [SearchController::class, 'respone'])->name('respone.filter');
         Route::post('/review/store/{id}',  [RateProductController::class, 'store'])->name('review.store');
         Route::get('/review/show/{id},' , [RateProductController::class, 'show'])->name('review.show');
+        Route::resource('profile', ProfileController::class);
+        Route::PUT('profile/updateprofile/{id}', [ProfileController::class,'update'])->name('update.profile');
+
     });
 
 

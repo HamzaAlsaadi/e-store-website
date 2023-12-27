@@ -6,5 +6,6 @@ return[
     "category"=>"category",
     "Cart"=>"Cart",
     "problem"=>"problem",
+    "profile"=>"profile",
 ];
 ?>
