@@ -14,7 +14,8 @@ class CartController extends Controller
     public function index()
     {
         if (!session()->has('cart')) {
-            return 0;
+            $totalPrice = 0;
+            return view('web.cart',compact('totalPrice'));
         }
         $products = session()->get('cart');
         $totalPrice = 0;

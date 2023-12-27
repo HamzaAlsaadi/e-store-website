@@ -12,7 +12,10 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('web.profile_user');
+        $user = Auth::user();
+        $address = AddressUser::where('user_id', $user->id)->first();
+
+        return view('web.profile_user',compact('user','address'));
     }
 
     public function show($id )

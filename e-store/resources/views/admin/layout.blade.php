@@ -10,6 +10,7 @@
   </head>
   <body>
 
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="">Admin</a>
@@ -23,6 +24,7 @@
                         <a class="nav-link" href="{{ route('add.category') }}">add category</a>
                         <a class="nav-link "href="{{ route('add.phone') }}">add phone</a>
                         <a class="nav-link "href="{{ route('add.csv') }}">add csv product</a>
+                        <a class="nav-link "href="{{ route('admin.order') }}">Order</a>
                         <div class="container">
                             <li  class="nav-item">
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -74,10 +76,15 @@
         </div>
       </nav>
 
-
-    @yield('content')
-
-
+      <div class="container mt-4">
+        @if(session('success'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+              {{ session('success') }}
+            </div>
+        @endif
+        @yield('content')
+    </div>
 
 
 

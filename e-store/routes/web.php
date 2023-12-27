@@ -7,6 +7,8 @@ use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RateProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +48,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::PUT('/update-category/{id}',[AdminController::class, 'updatecate'])->name('update.category');
         Route::PUT('/update-company/{id}',[AdminController::class, 'updatecomp'])->name('update.company');
         Route::PUT('/update-product/{id}',[AdminController::class, 'updateprod'])->name('update.product');
+        Route::get('/Order',[OrderController::class, 'getOrder'])->name('admin.order');
+
 
     });
 
@@ -76,6 +80,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::get('/review/show/{id},' , [RateProductController::class, 'show'])->name('review.show');
         Route::resource('profile', ProfileController::class);
         Route::PUT('profile/updateprofile/{id}', [ProfileController::class,'update'])->name('update.profile');
+        Route::get('/order_place,' , [OrderController::class, 'store'])->name('Order.Place');
+        Route::get('/Order/history',[OrderController::class, 'get_User_Orders'])->name('history.order');
+        Route::get('/Order/products/{id}',[OrderController::class, 'getOrder_Product'])->name('product.order');
+
 
     });
 

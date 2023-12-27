@@ -9,5 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['count_of_items_in_order', 'total_price'];
+    protected $fillable = ['count_of_items_in_order', 'total_price','user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
+    public function order()
+    {
+        return $this->hasMany(PivotOrderProduct::class);
+    }
 }

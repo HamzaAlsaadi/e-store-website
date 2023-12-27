@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('pivot_order_products', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity');
             $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
