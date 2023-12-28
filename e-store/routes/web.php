@@ -9,6 +9,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RateProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Auth;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
