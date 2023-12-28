@@ -3,7 +3,7 @@
 
 <div class="card-group">
 
-    @foreach ( $product as $product )
+    @foreach ( $products as $product )
     <div class="card">
         <img class="card-img-top" src="{{ asset('imageproduct/'.$product->imge) }}" width="50px" height="150px" alt="Card image cap">
         <div class="card-body">
@@ -22,9 +22,9 @@
         </div>
 
     @endforeach
-
-
 </div>
+
+{{ $products->links() }}
 
 
 @endsection

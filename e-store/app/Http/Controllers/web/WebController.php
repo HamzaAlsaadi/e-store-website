@@ -12,8 +12,9 @@ class WebController extends Controller
 {
     public function index()
     {
-        $product=Product::all();
-        return view('web.homepage',compact('product'));
+
+        $products=Product::paginate(2);
+        return view('web.homepage',compact('products'));
     }
 
     public function productinfo($id)
