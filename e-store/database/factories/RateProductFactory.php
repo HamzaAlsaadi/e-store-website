@@ -22,6 +22,7 @@ class RateProductFactory extends Factory
             'number_of_rate_for_product' => fake()->numberBetween(1, 5),
             'product_id' => Product::all()->random()->id,
             'User_id' => User::all()->random()->id,
+            'comment' => fake()->sentence(),
         ];
     }
 }
