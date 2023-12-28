@@ -1,12 +1,6 @@
 @extends('admin.layout')
 @section('content')
 
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-        {{ Session::get('success') }}
-    </div>
-@endif
 
 @if ($errors->any())
     <div class="alert alert-danger">

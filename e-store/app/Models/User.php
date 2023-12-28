@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
     ];
 
     /**
@@ -44,6 +45,20 @@ class User extends Authenticatable
     ];
     public function address()
     {
-        return $this->hasMany(Address_of_user::class);
+        return $this->hasMany(AddressUser::class);
+    }
+
+    public function rate()
+    {
+        return $this->hasMany(RateProduct::class);
+    }
+
+    public function problem()
+    {
+        return $this->hasMany(Problem::class);
+    }
+    public function order()
+    {
+        return $this->hasMany(order::class);
     }
 }

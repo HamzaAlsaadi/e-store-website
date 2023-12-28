@@ -14,11 +14,20 @@ class Product extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class,'Company_id');
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
+    public function rate()
+    {
+        return $this->hasMany(RateProduct::class);
+    }
+    public function order()
+    {
+        return $this->hasMany(PivotOrderProduct::class);
     }
 }

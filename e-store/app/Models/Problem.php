@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RateProduct extends Model
+class Problem extends Model
 {
     use HasFactory;
-    protected $fillable=['number_of_rate_for_product','comment','product_id','user_id'];
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+    protected $fillable = [
+        'Text_of_problem',
+        'file',
+        'Status',
+        'User_id',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pivot_order_products', function (Blueprint $table) {
+        Schema::create('problems', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
-            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-
+            $table->unsignedBigInteger('User_id');
+            $table->string('Text_of_problem');
+            $table->string('file');
+            $table->string('Status')->default('panding');
+            $table->foreign('User_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pivot_order_products');
+        Schema::dropIfExists('problems');
     }
 };

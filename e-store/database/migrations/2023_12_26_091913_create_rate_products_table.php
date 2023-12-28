@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('rate_products', function (Blueprint $table) {
             $table->id();
             $table->integer('number_of_rate_for_product');
+            $table->text('comment');
             $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
