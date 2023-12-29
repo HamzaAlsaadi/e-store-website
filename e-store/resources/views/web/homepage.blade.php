@@ -22,9 +22,9 @@
         </div>
 
     @endforeach
+
 </div>
 
-{{ $products->links() }}
-
+<div class="container mt-4">{{ $products->onEachSide(5)->links() }}</div>
 
 @endsection
