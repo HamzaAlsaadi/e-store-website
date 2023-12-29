@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.layout');
+        return view('admin.main');
     }
 
     public function addcompany()
@@ -132,7 +132,6 @@ class AdminController extends Controller
         $product->save();
         return redirect()->route('add.phone')->with('success', 'Product added successfully.');
     }
-
 
 
     public function productdistroy($id)

@@ -19,7 +19,7 @@
             <p></p>
         </div>
         <div class="col-md-8">
-           {{--   <h3>Personal Information</h3>
+            <h3>Personal Information</h3>
             <p><strong>Name_Of_User: {{ $user-> name}}</strong> </p>
             <p><strong>email_Of_User: {{ $user-> email}}</strong> </p>
             <p><strong>City: {{ $address-> name_of_the_city}}</strong> </p>
@@ -27,7 +27,7 @@
             <p><strong>Building: {{ $address->number_of_building }}</strong> </p>
             <p><strong>Phone: {{ $user->phone }}</strong></p>
         </div>
-        --}}
+
     </div>
 
 </div>

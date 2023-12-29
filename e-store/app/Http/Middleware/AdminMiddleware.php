@@ -19,10 +19,6 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user() &&  Auth::user()->Type_of_user == 1) {
-            if (Auth::check()) {
-
-                session()->flash('success', 'welcome_to_tha_admin');
-            }
             return $next($request);
        }
        return redirect('home')->with('error','You have not admin access');
