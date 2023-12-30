@@ -4,18 +4,12 @@
 
 
     <h2>company</h2>
-
     <table class="table">
-
         <thead>
-
             <tr>
-
                 <th>company_name</th>
                 <th>company_address</th>
                 <th>event</th>
-
-
             </tr>
         </thead>
         @foreach ($companies as $company )
@@ -84,6 +78,7 @@
                 <th>imge</th>
                 <th>name of comany</th>
                 <th>name of category</th>
+                <th>offer</th>
                 <th>event</th>
             </tr>
         </thead>
@@ -102,6 +97,7 @@
                 <td><img src="{{ asset('imageproduct/'.$products->imge) }}" width="100" height="100" alt="{{ $products->name }}"/></td>
                 <td>{{ DB::table('companies')->where('id', $products->Company_id)->value('company_name') }}</td>
                 <td>{{ DB::table('categories')->where('id', $products->category_id)->value('name') }}</td>
+                <td>{{$products->offer->percent_of_discount}}</td>
                 <td>
                     <a href="{{ route('product.update',$products->id) }}"><button class="btn btn-danger">update</button></a>
                     <form action="{{ route('products.destroy',$products->id)}}" method="post">

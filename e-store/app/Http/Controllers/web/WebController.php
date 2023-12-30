@@ -5,6 +5,7 @@ use App\Models\Company;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Routing\Controller;
+use App\Models\Offer;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,13 @@ class WebController extends Controller
     public function index()
     {
 
-        $products=Product::paginate(pagination_count);
+        $products = Product::whereExists(function ($query) {
+            $query->select('id')
+                ->from('offers')
+                ->whereRaw('offers.id = products.offer_id')
+                ->where('offers.id', '=', 1);
+        })->paginate(pagination_count);
+
         return view('web.homepage',compact('products'));
     }
 

@@ -32,7 +32,7 @@
                         <a class="nav-link" href="{{ route('web.category') }}">{{ __('word.category') }}</a>
                         <a class="nav-link" href="{{ route('problem') }}">{{ __('word.problem') }}</a>
                         <a class="nav-link "href="{{ route('filter') }}">filter serach</a>
-                        <a class="nav-link "href="">offer product</a>
+                        <a class="nav-link "href="{{ route('offer') }}">offer product</a>
                     </div>
                 </div>
 

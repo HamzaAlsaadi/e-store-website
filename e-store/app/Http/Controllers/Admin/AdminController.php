@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Company;
 use App\Models\Category;
+use App\Models\Offer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,7 +15,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.main');
+        $companies = Company::all();
+        $category = Category::with('company')->get();
+        $products = Product::with('company','category')->get();
+        return view('admin.main', compact('products', 'category','companies'));
     }
 
     public function addcompany()
@@ -84,8 +88,9 @@ class AdminController extends Controller
     {
         $company=Company::all();
         $category=Category::all();
+        $offer=Offer::all();
 
-        return view('admin.add-phone', compact(['company', 'category']));
+        return view('admin.add-phone', compact(['company', 'category','offer']));
     }
 
 
@@ -105,6 +110,7 @@ class AdminController extends Controller
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id'=>'nullable|exists:offers,id'
 
         ]);
         if ($validator->fails()) {
@@ -128,7 +134,9 @@ class AdminController extends Controller
             'Company_id' => $request->input('Company_id'),
             'category_id' => $request->input('category_id'),
             'imge' => $imageName,
+            'offer_id'=>$request->input('offer_id')
         ]);
+
         $product->save();
         return redirect()->route('add.phone')->with('success', 'Product added successfully.');
     }
@@ -147,7 +155,8 @@ class AdminController extends Controller
         $product=Product::findOrfail($id);
         $company = Company::all();
         $category=Category::all();
-        return view('admin.update-product',compact('product','company','category'));
+        $offer=Offer::all();
+        return view('admin.update-product',compact('product','company','category','offer'));
     }
 
 
@@ -252,6 +261,7 @@ class AdminController extends Controller
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id'=>'nullable|exists:offers,id'
 
         ]);
         if ($validator->fails()) {
@@ -270,6 +280,7 @@ class AdminController extends Controller
             $product->Price = $request->input('Price');
             $product->Company_id = $request->input('Company_id');
             $product->category_id = $request->input('category_id');
+            $product->offer_id= $request->input('offer_id');
 
         if ($request->hasFile('imge')) {
             $request->validate([
@@ -282,7 +293,7 @@ class AdminController extends Controller
         }
         $product->save();
 
-        return redirect()->route('add.phone')->with('success', 'Product added successfully.');
+        return redirect()->back()->with('success', 'Product edit successfully.');
     }
 
 }

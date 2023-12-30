@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\Offer;
 use Database\Factories\catgoryFactory;
 use Illuminate\Database\Seeder;
 
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             PivotOrderProductSeeder::class,
             RateProductSeeder::class,
             PaymentSeeder::class,
+            Offerseesers::class,
             PillPaymentSeeder::class
         ]);
         // address_user::class);

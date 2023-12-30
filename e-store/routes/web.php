@@ -9,6 +9,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RateProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 define('pagination_count',3);
@@ -86,6 +87,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::get('/order_place,' , [OrderController::class, 'store'])->name('Order.Place');
         Route::get('/Order/history',[OrderController::class, 'get_User_Orders'])->name('history.order');
         Route::get('/Order/products/{id}',[OrderController::class, 'getOrder_Product'])->name('product.order');
+        Route::GET('/offer',  [OfferController::class, 'index'])->name('offer');
 
     });
 

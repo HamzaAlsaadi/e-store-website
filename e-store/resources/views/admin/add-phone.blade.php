@@ -109,6 +109,17 @@
         </div>
     </div>
 
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Offer/label>
+        <div class="col-sm-10">
+            <select id="category_id" type="text" class="form-control @error('category_id') is-invalid @enderror" name="offer_id" value="{{ old('offer_id') }}" required autocomplete="Company_id" autofocus>
+                @foreach($offer as $offers)
+                    <option value="{{ $offers->id }}">{{ $offers->percent_of_discount }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">image</label>
         <input type="file" class="form-control" id="exampleFormControlInput1"  name="imge">

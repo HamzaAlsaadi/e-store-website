@@ -20,9 +20,9 @@ class CartController extends Controller
         $products = session()->get('cart');
         $totalPrice = 0;
         foreach ($products as $product) {
-            $str1 = $product["price"];
-            $str2 =  $product["quantity"];
-            $result = $str1 * $str2;
+            $price = $product["price"];
+            $quantity =  $product["quantity"];
+            $result = $price * $quantity;
             $totalPrice =$totalPrice + $result;
         };
         return view('web.cart',compact('totalPrice'));
@@ -30,6 +30,15 @@ class CartController extends Controller
     public function addProducttoCart(Request $request , $id)
     {
         $product = Product::findOrFail($id);
+
+       if($product->offer->percent_of_discount != 0.00)
+           {
+            $discount = $product->Price * (1 - floatval($product->offer->percent_of_discount) / 100);
+            $product->Price=$discount;
+           }else{
+            $product->Price=$product->Price;
+           }
+
         $cart = session()->get('cart', []);
         if(isset($cart[$id])) {
             $cart[$id]=["quantity" => $request->quantity];
@@ -44,7 +53,9 @@ class CartController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product has been added to cart!');
+
+        return redirect()->back()->with('success', 'Product  has been added to cart!');
+
     }
 
     public function updateCart(Request $request ,$id)

@@ -13,6 +13,6 @@ class PillPaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        pillPayment::factory()->count(50)->create();
+        pillPayment::factory()->count(5)->create();
     }
 }

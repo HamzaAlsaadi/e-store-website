@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Offer;
 use Database\Seeders\catgory;
+use Database\Seeders\Offerseesers;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -32,7 +34,7 @@ class productFactory extends Factory
             'imge' => fake()->randomElement(['c://', 'D://']),
             'Company_id' => Company::all()->random()->id,
             'category_id' => Category::all()->random()->id,
-
+            'offer_id'=>Offer::all()->random()->id
 
         ];
     }
