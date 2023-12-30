@@ -20,24 +20,21 @@ class AdminController extends Controller
         $products = Product::with('company','category')->get();
         return view('admin.main', compact('products', 'category','companies'));
     }
-
     public function addcompany()
     {
         return view('admin.add-comany');
     }
-
     public function storecompany(Request $request)
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'company_name' => 'required|unique:companies,company_name',
-
             'company_address' => 'required',
          ]);
-
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
          $company=Company::create($request->all());
          return redirect()->back()->with(['success'=>'add company done']);
-
     }
     public function companydistroy($id)
     {
@@ -61,11 +58,13 @@ class AdminController extends Controller
 
     public function storecategory(Request $request)
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories,name',
             'Company_id' => 'required',
          ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
          $category=Category::create($request->all());
          return redirect()->back()->with(['success'=>'add category done']);
@@ -170,14 +169,17 @@ class AdminController extends Controller
     public function storecsv(Request $request)
 
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'csv_file' => 'required|mimes:csv,txt',
-        ]);
+         ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $path = $request->file('csv_file')->getRealPath();
         $data = array_map('str_getcsv', file($path));
         $data = array_slice($data, 1);
         foreach ($data as $row) {
+
             $product = new Product([
                 'mobile_name' => $row[0],
                 'Cpu_spsecfication' => $row[1],

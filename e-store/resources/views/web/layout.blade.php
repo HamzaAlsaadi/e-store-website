@@ -12,7 +12,15 @@
     <script src="https://kit.fontawesome.com/71b7145720.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <body>
 
     <div class="hero_area">
@@ -111,12 +119,6 @@
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                 {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                {{ session('error') }}
             </div>
         @endif
         @yield('content')

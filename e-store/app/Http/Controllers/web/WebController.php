@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Routing\Controller;
 use App\Models\Offer;
 use Validator;
+
 use Illuminate\Http\Request;
 
 class WebController extends Controller

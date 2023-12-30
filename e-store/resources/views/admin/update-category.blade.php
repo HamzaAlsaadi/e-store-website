@@ -1,20 +1,6 @@
 @extends('admin.layout')
 @section('content')
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-        {{ Session::get('success') }}
-    </div>
-@endif
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
 <form action={{ route('update.category',$category->id) }} method="post"/>
 @csrf
 @method('Put')

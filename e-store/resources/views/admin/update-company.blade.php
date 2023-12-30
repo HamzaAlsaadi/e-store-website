@@ -1,12 +1,7 @@
 @extends('admin.layout')
 @section('content')
 company update
-@if (Session::has('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-        {{ Session::get('success') }}
-    </div>
-@endif
+
 <form action={{ route('update.company',$company->id) }} method="post"/>
 @csrf
 @method('Put')
