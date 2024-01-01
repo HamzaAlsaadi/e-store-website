@@ -5,6 +5,7 @@ use App\Models\Company;
 use App\Models\Category;
 use App\Models\Offer;
 use App\Models\Product;
+use Dotenv\Validator as DotenvValidator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Validator;
@@ -13,7 +14,7 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() //
     {
         $companies = Company::all();
         $category = Category::with('company')->get();
