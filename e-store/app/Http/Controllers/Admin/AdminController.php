@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Company;
 use App\Models\Category;
 use App\Models\Product;
+use Dotenv\Validator as DotenvValidator;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Validator;
@@ -12,17 +13,17 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() //
     {
         return view('admin.layout');
     }
 
-    public function addcompany()
+    public function addcompany()    //
     {
         return view('admin.add-comany');
     }
 
-    public function storecompany(Request $request)
+    public function storecompany(Request $request)  //
     {
         $request->validate([
 
