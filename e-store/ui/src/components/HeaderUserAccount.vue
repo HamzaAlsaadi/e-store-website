@@ -198,7 +198,11 @@
                     >
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/UserAccount"
+                                        >Home</router-link
+                                    ></a
+                                >
                             </li>
                             <li class="nav-item">
                                 <nav>
@@ -222,37 +226,58 @@
                                                             >
                                                                 <li>
                                                                     <a href="#"
-                                                                        >SAMSUNG</a
+                                                                        ><router-link
+                                                                            to="Samsung"
+                                                                            >SAMSUNG</router-link
+                                                                        >
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                        ><router-link
+                                                                            to="Apple"
+                                                                            >APPLE</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >APPLE</a
+                                                                        ><router-link
+                                                                            to="Xiaomi"
+                                                                            >XIAOMI</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >XIAOMI</a
+                                                                        ><router-link
+                                                                            to="HuaWei"
+                                                                            >HUAWEI</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >HUAWEI</a
+                                                                        ><router-link
+                                                                            to="Nokia"
+                                                                            >NOKIA</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >NOKIA</a
+                                                                        ><router-link
+                                                                            to="Htc"
+                                                                            >HTC</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >HTC</a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        >TECNO</a
+                                                                        ><router-link
+                                                                            to="Tecno"
+                                                                            >TECNO</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
@@ -268,37 +293,58 @@
                                                             >
                                                                 <li>
                                                                     <a href="#"
-                                                                        >LG</a
+                                                                        ><router-link
+                                                                            to="Lg"
+                                                                            >LG</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >HONOR</a
+                                                                        ><router-link
+                                                                            to="Honor"
+                                                                            >HONOR</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >GOOGLE</a
+                                                                        ><router-link
+                                                                            to="Google"
+                                                                            >GOOGLE</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >LENOVO</a
+                                                                        ><router-link
+                                                                            to="Lenovo"
+                                                                            >LENOVO</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >ONEPLUS</a
+                                                                        ><router-link
+                                                                            to="Oneplus"
+                                                                            >ONEPLUS</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >OPPO</a
+                                                                        ><router-link
+                                                                            to="Oppo"
+                                                                            >OPPO</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >INFINIX</a
+                                                                        ><router-link
+                                                                            to="Infinix"
+                                                                            >INFINIX</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                             </ul>
@@ -309,37 +355,58 @@
                                                             >
                                                                 <li>
                                                                     <a href="#"
-                                                                        >SONY</a
+                                                                        ><router-link
+                                                                            to="Sony"
+                                                                            >SONY</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >REALME</a
+                                                                        ><router-link
+                                                                            to="Realme"
+                                                                            >REALME</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >VIVO</a
+                                                                        ><router-link
+                                                                            to="Vivo"
+                                                                            >VIVO</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >ZTE</a
+                                                                        ><router-link
+                                                                            to="Zte"
+                                                                            >ZTE</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >MEIZU</a
+                                                                        ><router-link
+                                                                            to="Meizu"
+                                                                            >MEIZU</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >MOTOROLA</a
+                                                                        ><router-link
+                                                                            to="Motorola"
+                                                                            >MOTOROLA</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >ASUS</a
+                                                                        ><router-link
+                                                                            to="Asus"
+                                                                            >ASUS</router-link
+                                                                        ></a
                                                                     >
                                                                 </li>
                                                             </ul>
@@ -362,7 +429,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Compare</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="Compare"
+                                        >Compare</router-link
+                                    ></a
+                                >
                             </li>
                         </ul>
                     </div>
