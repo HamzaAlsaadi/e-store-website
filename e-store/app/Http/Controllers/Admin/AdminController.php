@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
     public function addcompany()
     {
-        return view('admin.add-comany');
+        return view('admin.company.add-comany');
     }
     public function storecompany(Request $request)
     {
@@ -46,14 +46,14 @@ class AdminController extends Controller
     public function companyupdate($id)
     {
         $company = Company::findOrfail($id);
-        return view('admin.update-company',compact('company'));
+        return view('admin.company.update-company',compact('company'));
     }
 
 
     public function addcategory()
     {
         $company=Company::all();
-        return view('admin.add-category',compact('company'));
+        return view('admin.category.add-category',compact('company'));
     }
 
     public function storecategory(Request $request)
@@ -80,7 +80,7 @@ class AdminController extends Controller
     {
         $category=Category::findOrfail($id);
         $companies = Company::all();
-        return view('admin.update-category',compact('category','companies'));
+        return view('admin.category.update-category',compact('category','companies'));
     }
 
     public function addphone()
@@ -89,7 +89,7 @@ class AdminController extends Controller
         $category=Category::all();
         $offer=Offer::all();
 
-        return view('admin.add-phone', compact(['company', 'category','offer']));
+        return view('admin.product.add-phone', compact(['company', 'category','offer']));
     }
 
 
@@ -155,13 +155,13 @@ class AdminController extends Controller
         $company = Company::all();
         $category=Category::all();
         $offer=Offer::all();
-        return view('admin.update-product',compact('product','company','category','offer'));
+        return view('admin.product.update-product',compact('product','company','category','offer'));
     }
 
 
     public function addcsv()
     {
-        return view('admin.add-csv-file-product');
+        return view('admin.csv_product.add-csv-file-product');
     }
 
 

@@ -55,7 +55,7 @@ class RateProductController extends Controller
     public function show($id)
     {
         $review = RateProduct::where('product_id', 'like', "%$id%")->get();
-        return view('rating',compact('review'));
+        return view('web.rate.rating',compact('review'));
 
     }
 

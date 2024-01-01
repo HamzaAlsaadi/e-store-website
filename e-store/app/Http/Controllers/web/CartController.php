@@ -16,7 +16,7 @@ class CartController extends Controller
     {
         if (!session()->has('cart')) {
             $totalPrice = 0;
-            return view('web.cart',compact('totalPrice'));
+            return view('web.cart.cart',compact('totalPrice'));
         }
         $products = session()->get('cart');
         $totalPrice = 0;
@@ -26,7 +26,7 @@ class CartController extends Controller
             $result = $price * $quantity;
             $totalPrice =$totalPrice + $result;
         };
-        return view('web.cart',compact('totalPrice'));
+        return view('web.cart.cart',compact('totalPrice'));
     }
     public function addProducttoCart(Request $request , $id)
     {

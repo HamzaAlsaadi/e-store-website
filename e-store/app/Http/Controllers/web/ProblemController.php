@@ -13,7 +13,7 @@ class ProblemController extends Controller
 {
     public function show()
     {
-        return view('web.problem');
+        return view('web.problem.problem');
     }
 
 

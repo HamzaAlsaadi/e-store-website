@@ -21,14 +21,14 @@ class SearchController extends Controller
             $search = $request->input('quiry');
             $products = Product::where('mobile_name', 'like', "%$search%")->get();
 
-            return view('web.search', compact('products'));
+            return view('web.search&filter.search', compact('products'));
 
     }
     public function filter()
     {
         $company=Company::all();
         $category=Category::all();
-        return view ('web.filter',compact('company','category'));
+        return view ('web.search&filter.filter',compact('company','category'));
     }
     public function respone(Request $request)
      {

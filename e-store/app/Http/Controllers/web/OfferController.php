@@ -20,7 +20,7 @@ class OfferController extends Controller
             $product->discounted_price = $product->Price * (1 - floatval($product->offer->percent_of_discount) / 100);
         });
         $products = $this->paginate($products, 10);
-        return view('web.offer_product', compact('products'));
+        return view('web.offer.offer_product', compact('products'));
 
     }
     public function paginate($items, $perPage)

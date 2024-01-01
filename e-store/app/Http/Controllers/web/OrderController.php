@@ -75,7 +75,7 @@ class OrderController extends Controller
     {
         $order=Order::all();
         $recordCount = Order::count();
-        return view('admin.Orders',compact('order','recordCount'));
+        return view('admin.order.Orders',compact('order','recordCount'));
     }
 
     /**
@@ -86,7 +86,7 @@ class OrderController extends Controller
         $PivotOrderProduct=PivotOrderProduct::where('order_id', $id)->get();
 
 
-        return view('admin.Products_Of_Order',compact('PivotOrderProduct'));
+        return view('admin.order.Products_Of_Order',compact('PivotOrderProduct'));
     }
 
     /**

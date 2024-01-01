@@ -16,12 +16,12 @@ class ProfileController extends Controller
         $user = Auth::user();
         $address = AddressUser::where('user_id', $user->id)->first();
 
-        return view('web.profile_user',compact('user','address'));
+        return view('web.profile.profile_user',compact('user','address'));
     }
 
     public function show($id )
     {
-        return view('profile.store');
+        return view('web.profile.profile.store');
     }
 
     public function edit($id )
@@ -29,15 +29,15 @@ class ProfileController extends Controller
         $user_id=Auth::id();
         $address = AddressUser::where('user_id', 'like', "%$user_id%")->get();
         $user=User::findOrfail($user_id);
-        return view('profile.edit',compact('address','user'));
+        return view('web.profile.edit',compact('address','user'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name_of_the_city' => 'required',
-            'number_of_the_street' => 'required',
-            'number_of_building'=> 'required'
+            'name_of_the_city' => 'nullable',
+            'number_of_the_street' => 'nullable',
+            'number_of_building'=> 'nullable'
          ]);
          if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
