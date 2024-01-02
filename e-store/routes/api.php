@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('products', ProductController::class)->middleware('auth:sanctum');;
+Route::apiResource('products', ProductController::class);
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
 Route::apiResource('csv', StoreCsvController::class)->middleware('auth:sanctum');;
