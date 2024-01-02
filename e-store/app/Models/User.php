@@ -48,7 +48,7 @@ class User extends Authenticatable
         return $this->hasMany(AddressUser::class);
     }
 
-    public function rate()
+    public function ratings()
     {
         return $this->hasMany(RateProduct::class);
     }
