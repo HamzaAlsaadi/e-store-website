@@ -26,24 +26,27 @@
             <section class="wwrapper">
                 <div class="form signup">
                     <header>Signup</header>
-                    <form action="#">
+                    <form @submit.prevent="register()" action="#">
                         <input
                             type="text"
                             class="bbb"
                             placeholder="Full name"
                             required
+                            v-model="name"
                         />
                         <input
                             class="bbb"
                             type="text"
                             placeholder="Email address"
                             required
+                            v-model="email"
                         />
                         <input
                             class="bbb"
                             type="password"
                             placeholder="Password"
                             required
+                            v-model="password"
                         />
                         <div class="checkbox">
                             <input type="checkbox" id="signupCheck" />
@@ -88,13 +91,39 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderSignUp from "@/components/Header.SignUp.vue";
 export default {
     name: "SignUp",
+    data() {
+        return {
+            name: "",
+            email: "",
+            password: "",
+        };
+    },
     components: {
         HeaderSignUp,
     },
     methods: {
+        register: function () {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/auth/register",
+                data: {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                },
+            })
+                .then(function (response) {
+                    window.alert(response.data.name + " regestir succesful");
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                });
+        },
+
         addActiveClass() {
             const wrapper = this.$el.querySelector(".wwrapper");
             wrapper.classList.add("active");

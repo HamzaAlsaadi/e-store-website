@@ -50,6 +50,9 @@ Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany'
 
 Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
 Route::post('/auth/register', [UserController::class, 'createUser']);
+Route::apiResource('csv', StoreCsvController::class);
+Route::apiResource('User', UserController::class);
+Route::get('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
 Route::post('/create-order', [OrderProdctController::class, 'createOrder'])->middleware('auth:sanctum');
 Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTimeRange'])->middleware('auth:sanctum');

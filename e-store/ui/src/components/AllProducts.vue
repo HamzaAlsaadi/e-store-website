@@ -12,8 +12,14 @@
             <div id="product-1" class="row">
                 <!-- Single Product -->
                 <div
+<<<<<<< Updated upstream
                     v-for="post in posts"
                     :key="post.id"
+=======
+                    v-for="proudact in proudacts"
+                    :key="proudact.id"
+                    id="product-1"
+>>>>>>> Stashed changes
                     class="col-md-6 col-lg-4 col-xl-3"
                 >
                     <div class="single-product">
@@ -90,11 +96,19 @@
                             </ul>
                         </div>
                         <div class="part-2">
+<<<<<<< Updated upstream
                             <h3 class="product-title">{{ post.body }}</h3>
                             <h4 class="product-old-price">{{ post.userId }}</h4>
                             <h4 class="product-price">
                                 {{ post.title }}
                             </h4>
+=======
+                            <h3 class="product-title">
+                                {{ post.title }}
+                            </h3>
+                            <h4 class="product-old-price"></h4>
+                            <h4 class="product-price">$49.99</h4>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -108,7 +122,11 @@ export default {
     name: "AllProducts",
 
     data() {
+<<<<<<< Updated upstream
         return { posts: [], count: 0 };
+=======
+        return { posts: [] };
+>>>>>>> Stashed changes
     },
     methods: {
         getorders() {
@@ -119,8 +137,13 @@ export default {
                 .then((response) => {
                     this.posts = response.data;
                 })
+<<<<<<< Updated upstream
                 .catch(function (error) {
                     window.alert(error.response);
+=======
+                .catch(function () {
+                    window.alert("hi");
+>>>>>>> Stashed changes
                 });
         },
     },
