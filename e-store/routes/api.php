@@ -29,5 +29,5 @@ Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
 Route::apiResource('csv', StoreCsvController::class);
 Route::apiResource('User', UserController::class);
-Route::post('/auth/register', [UserController::class, 'createUser']);
+Route::get('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
