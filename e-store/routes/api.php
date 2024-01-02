@@ -46,6 +46,6 @@ Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateP
 
 
 
-Route::post('password/email',  ForgotPasswordController::class);
-Route::post('password/code/check', CodeCheckController::class);
-Route::post('password/reset', ResetPasswordController::class);
+// Route::post('password/email',  ForgotPasswordController::class);
+// Route::post('password/code/check', CodeCheckController::class);
+// Route::post('password/reset', ResetPasswordController::class);
