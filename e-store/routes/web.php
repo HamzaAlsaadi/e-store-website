@@ -1,4 +1,4 @@
-`<?php
+<?php
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CheckOutMiddleWare;
 use Illuminate\Support\Facades\Route;

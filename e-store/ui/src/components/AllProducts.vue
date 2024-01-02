@@ -12,14 +12,9 @@
             <div id="product-1" class="row">
                 <!-- Single Product -->
                 <div
-<<<<<<< Updated upstream
-                    v-for="post in posts"
-                    :key="post.id"
-=======
-                    v-for="proudact in proudacts"
-                    :key="proudact.id"
+                    v-for="product in products"
+                    :key="product.id"
                     id="product-1"
->>>>>>> Stashed changes
                     class="col-md-6 col-lg-4 col-xl-3"
                 >
                     <div class="single-product">
@@ -76,7 +71,10 @@
                                 </li>
                                 <li>
                                     <a href="#"
-                                        ><router-link to="/DetailsProduct"
+                                        ><router-link
+                                            to="/DetailsProduct"
+                                            @click="shareData"
+                                            :key="product.id"
                                             ><svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
@@ -96,19 +94,11 @@
                             </ul>
                         </div>
                         <div class="part-2">
-<<<<<<< Updated upstream
-                            <h3 class="product-title">{{ post.body }}</h3>
-                            <h4 class="product-old-price">{{ post.userId }}</h4>
-                            <h4 class="product-price">
-                                {{ post.title }}
-                            </h4>
-=======
                             <h3 class="product-title">
-                                {{ post.title }}
+                                {{ product.mobile_name }}
                             </h3>
                             <h4 class="product-old-price"></h4>
-                            <h4 class="product-price">$49.99</h4>
->>>>>>> Stashed changes
+                            <h4 class="product-price">{{ product.Price }}$</h4>
                         </div>
                     </div>
                 </div>
@@ -122,28 +112,22 @@ export default {
     name: "AllProducts",
 
     data() {
-<<<<<<< Updated upstream
-        return { posts: [], count: 0 };
-=======
-        return { posts: [] };
->>>>>>> Stashed changes
+        return { products: [] };
     },
     methods: {
         getorders() {
             axios({
                 method: "get",
-                url: "https://jsonplaceholder.typicode.com/posts",
+                url: "http://127.0.0.1:8000/api/products/",
             })
                 .then((response) => {
-                    this.posts = response.data;
+                    this.products = response.data;
                 })
-<<<<<<< Updated upstream
                 .catch(function (error) {
                     window.alert(error.response);
-=======
+                })
                 .catch(function () {
                     window.alert("hi");
->>>>>>> Stashed changes
                 });
         },
     },

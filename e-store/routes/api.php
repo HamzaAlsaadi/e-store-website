@@ -74,6 +74,6 @@ Route::get('/offers', [OfferController::class, 'allOffersWithProductNames']);
 Route::post('/send-message', [ContactController::class, 'sendMessage'])->middleware('auth:sanctum');
 Route::post('/send-response/{messageId}', [ContactController::class, 'sendResponse'])->middleware('auth:sanctum');
 
-Route::post('password/email',  ForgotPasswordController::class);
-Route::post('password/code/check', CodeCheckController::class);
-Route::post('password/reset', ResetPasswordController::class);
+// Route::post('password/email',  ForgotPasswordController::class);
+// Route::post('password/code/check', CodeCheckController::class);
+// Route::post('password/reset', ResetPasswordController::class);
