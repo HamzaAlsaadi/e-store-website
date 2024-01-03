@@ -79,7 +79,10 @@
                                             "
                                         >
                                             <i class="fa fa-shopping-cart"></i>
-                                            Cart ({{ posts.count }})
+                                            Cart ({{
+                                                Object.keys($store.state.Order)
+                                                    .length
+                                            }})
                                         </router-link>
                                     </a>
                                 </li>

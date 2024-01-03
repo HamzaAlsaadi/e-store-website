@@ -53,7 +53,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a
+                                        @click="
+                                            AddProduct(
+                                                product.id,
+                                                product.mobile_name,
+                                                product.Price,
+                                                product.imge
+                                            )
+                                        "
+                                        href="#"
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -72,9 +82,10 @@
                                 <li>
                                     <a href="#"
                                         ><router-link
-                                            to="/DetailsProduct"
-                                            @click="shareData"
-                                            :key="product.id"
+                                            :to="
+                                                '/DetailsProduct?id=' +
+                                                product.id
+                                            "
                                             ><svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
@@ -97,7 +108,6 @@
                             <h3 class="product-title">
                                 {{ product.mobile_name }}
                             </h3>
-                            <h4 class="product-old-price"></h4>
                             <h4 class="product-price">{{ product.Price }}$</h4>
                         </div>
                     </div>
@@ -108,6 +118,7 @@
 </template>
 <script>
 import axios from "axios";
+import store from "@/store";
 export default {
     name: "AllProducts",
 
@@ -129,6 +140,34 @@ export default {
                 .catch(function () {
                     window.alert("hi");
                 });
+        },
+        AddProduct(id, name_mobile, Price, img) {
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    if (id == store.state.Order[index]["id"]) {
+                        store.state.Order[index]["count"]++;
+                        console.log(store.state.Order);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
+            }
+            store.state.Order[store.state.counter] = {
+                id: id,
+                name: name_mobile,
+                Price: Price,
+                img: img,
+                count: 1,
+            };
+            store.state.counter++;
+            console.log(store.state.Order);
         },
     },
     beforeMount() {

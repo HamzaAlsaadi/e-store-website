@@ -1,7 +1,7 @@
 <template>
     <body>
         <div class="container">
-            <div v-if="product" class="box">
+            <div class="box">
                 <div class="images">
                     <div class="img-holder active">
                         <img src="@/assets/product-1.jpg" />
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="basic-info">
-                    <h1>{{ product.mobile_name }}</h1>
+                    <h1>aaa</h1>
                     <div class="rate">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
 
                     <div class="product-price">
                         <p class="last-price">
-                            Old Price : <span>$257.00</span>
+                            Old Price : <span>{{ products.Price }}</span>
                         </p>
                         <p class="new-price">
                             New Price : <span>$249.00 (5%)</span>
@@ -56,7 +56,7 @@
                 <div class="product-specs">
                     <h2 class="text-center">Product Specifications</h2>
                     <ul>
-                        <li>Brand :<input type="text" /></li>
+                        <li>Brand :</li>
                         <li>Model : <input type="text" /></li>
                         <li>Color : <input type="text" /></li>
                         <li>Weight : <input type="text" /></li>
@@ -68,11 +68,12 @@
 </template>
 <script>
 import axios from "axios";
+import store from "@/store";
 export default {
     name: "DetailsProduct",
     data() {
         return {
-            products: [],
+            products: {},
             rating: 0,
         };
     },
@@ -80,10 +81,13 @@ export default {
         getorders() {
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/products/",
+                url:
+                    "http://127.0.0.1:8000/api/products/" +
+                    store.state.productID,
             })
                 .then((response) => {
                     this.products = response.data;
+                    console.log(response.data);
                 })
                 .catch(function (error) {
                     window.alert(error.response);

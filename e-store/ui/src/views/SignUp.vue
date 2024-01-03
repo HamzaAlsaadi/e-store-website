@@ -26,7 +26,7 @@
             <section class="wwrapper">
                 <div class="form signup">
                     <header>Signup</header>
-                    <form @submit.prevent="register()" action="#">
+                    <form>
                         <input
                             type="text"
                             class="bbb"
@@ -54,9 +54,12 @@
                                 >I accept all terms & conditions</label
                             >
                         </div>
-                        <router-link to="/UserAccount" class="qwq"
-                            ><input type="submit" class="bbb" value="Signup"
-                        /></router-link>
+                        ><input
+                            type="button"
+                            @click="register()"
+                            class="bbb"
+                            value="Signup"
+                        />
                     </form>
                 </div>
 
@@ -100,6 +103,7 @@ export default {
             name: "",
             email: "",
             password: "",
+            Nationality: "sryia",
         };
     },
     components: {
@@ -114,13 +118,17 @@ export default {
                     name: this.name,
                     email: this.email,
                     password: this.password,
+                    Nationality: this.Nationality,
                 },
             })
                 .then(function (response) {
+                    console.log(response);
                     window.alert(response.data.name + " regestir succesful");
                 })
                 .catch(function (error) {
-                    window.alert(error.response);
+                    console.log(error);
+
+                    window.alert(error.response.message);
                 });
         },
 
