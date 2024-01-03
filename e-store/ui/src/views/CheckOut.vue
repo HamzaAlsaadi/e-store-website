@@ -22,21 +22,28 @@
                     <hr />
                     <h6 class="mb-0">Shopping cart</h6>
                     <div class="d-flex justify-content-between">
-                        <span>You have 4 items in your cart</span>
+                        <span
+                            >You have
+                            {{ Object.keys($store.state.Order).length }} items
+                            in your cart</span
+                        >
                     </div>
+
                     <div
                         class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded"
+                        v-for="(product, index) in $store.state.Order"
+                        :key="product.id"
                     >
                         <div class="d-flex flex-row">
                             <img
                                 class="rounded"
-                                src="https://i.imgur.com/QRwjbm5.jpg"
+                                :src="product.img"
                                 width="40"
                             />
                             <div class="ml-2">
                                 <span class="font-weight-bold d-block"
-                                    >Iphone 11 pro</span
-                                ><span class="spec">256GB, Navy Blue</span>
+                                    >{{ product.name }}&nbsp;</span
+                                >
                             </div>
                         </div>
                         <div class="d-flex flex-row align-items-center">
@@ -44,6 +51,17 @@
                                 class="d-block"
                                 style="margin: 0px 257px 0px 0px"
                                 ><button
+                                    @click="
+                                        if (
+                                            $store.state.Order[index]['count'] >
+                                            0
+                                        ) {
+                                            $store.state.Order[index][
+                                                'count'
+                                            ]--;
+                                        }
+                                        total_price();
+                                    "
                                     class="btn btn-primary"
                                     type="button"
                                     style="
@@ -53,8 +71,12 @@
                                 >
                                     <span class="ml-2">-</span>
                                 </button>
-                                {{ count
+                                {{ product.count
                                 }}<button
+                                    @click="
+                                        $store.state.Order[index]['count']++;
+                                        total_price();
+                                    "
                                     class="btn btn-primary"
                                     type="button"
                                     style="
@@ -65,187 +87,9 @@
                                     <span class="ml-2">+</span>
                                 </button></span
                             ><span class="d-block ml-5 font-weight-bold"
-                                >$900</span
+                                >${{ product.Price }}</span
                             ><button
-                                class="btn btn-primary"
-                                type="button"
-                                style="
-                                    margin: 0px 0px 0px 10px;
-                                    padding: 0px 5px 0px 5px;
-                                    background-color: white;
-                                "
-                            >
-                                <span class="ml-2"
-                                    ><i
-                                        class="fa fa-trash-o ml-3 text-black-50"
-                                    ></i
-                                ></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded"
-                    >
-                        <div class="d-flex flex-row">
-                            <img
-                                class="rounded"
-                                src="https://i.imgur.com/GQnIUfs.jpg"
-                                width="40"
-                            />
-                            <div class="ml-2">
-                                <span class="font-weight-bold d-block"
-                                    >One pro 7T</span
-                                ><span class="spec">256GB, Navy Blue</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                            <span
-                                class="d-block"
-                                style="margin: 0px 257px 0px 0px"
-                                ><button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 10px 0px 10px;
-                                        padding: 0px 7px 0px 6px;
-                                    "
-                                >
-                                    <span class="ml-2">-</span>
-                                </button>
-                                {{ count
-                                }}<button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 0px 0px 10px;
-                                        padding: 0px 5px 0px 5px;
-                                    "
-                                >
-                                    <span class="ml-2">+</span>
-                                </button></span
-                            ><span class="d-block ml-5 font-weight-bold"
-                                >$900</span
-                            ><button
-                                class="btn btn-primary"
-                                type="button"
-                                style="
-                                    margin: 0px 0px 0px 10px;
-                                    padding: 0px 5px 0px 5px;
-                                    background-color: white;
-                                "
-                            >
-                                <span class="ml-2"
-                                    ><i
-                                        class="fa fa-trash-o ml-3 text-black-50"
-                                    ></i
-                                ></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded"
-                    >
-                        <div class="d-flex flex-row">
-                            <img
-                                class="rounded"
-                                src="https://i.imgur.com/o2fKskJ.jpg"
-                                width="40"
-                            />
-                            <div class="ml-2">
-                                <span class="font-weight-bold d-block"
-                                    >Google pixel 4 XL</span
-                                ><span class="spec">256GB, Axe black</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                            <span
-                                class="d-block"
-                                style="margin: 0px 257px 0px 0px"
-                                ><button
-                                    @click="Minus"
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 10px 0px 10px;
-                                        padding: 0px 7px 0px 6px;
-                                    "
-                                >
-                                    <span class="ml-2">-</span>
-                                </button>
-                                {{ count
-                                }}<button
-                                    @click="Add"
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 0px 0px 10px;
-                                        padding: 0px 5px 0px 5px;
-                                    "
-                                >
-                                    <span class="ml-2">+</span>
-                                </button></span
-                            ><span class="d-block ml-5 font-weight-bold"
-                                >$800</span
-                            ><button
-                                class="btn btn-primary"
-                                type="button"
-                                style="
-                                    margin: 0px 0px 0px 10px;
-                                    padding: 0px 5px 0px 5px;
-                                    background-color: white;
-                                "
-                            >
-                                <span class="ml-2"
-                                    ><i
-                                        class="fa fa-trash-o ml-3 text-black-50"
-                                    ></i
-                                ></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded"
-                    >
-                        <div class="d-flex flex-row">
-                            <img
-                                class="rounded"
-                                src="https://i.imgur.com/Tja5H1c.jpg"
-                                width="40"
-                            />
-                            <div class="ml-2">
-                                <span class="font-weight-bold d-block"
-                                    >Samsung galaxy Note 10&nbsp;</span
-                                ><span class="spec">256GB, Navy Blue</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                            <span
-                                class="d-block"
-                                style="margin: 0px 257px 0px 0px"
-                                ><button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 10px 0px 10px;
-                                        padding: 0px 7px 0px 6px;
-                                    "
-                                >
-                                    <span class="ml-2">-</span>
-                                </button>
-                                {{ count
-                                }}<button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    style="
-                                        margin: 0px 0px 0px 10px;
-                                        padding: 0px 5px 0px 5px;
-                                    "
-                                >
-                                    <span class="ml-2">+</span>
-                                </button></span
-                            ><span class="d-block ml-5 font-weight-bold"
-                                >$999</span
-                            ><button
+                                @click="deleteproduct(index)"
                                 class="btn btn-primary"
                                 type="button"
                                 style="
@@ -353,19 +197,21 @@
                     </div>
                     <hr class="line" />
                     <div class="d-flex justify-content-between information">
-                        <span>Subtotal</span><span>$3000.00</span>
+                        <span>Subtotal</span><span>${{ totalprice }}</span>
                     </div>
                     <div class="d-flex justify-content-between information">
                         <span>Shipping</span><span>$20.00</span>
                     </div>
                     <div class="d-flex justify-content-between information">
-                        <span>Total(Incl. taxes)</span><span>$3020.00</span>
+                        <span>Total(Incl. taxes)</span
+                        ><span>${{ totalprice + 20 }}</span>
                     </div>
                     <button
+                        @click="checkout()"
                         class="btn btn-primary btn-block d-flex justify-content-between mt-3"
                         type="button"
                     >
-                        <span>$3020.00</span
+                        <span>${{ totalprice + 20 }}</span
                         ><span
                             >Checkout<i class="fa fa-long-arrow-right ml-1"></i
                         ></span>
@@ -376,20 +222,64 @@
     </div>
 </template>
 <script>
+import store from "@/store";
 export default {
     name: "CheckOut",
     data() {
-        return { count: 0 };
+        return {
+            totalprice: 0,
+        };
     },
     methods: {
-        Minus() {
-            if (this.count > 0) {
-                this.count--;
+        total_price() {
+            this.totalprice = 0;
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    this.totalprice +=
+                        store.state.Order[index]["Price"] *
+                        store.state.Order[index]["count"];
+                }
             }
         },
-        Add() {
-            this.count++;
+        deleteproduct(index) {
+            var i = index;
+            console.log(index);
+            if (Object.keys(store.state.Order).length == 1) {
+                delete store.state.Order[i];
+                this.total_price();
+                store.state.counter--;
+                console.log(store.state.Order);
+                return;
+            }
+            for (i = 0; i < Object.keys(store.state.Order).length - 1; i++) {
+                store.state.Order[i] = store.state.Order[i + 1];
+            }
+            delete store.state.Order[i];
+            store.state.counter--;
+
+            this.total_price();
         },
+        checkout() {
+            var F_cart = {};
+            for (
+                var index = 0;
+                index < Object.keys(store.state.Order).length;
+                index++
+            ) {
+                F_cart[index] = {
+                    productID: store.state.Order[index]["id"],
+                    Amount: store.state.Order[index]["count"],
+                };
+            }
+            console.log(F_cart);
+        },
+    },
+    mounted() {
+        this.total_price();
     },
 };
 </script>

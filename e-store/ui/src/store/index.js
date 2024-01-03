@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 
 export default createStore({
-    state: {},
+    state: { productID: 0, Order: {}, counter: 0 },
     getters: {},
     mutations: {},
     actions: {},
