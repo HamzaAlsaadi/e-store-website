@@ -3,22 +3,64 @@
 namespace App\Http\Controllers\payment;
 
 use App\Models\Payment;
+use Stripe\Stripe;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function checkout()
     {
-        //
+        return redirect()->route('show.cart');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function session(Request $request)
+    {
+        $cartItems = session()->get('cart');
+        if ($cartItems) {
+
+            $totalPrice = 0;
+            foreach ($cartItems as $cartItem) {
+                $str1 = $cartItem["price"];
+                $str2 =  $cartItem["quantity"];
+                $result = $str1 * $str2;
+                $totalPrice =$totalPrice + $result;
+            }};
+            $totalPriceRounded = round($totalPrice * 100);
+            $productname='majd';
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $session = \Stripe\Checkout\Session::create([
+            'line_items'  => [
+                [
+                    'price_data' => [
+                        'currency'     => 'USD',
+                        'product_data' => [
+                            "name" => $productname,
+                        ],
+                        'unit_amount'  => $totalPriceRounded,
+                    ],
+                    'quantity'   => 1,
+                ],
+
+            ],
+            'mode'        => 'payment',
+            'success_url' => route('success'),
+            'cancel_url'  => route('checkout'),
+        ]);
+
+        return redirect()->away($session->url);
+    }
+
+    public function success()
+    {
+        return redirect()->route('Order.Place');
+    }
+
     public function create()
     {
         //

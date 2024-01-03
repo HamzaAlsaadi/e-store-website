@@ -19,4 +19,8 @@ class Order extends Model
     {
         return $this->hasMany(PivotOrderProduct::class);
     }
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

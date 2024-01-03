@@ -8,6 +8,7 @@ use App\Http\Controllers\web\ProblemController;
 use App\Http\Controllers\search\SearchController;
 use App\Http\Controllers\web\RateProductController;
 use App\Http\Controllers\web\ProfileController;
+use App\Http\Controllers\payment\PaymentController;
 use App\Http\Controllers\web\OrderController;
 use App\Http\Controllers\web\OfferController;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::GET('/offer',  [OfferController::class, 'index'])->name('offer');
 
     });
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/session', [PaymentController::class, 'session'])->name('session');
+    Route::get('/success', [PaymentController::class, 'success'])->name('success');
 
 
 });

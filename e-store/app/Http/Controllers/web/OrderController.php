@@ -5,10 +5,11 @@ namespace App\Http\Controllers\web;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use Validator;
+use App\Models\Payment;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\PivotOrderProduct;
-
+use Stripe\Stripe;
 class OrderController extends Controller
 {
     /**
@@ -62,9 +63,15 @@ class OrderController extends Controller
                     "quantity"=>$cartItem["quantity"],
                     "order_id"=> $order_id
                 ]);
+            $Payment=Payment::create([
+                'order_id'=>$order_id,
+                'user_id'=>auth()->user()->id,
+                'stripe_payment_id'=>$totalPrice
+            ]);
+
             }
 
-            return redirect()->back()->with('success', 'Order has been placed!');
+            return redirect()->route('show.cart')->with('success', 'Order has been placed!');
         }
     }
 
