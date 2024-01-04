@@ -14,7 +14,7 @@ class CatgoryContoller extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json(['categories' => $categories], 200);
+        return response()->json($categories, 200);
     }
 
     /**
@@ -30,7 +30,7 @@ class CatgoryContoller extends Controller
 
         $category = Category::create($validatedData);
 
-        return response()->json(['category' => $category], 201);
+        return response()->json($category, 201);
     }
 
     /**
@@ -42,7 +42,7 @@ class CatgoryContoller extends Controller
         if (!$category) {
             return response()->json(['message' => 'Category not found'], 404);
         }
-        return response()->json(['category' => $category], 200);
+        return response()->json($category, 200);
     }
 
     /**
