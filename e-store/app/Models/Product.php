@@ -27,8 +27,12 @@ class Product extends Model
     {
         return $this->hasMany(RateProduct::class);
     }
-    public function order()
+    public function orders()
     {
-        return $this->hasMany(PivotOrderProduct::class);
+        return $this->belongsToMany(Order::class, 'pivot_order_products')->withPivot('quantity');
+    }
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
     }
 }
