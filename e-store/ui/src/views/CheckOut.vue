@@ -230,6 +230,7 @@ export default {
             totalprice: 0,
         };
     },
+
     methods: {
         total_price() {
             this.totalprice = 0;
