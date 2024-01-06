@@ -100,4 +100,23 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+
+    public function getProductsSortedByLatestTime()
+    {
+        $products = Product::orderBy('created_at', 'desc')->get();
+
+        return response()->json($products);
+    }
+
+
+    public function productsWithValidOffers()
+    {
+        $productsWithOffers = Product::has('offers')
+            ->whereHas('offers', function ($query) {
+                $query->where('expiration_date', '>', now());
+            })
+            ->get();
+
+        return response()->json(['products_with_valid_offers' => $productsWithOffers], 200);
+    }
 }
