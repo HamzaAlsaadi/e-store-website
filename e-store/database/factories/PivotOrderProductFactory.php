@@ -21,7 +21,6 @@ class PivotOrderProductFactory extends Factory
         return [
             'quantity' => fake()->randomNumber(),
             'product_id' => Product::all()->random()->id,
-
             'order_id' => Order::all()->random()->id,
         ];
     }
