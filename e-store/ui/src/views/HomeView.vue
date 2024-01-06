@@ -9,8 +9,6 @@
     <!-- FooTer -->
 
     <FooTer />
-
-    <router-view />
 </template>
 
 <script>

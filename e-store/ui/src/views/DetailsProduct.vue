@@ -1,5 +1,6 @@
 <template>
     <body>
+        <HeaderPage />
         <div class="container">
             <div class="box">
                 <div class="images">
@@ -17,7 +18,7 @@
                     </div>
                 </div>
                 <div class="basic-info">
-                    <h1>aaa</h1>
+                    <h1>{{ products.mobile_name }}</h1>
                     <div class="rate">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -36,16 +37,12 @@
                             />
                         </svg>
                     </div>
-                    <strong class="h1">$250</strong>
-
                     <div class="product-price">
                         <p class="last-price">
-                            Old Price : <span>{{ products.Price }}</span>
-                        </p>
-                        <p class="new-price">
-                            New Price : <span>$249.00 (5%)</span>
+                            <span>Price :</span>
                         </p>
                     </div>
+                    <strong class="h1">${{ products.Price }}</strong>
 
                     <div class="options">
                         <button><a href="#">Buy It Now</a></button>
@@ -56,19 +53,35 @@
                 <div class="product-specs">
                     <h2 class="text-center">Product Specifications</h2>
                     <ul>
-                        <li>Brand :</li>
-                        <li>Model : <input type="text" /></li>
-                        <li>Color : <input type="text" /></li>
-                        <li>Weight : <input type="text" /></li>
+                        <li>Cpu : {{ products.Cpu_spsecfication }}</li>
+                        <li>Gpu :{{ products.Gpu_spsecfication }}</li>
+                        <li>Screen Size : {{ products.Screen_Size }}</li>
+
+                        <li>
+                            battery :
+                            {{ products.battery_spsecfication }}
+                        </li>
+                        <li>
+                            Front Camera :
+                            {{ products.Front_camera_spsecfication }}
+                        </li>
+                        <li>
+                            Back Camera :
+                            {{ products.Back_camera_spsecfication }}
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
+        <FooTer />
     </body>
 </template>
 <script>
 import axios from "axios";
 import store from "@/store";
+import HeaderPage from "@/components/Header.vue";
+import FooTer from "@/components/footer.vue";
+
 export default {
     name: "DetailsProduct",
     data() {
@@ -77,6 +90,7 @@ export default {
             rating: 0,
         };
     },
+    components: { HeaderPage, FooTer },
     methods: {
         getorders() {
             axios({
@@ -246,9 +260,9 @@ body {
 }
 
 .product-specs li {
-    font-size: 12px;
+    font-size: 17px;
 
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .product-specs input {
@@ -271,7 +285,7 @@ body {
 }
 .last-price span {
     color: #f64749;
-    text-decoration: line-through;
+    font-size: 40px;
 }
 .new-price span {
     color: #256eff;
