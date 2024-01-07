@@ -59,6 +59,8 @@ Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTime
 Route::post('/order-on-time', [OrderProdctController::class, 'getOrdersInTime'])->middleware('auth:sanctum');
 Route::apiResource('/order', OrderProdctController::class)->middleware('auth:sanctum');
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
+Route::get('get/profile', [UserController::class , 'show'])->middleware('auth:sanctum');
+
 Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
 Route::apiResource('/cobon', Couppon::class)->middleware('auth:sanctum');
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');

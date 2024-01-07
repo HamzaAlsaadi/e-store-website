@@ -1,6 +1,6 @@
 <template>
     <!-- Header-->
-    <HeaderPage />
+    <HeaderPage name="ssssss" />
     <!-- AllBroducts-->
     <AllProducts />
     <!-- OtherCompany-->

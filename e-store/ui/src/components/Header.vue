@@ -410,6 +410,7 @@ export default {
             posts: AllProducts,
         };
     },
+    params: { name: String },
 };
 </script>
 <style scoped>
