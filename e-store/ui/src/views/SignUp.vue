@@ -141,7 +141,11 @@ export default {
                     if (response.status == 200) {
                         console.log(response.status);
                         window.alert("LogIn succesful");
-                        router.push("/UserAccount");
+                        window.localStorage.setItem(
+                            "token",
+                            response.data.token
+                        ),
+                            router.push("/UserAccount");
                     }
                 })
                 .catch(function (error) {

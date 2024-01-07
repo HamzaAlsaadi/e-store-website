@@ -40,6 +40,7 @@ Route::apiResource('csv', StoreCsvController::class)->middleware('auth:sanctum')
 Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
+Route::get('get/profile', [UserController::class , 'show'])->middleware('auth:sanctum');
 
 Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
 

@@ -17,13 +17,15 @@ class UserController extends Controller
         $user = User::all();
         return response()->json($user);
     }
-    public function show(string $id)
+    public function show(Request $request)
     {
-        $user = User::find($id);
+        $token_id = auth()->user()->id;
+        $user = User::where('id', $token_id)->first();
         if (!$user) {
-            return response()->json(['message' => 'user not found'], 404);
-        }
-        return response()->json($user, 200);
+            $response = ['message' => 'id incorrect'];
+        } else {
+            $response =  $user;
+        }return response()->json($response);
     }
     public function createUser(Request $request)
     {

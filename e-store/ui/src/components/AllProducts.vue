@@ -108,7 +108,7 @@ export default {
     name: "AllProducts",
 
     data() {
-        return { products: [] };
+        return { products: [], productbeforpagi: [] };
     },
     methods: {
         getorders() {
@@ -117,7 +117,8 @@ export default {
                 url: "http://127.0.0.1:8000/api/products/",
             })
                 .then((response) => {
-                    this.products = response.data;
+                    this.productbeforpagi = response.data;
+                    this.makepagi();
                 })
                 .catch(function (error) {
                     window.alert(error.response);
@@ -150,7 +151,13 @@ export default {
             store.state.counter++;
             console.log(store.state.Order);
         },
+        makepagi() {
+            for (var i = 0; i < 12; i++) {
+                this.products.push(this.productbeforpagi[i]);
+            }
+        },
     },
+
     beforeMount() {
         this.getorders();
     },
