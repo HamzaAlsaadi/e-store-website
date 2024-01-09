@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             PivotOrderProductSeeder::class,
             RateProductSeeder::class,
             PaymentSeeder::class,
-            PillPaymentSeeder::class
+            PillPaymentSeeder::class,
+            CoupponSeeder::class
         ]);
         // address_user::class);
     }
