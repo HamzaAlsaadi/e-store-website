@@ -17,7 +17,7 @@
             <td>{{ $PivotOrderProducts->product->mobile_name}}</td>
             <td>{{$PivotOrderProducts->product->company->company_name  }}</td>
             <td>{{$PivotOrderProducts->product->category->name  }}</td>
-            <td>{{ DB::table('products')->where('id', $PivotOrderProducts->product_id)->value('Price') }}</td>
+            <td>{{ $PivotOrderProducts->product->Price }}</td>
             <td>{{$PivotOrderProducts->quantity }}</td>
         </tr>
     </tbody>
@@ -25,7 +25,7 @@
     <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ route('admin.order') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Back</a>
+                <a href="" class="btn btn-primary"><i class="fa fa-angle-left"></i>Back</a>
             </td>
         </tr>
     </tfoot>

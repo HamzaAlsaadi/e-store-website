@@ -54,7 +54,7 @@
             <td colspan="5" class="text-right">
                 <span class="card-text"><strong>{{ $totalPrice }}</strong></span>
                 <a href="{{ route('web') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-                <a href="{{ route('Order.Place') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Place Order</a>
+                <a href="{{ url('/session') }}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Place Order</a>
 
 
             </td>
