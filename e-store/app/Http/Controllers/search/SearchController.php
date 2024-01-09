@@ -40,7 +40,7 @@ class SearchController extends Controller
                 $products = $products->where('category_id', $request->input('category'));
             }
             $products = $products->get();
-            return view('web.search', compact('products'));
+            return view('web.search&filter.search', compact('products'));
      }
 
 }

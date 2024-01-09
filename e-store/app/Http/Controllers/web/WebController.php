@@ -19,7 +19,7 @@ class WebController extends Controller
             $query->select('id')
                 ->from('offers')
                 ->whereRaw('offers.id = products.offer_id')
-                ->where('offers.id', '=', 1);
+                ->where('offers.percent_of_discount', '=', 0);
         })->paginate(pagination_count);
 
         return view('web.homepage',compact('products'));

@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class offer extends Model
+class Offer extends Model
 {
     use HasFactory;
+    protected $fillable = ['Type', 'percent_of_discount'];
+
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(product::class);
     }
 }

@@ -15,19 +15,26 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $address = AddressUser::where('user_id', $user->id)->first();
+        if(!$address){
+
+            $cityNotFound = 'City not found. Please register an address.';
+            $streetNotFound = 'Street not found. Please register an address.';
+            $buildingNotFound = 'Building not found. Please register an address.';
+            return view('web.profile.profile_user', compact('user', 'cityNotFound', 'streetNotFound', 'buildingNotFound'));
+        }
 
         return view('web.profile.profile_user',compact('user','address'));
     }
 
     public function show($id )
     {
-        return view('web.profile.profile.store');
+        return view('web.profile.store');
     }
 
     public function edit($id )
     {
         $user_id=Auth::id();
-        $address = AddressUser::where('user_id', 'like', "%$user_id%")->get();
+        $address = AddressUser::where('user_id', 'like', "%$user_id%")->first();
         $user=User::findOrfail($user_id);
         return view('web.profile.edit',compact('address','user'));
     }

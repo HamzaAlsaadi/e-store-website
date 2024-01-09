@@ -22,9 +22,9 @@
             <h3>Personal Information</h3>
             <p><strong>Name_Of_User: {{ $user-> name}}</strong> </p>
             <p><strong>email_Of_User: {{ $user-> email}}</strong> </p>
-            <p><strong>City: {{ $address-> name_of_the_city}}</strong> </p>
-            <p><strong>Street: {{  $address->number_of_the_street}}</strong> </p>
-            <p><strong>Building: {{ $address->number_of_building }}</strong> </p>
+            <p><strong>City:</strong> @if(isset($address->name_of_the_city)) {{ $address->name_of_the_city }} @else {{ $cityNotFound }} @endif</p>
+            <p><strong>Street:</strong> @if(isset($address->number_of_the_street)) {{ $address->number_of_the_street }} @else {{ $streetNotFound }} @endif</p>
+            <p><strong>Building:</strong> @if(isset($address->number_of_building)) {{ $address->number_of_building }} @else {{ $buildingNotFound }} @endif</p>
             <p><strong>Phone: {{ $user->phone }}</strong></p>
         </div>
 

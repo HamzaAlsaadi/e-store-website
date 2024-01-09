@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             company::class,
             CatgorySeeder::class,
+            Offerseesers::class,
             AddressUserSeeder::class,
             Product::class,
             PivotOrderProductSeeder::class,

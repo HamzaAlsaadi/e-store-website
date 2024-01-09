@@ -17,7 +17,9 @@ class OfferFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'Type' => 'dicount',
+            'percent_of_discount' => fake()->randomElement(['10', '15', '50']),
         ];
+
     }
 }
