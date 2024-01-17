@@ -38,7 +38,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('products', ProductController::class);
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
-Route::get('company-product/{companyId}', [CompanyController::class, 'getCompanyProducts']);
+Route::get('company-product/{companyId}', [CompanyController::class, 'getC-ompanyProducts']);
 Route::get('latest-product', [ProductController::class, 'getProductsSortedByLatestTime']);
 Route::apiResource('csv', StoreCsvController::class)->middleware('auth:sanctum');
 
