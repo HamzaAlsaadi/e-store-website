@@ -239,17 +239,7 @@
                                                                         ></a
                                                                     >
                                                                 </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        >NOTHING</a
-                                                                    >
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
+
                                                                 <li>
                                                                     <a href="#"
                                                                         ><router-link
@@ -306,12 +296,7 @@
                                                                         ></a
                                                                     >
                                                                 </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
+
                                                                 <li>
                                                                     <a href="#"
                                                                         ><router-link
@@ -476,8 +461,17 @@ export default {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 .mega-box .content .row {
-    width: calc(25% - 30px);
+    flex: calc(100% / 3);
     line-height: 45px;
+}
+.mega-links {
+    list-style-type: none;
+}
+.mega-links li {
+    display: inline-block;
+}
+.mega-links li a {
+    display: block;
 }
 
 header {

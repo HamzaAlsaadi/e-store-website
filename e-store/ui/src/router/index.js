@@ -31,8 +31,26 @@ import TecNo from "../views/Tecno";
 import ViVo from "../views/Vivo";
 import XiaOmi from "../views/Xiaomi";
 import ZtE from "../views/Zte";
+import LatestProduct from "../views/LatestProduct";
+import Admin from "../views/Admin";
+import CompanyAdmin from "../views/CompanyAdmin";
 
 const routes = [
+    {
+        path: "/CompanyAdmin",
+        name: "CompanyAdmin",
+        component: CompanyAdmin,
+    },
+    {
+        path: "/AdmIn",
+        name: "AdmIn",
+        component: Admin,
+    },
+    {
+        path: "/LatestProduct",
+        name: "LatestProduct",
+        component: LatestProduct,
+    },
     {
         path: "/Apple",
         name: "Apple",

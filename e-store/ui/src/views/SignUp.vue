@@ -145,7 +145,7 @@ export default {
                             "token",
                             response.data.token
                         ),
-                            router.push("/UserAccount");
+                            router.push("/Admin");
                     }
                 })
                 .catch(function (error) {
