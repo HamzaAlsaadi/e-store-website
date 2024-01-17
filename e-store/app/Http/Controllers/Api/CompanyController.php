@@ -20,7 +20,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $this->validate($request, [
 
@@ -49,9 +49,9 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $company = Company::find($id);
+        $company = Company::find($request->id);
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }
@@ -68,9 +68,9 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $company = Company::find($id);
+        $company = Company::find($request->id);
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }

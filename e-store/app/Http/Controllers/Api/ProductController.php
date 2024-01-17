@@ -20,7 +20,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'mobile_name' => 'required',
@@ -58,9 +58,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update_product(Request $request)
     {
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
@@ -89,9 +89,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }

@@ -36,11 +36,35 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('products', ProductController::class);
+<<<<<<< HEAD
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
 Route::get('company-product/{companyId}', [CompanyController::class, 'getC-ompanyProducts']);
+=======
+Route::post('create-product', [ProductController::class, 'create']);
+Route::post('update-product', [ProductController::class, 'update_product']);
+Route::post('delete-product', [ProductController::class, 'destroy']);
+>>>>>>> main
 Route::get('latest-product', [ProductController::class, 'getProductsSortedByLatestTime']);
-Route::apiResource('csv', StoreCsvController::class)->middleware('auth:sanctum');
+
+Route::apiResource('catgory', CatgoryContoller::class);
+Route::post('create-catgory', [CatgoryContoller::class, 'create']);
+Route::post('update-catgory', [CatgoryContoller::class, 'update']);
+Route::post('delete-catgory', [CatgoryContoller::class, 'destroy']);
+Route::get('products-in-catgory/{categoryId}', [CatgoryContoller::class, 'getCategoryProducts']);
+
+
+Route::apiResource('Company', CompanyController::class);
+Route::post('create-Company', [CompanyController::class, 'create']);
+Route::post('update-Company', [CompanyController::class, 'update']);
+Route::post('delete-Company', [CompanyController::class, 'destroy']);
+Route::get('product-of-company/{companyId}', [CompanyController::class, 'getCompanyProducts']);
+
+
+
+Route::post('store-from-csv', [StoreCsvController::class, 'uploadCSV']);
+
+
 
 Route::get('Serach/searchByName', [SerachController::class, 'searchByName']);
 Route::get('Serach/searchByPrice', [SerachController::class, 'searchByPrice']);
@@ -49,11 +73,14 @@ Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany'
 
 
 Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
+
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::apiResource('csv', StoreCsvController::class);
 Route::apiResource('User', UserController::class);
 Route::get('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
+
+
 Route::post('/create-order', [OrderProdctController::class, 'createOrder'])->middleware('auth:sanctum');
 Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTimeRange'])->middleware('auth:sanctum');
 Route::post('/order-on-time', [OrderProdctController::class, 'getOrdersInTime'])->middleware('auth:sanctum');
