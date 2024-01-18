@@ -25,12 +25,8 @@ class UserController extends Controller
             $response = ['message' => 'id incorrect'];
         } else {
             $response =  $user;
-<<<<<<< HEAD
         }return response()->json($response);
-=======
-        }
         return response()->json($response);
->>>>>>> main
     }
     public function createUser(Request $request)
     {

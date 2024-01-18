@@ -6,15 +6,15 @@
             <h1>Add Company</h1>
             <label> Name Company : </label>
             <div class="txtb">
-                <input type="text" value="" />
+                <input type="text" v-model="company.name" />
             </div>
 
             <label> Address Company : </label>
             <div class="txtb">
-                <input type="text" value="" />
+                <input type="text" v-model="company.address" />
             </div>
 
-            <input class="btn" type="submit" value="ADD" />
+            <button type="button" @click="Addcompany()" class="btn">Add</button>
         </form>
         <div class="attendance-list">
             <table class="table">
@@ -66,20 +66,21 @@ export default {
     },
     data() {
         return {
-            company: {
-                name: "",
-                address: "",
-            },
+            company: { name: "", address: "" },
         };
     },
     methods: {
-        postcompany() {
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/products" + this.company,
-            })
+        Addcompany() {
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/create-Company?company_name=" +
+                        this.company.name +
+                        "&company_address=" +
+                        this.company.address
+                )
                 .then((response) => {
-                    this.products = response.data;
+                    console.log(response.data);
+                    alert(response.data);
                 })
                 .catch(function (error) {
                     console.log(error.data);

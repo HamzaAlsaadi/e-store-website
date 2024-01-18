@@ -36,15 +36,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('products', ProductController::class);
-<<<<<<< HEAD
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
 Route::get('company-product/{companyId}', [CompanyController::class, 'getC-ompanyProducts']);
-=======
 Route::post('create-product', [ProductController::class, 'create']);
 Route::post('update-product', [ProductController::class, 'update_product']);
 Route::post('delete-product', [ProductController::class, 'destroy']);
->>>>>>> main
 Route::get('latest-product', [ProductController::class, 'getProductsSortedByLatestTime']);
 
 Route::apiResource('catgory', CatgoryContoller::class);
