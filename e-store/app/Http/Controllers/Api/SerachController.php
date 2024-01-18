@@ -8,29 +8,44 @@ use Illuminate\Http\Request;
 
 class SerachController extends Controller
 {
-    public function search(Request $request)
+    public function searchByName(Request $request)
     {
-        $query = Product::query();
+        $searchTerm = $request->input('mobile_name');
 
-        // Filter by brand if provided
-        // if ($request->has('brand')) {
-        //     $query->where('brand', $request->input('brand'));
-        // }
+        $products = Product::where('mobile_name', 'like', "%$searchTerm%")->get();
 
-        // Add more filters based on user inputs...
+        return response()->json($products);
+    }
 
-        // Perform search based on user input (e.g., search by name or any other criteria)
-        if ($request->has('search')) {
-            $searchTerm = $request->input('search');
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('mobile_name', 'like', "%$searchTerm%");
-                // ->orWhere('specification_field', 'like', "%$searchTerm%"); // Adjust as per your database schema
-            });
-        }
+    public function searchByPrice(Request $request)
+    {
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
 
-        // Fetch the results
-        $results = $query->get();
+        $products = Product::whereBetween('price', [$minPrice, $maxPrice])->get();
 
-        return response()->json($results);
+        return response()->json($products);
+    }
+
+    public function searchByCategory(Request $request)
+    {
+        $category = $request->input('category');
+
+        $products = Product::whereHas('category', function ($query) use ($category) {
+            $query->where('name', $category);
+        })->get();
+
+        return response()->json($products);
+    }
+
+    public function searchByCompany(Request $request)
+    {
+        $companyName = $request->input('company');
+
+        $products = Product::whereHas('company', function ($query) use ($companyName) {
+            $query->where('company_name', $companyName);
+        })->get();
+
+        return response()->json($products);
     }
 }

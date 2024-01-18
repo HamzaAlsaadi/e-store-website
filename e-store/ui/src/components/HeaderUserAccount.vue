@@ -79,7 +79,10 @@
                                             "
                                         >
                                             <i class="fa fa-shopping-cart"></i>
-                                            Cart (0)
+                                            Cart ({{
+                                                Object.keys($store.state.Order)
+                                                    .length
+                                            }})
                                         </router-link>
                                     </a>
                                 </li>
@@ -126,14 +129,15 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="#">
-                                                <router-link
-                                                    to="/"
+                                                <button
+                                                    @click="logout()"
+                                                    type="button"
                                                     style="
                                                         text-decoration: none;
                                                     "
                                                 >
-                                                    Sign Out</router-link
-                                                ></a
+                                                    Sign Out
+                                                </button></a
                                             >
                                         </li>
                                     </ul>
@@ -443,8 +447,15 @@
     </body>
 </template>
 <script>
+import router from "@/router";
 export default {
     name: "HeaderUserAccount",
+    methods: {
+        logout() {
+            window.localStorage.removeItem("token");
+            router.push("/");
+        },
+    },
 };
 </script>
 <style scoped>
