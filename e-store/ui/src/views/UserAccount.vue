@@ -1,16 +1,16 @@
 <template>
-  <!-- Header-->
-  <HeaderUserAccount />
-  <!-- AllBroducts-->
-  <AllProducts />
-  <!-- OtherCompany-->
+    <!-- Header-->
+    <HeaderUserAccount />
+    <!-- AllBroducts-->
+    <AllProducts />
+    <!-- OtherCompany-->
 
-  <OtherCompany />
-  <!-- FooTer -->
+    <OtherCompany />
+    <!-- FooTer -->
 
-  <FooTer />
+    <FooTer />
 
-  <router-view />
+    <router-view />
 </template>
 
 <script>
@@ -21,12 +21,12 @@ import FooTer from "@/components/footer.vue";
 import OtherCompany from "@/components/OtherCompany.vue";
 
 export default {
-  components: {
-    HeaderUserAccount,
-    AllProducts,
-    OtherCompany,
-    FooTer
-  }
+    components: {
+        HeaderUserAccount,
+        AllProducts,
+        OtherCompany,
+        FooTer,
+    },
 };
 </script>
 <style></style>

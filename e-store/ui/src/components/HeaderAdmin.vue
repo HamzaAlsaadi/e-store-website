@@ -14,6 +14,7 @@
         />
         <link rel="stylesheet" href="style.css" />
     </head>
+
     <body>
         <div class="main-navbar shadow-sm sticky-top">
             <div class="top-navbar">
@@ -214,6 +215,7 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -224,6 +226,7 @@ export default {
 .nav-links li {
     list-style: none;
 }
+
 .nav-links li a {
     color: #f2f2f2;
     text-decoration: none;
@@ -233,12 +236,15 @@ export default {
     border-radius: 5px;
     transition: all 0.3s ease;
 }
+
 .nav-links li a:hover {
     background: #542ded;
 }
+
 .nav-links .mobile-item {
     display: none;
 }
+
 .nav-links .drop-menu {
     position: absolute;
     background: #242526;
@@ -266,6 +272,7 @@ export default {
     opacity: 0;
     visibility: hidden;
 }
+
 .mega-box .content {
     background: #ddd;
     padding: 25px 20px;
@@ -274,6 +281,7 @@ export default {
     justify-content: space-between;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
+
 .mega-box .content .row {
     width: calc(25% - 30px);
     line-height: 45px;
@@ -286,38 +294,46 @@ header {
 .main-navbar {
     border-bottom: 1px solid #ccc;
 }
+
 .main-navbar .top-navbar {
     background-color: black;
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .main-navbar .top-navbar .brand-name {
     color: #fff;
 }
+
 .main-navbar .top-navbar .nav-link {
     color: #fff;
     font-size: 16px;
     font-weight: 500;
 }
+
 .main-navbar .top-navbar .dropdown-menu {
     padding: 0px 0px;
     border-radius: 0px;
 }
+
 .main-navbar .top-navbar .dropdown-menu .dropdown-item {
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
     font-size: 14px;
 }
+
 .main-navbar .top-navbar .dropdown-menu .dropdown-item i {
     width: 20px;
     text-align: center;
     color: #2874f0;
     font-size: 14px;
 }
+
 .main-navbar .navbar {
     padding: 0px;
     background-color: #464545;
 }
+
 .main-navbar .navbar .nav-item a {
     padding: 8px 20px;
     color: #000;

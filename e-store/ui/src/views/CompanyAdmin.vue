@@ -97,6 +97,7 @@ export default {
 * {
     background-color: black;
 }
+
 .contact-form {
     box-sizing: border-box;
     border-radius: 8px;
@@ -105,10 +106,12 @@ export default {
     font-family: "Montserrat";
     color: white;
 }
+
 .contact-form h1 {
     margin-top: 0;
     font-weight: 200;
 }
+
 .txtb {
     border: 1px solid gray;
     margin: 8px 0;
@@ -123,6 +126,7 @@ export default {
     text-transform: uppercase;
     font-size: 14px;
 }
+
 .txtb input {
     width: 100%;
     border: none;
@@ -144,6 +148,7 @@ export default {
     box-shadow: none;
     transition: 0.5s ease;
 }
+
 input[type="submit"]:hover {
     background-color: #979797;
 }
@@ -156,6 +161,7 @@ input[type="submit"]:hover {
     border-radius: 10px;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
+
 .table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -164,19 +170,23 @@ input[type="submit"]:hover {
     overflow: hidden;
     border-radius: 5px 5px 0 0;
 }
+
 table thead tr {
     color: #fff;
     background: #454545;
     text-align: left;
     font-weight: bold;
 }
+
 .table th,
 .table td {
     padding: 12px 15px;
 }
+
 .table tbody tr {
     border-bottom: 1px solid #ddd;
 }
+
 .table tbody tr {
     background: #979797;
 }
@@ -184,6 +194,7 @@ table thead tr {
 .table tbody tr:last-of-type {
     border-bottom: 2px solid #ffffff;
 }
+
 .table button {
     padding: 6px 20px;
     border-radius: 10px;
@@ -192,6 +203,7 @@ table thead tr {
     background-color: #454545;
     border: 1px solid #ffffff;
 }
+
 .table button:hover {
     background: #373737;
     color: #fff;
