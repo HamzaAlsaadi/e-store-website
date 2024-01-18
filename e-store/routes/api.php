@@ -72,9 +72,6 @@ Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany'
 Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
 
 Route::post('/auth/register', [UserController::class, 'createUser']);
-Route::apiResource('csv', StoreCsvController::class);
-Route::apiResource('User', UserController::class);
-Route::get('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
 
 
@@ -83,8 +80,6 @@ Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTime
 Route::post('/order-on-time', [OrderProdctController::class, 'getOrdersInTime'])->middleware('auth:sanctum');
 Route::apiResource('/order', OrderProdctController::class)->middleware('auth:sanctum');
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
-Route::get('get/profile', [UserController::class , 'show'])->middleware('auth:sanctum');
-
 Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
 Route::apiResource('/cobon', Couppon::class)->middleware('auth:sanctum');
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');
