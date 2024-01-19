@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductRatingController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\SerachController;
 use App\Http\Controllers\Api\StoreCsvController;
 
 /*
@@ -29,8 +30,33 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('products', ProductController::class);
+Route::post('create-product', [ProductController::class, 'create']);
+Route::post('update-product', [ProductController::class, 'update_product']);
+Route::post('delete-product', [ProductController::class, 'destroy']);
+Route::get('latest-product', [ProductController::class, 'getProductsSortedByLatestTime']);
+Route::get('/csv-product', [ProductController::class, 'uploadCSV'])->middleware('auth:sanctum');;
+
+
+
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::apiResource('Company', CompanyController::class);
+
+Route::post('create-Company', [CompanyController::class, 'create']);
+Route::post('update-Company', [CompanyController::class, 'update']);
+Route::post('delete-Company', [CompanyController::class, 'destroy']);
+Route::get('product-of-company/{companyId}', [CompanyController::class, 'getCompanyProducts']);
+
+
+
+Route::get('csv', [StoreCsvController::class, 'uploadCSV']);
+
+
+
+Route::get('Serach/searchByName', [SerachController::class, 'searchByName']);
+Route::get('Serach/searchByPrice', [SerachController::class, 'searchByPrice']);
+Route::get('Serach/searchByCategory', [SerachController::class, 'searchByCategory']);
+Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany']);
+
 
 Route::apiResource('csv', StoreCsvController::class);
 Route::apiResource('User', UserController::class);
@@ -40,7 +66,10 @@ Route::apiResource('csv', StoreCsvController::class)->middleware('auth:sanctum')
 Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
+
 Route::get('get/profile', [UserController::class , 'show'])->middleware('auth:sanctum');
+
+Route::get('/send-verify-email/{email}', [UserController::class, 'sendVerifyEmail'])->middleware('auth:sanctum');
 
 Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
 

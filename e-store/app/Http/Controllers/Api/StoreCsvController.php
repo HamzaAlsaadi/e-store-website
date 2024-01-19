@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 
 class StoreCsvController extends Controller
 {
+
     public function uploadCSV(Request $request)
     {
+        print('hiii');
         // Validate incoming request
         $request->validate([
             'csv_file' => 'required|mimes:csv,txt', // Validate CSV file
