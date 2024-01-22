@@ -101,6 +101,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => true,
+                'type_of_user' => $user->Type_of_user,
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
