@@ -94,9 +94,9 @@
                                             >Name</label
                                         >
                                         <input
+                                            v-model="user.email"
                                             type="text"
                                             class="form-control"
-                                            value=""
                                             placeholder="Nelle Maxwell"
                                         />
                                     </div>
@@ -120,7 +120,6 @@
                                             >
                                         </div>
                                     </div>
-                                    Abo Ali, [12/25/2023 6:52 AM]
                                     <div class="form-group">
                                         <label class="form-label text-white"
                                             >Male</label
