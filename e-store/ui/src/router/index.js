@@ -34,8 +34,14 @@ import ZtE from "../views/Zte";
 import CompanyAdmin from "../views/CompanyAdmin";
 import LatestProduct from "../views/LatestProduct";
 import Admin from "../views/Admin";
+import OfferProduct from "../views/OfferProduct";
 
 const routes = [
+    {
+        path: "/OfferProduct",
+        name: "OfferProduct",
+        component: OfferProduct,
+    },
     {
         path: "/AdmIn",
         name: "AdmIn",

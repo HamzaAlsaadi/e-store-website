@@ -6,12 +6,12 @@
             <h1>Add Company</h1>
             <label> Name Company : </label>
             <div class="txtb">
-                <input type="text" v-model="company.name" />
+                <input type="text" v-model="namecompany" />
             </div>
 
             <label> Address Company : </label>
             <div class="txtb">
-                <input type="text" v-model="company.address" />
+                <input type="text" v-model="address" />
             </div>
 
             <button type="button" @click="Addcompany()" class="btn">Add</button>
@@ -66,20 +66,22 @@ export default {
     },
     data() {
         return {
-            company: { name: "", address: "" },
+            namecompany: "",
+            address: "",
         };
     },
     methods: {
         Addcompany() {
-            axios
-                .post(
-                    "http://127.0.0.1:8000/api/create-Company?company_name=" +
-                        this.company.name +
-                        "&company_address=" +
-                        this.company.address
-                )
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/create-Company",
+                data: {
+                    company_name: this.namecompany,
+                    company_address: this.address,
+                },
+            })
                 .then((response) => {
-                    console.log(response.data);
+                    console.log(response);
                     alert(response.data);
                 })
                 .catch(function (error) {

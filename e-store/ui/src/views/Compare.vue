@@ -152,14 +152,14 @@
                                     {{
                                         phone1.Screen_Size == null
                                             ? "N/A"
-                                            : phone1.Size_Screnn1
+                                            : phone1.Screen_Size
                                     }}
                                 </td>
                                 <td id="Size_Screnn2">
                                     {{
-                                        phone2.Size_Screnn1 == null
+                                        phone2.Screen_Size == null
                                             ? "N/A"
-                                            : phone2.Size_Screnn1
+                                            : phone2.Screen_Size
                                     }}
                                 </td>
                             </tr>
