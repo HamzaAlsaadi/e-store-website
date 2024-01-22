@@ -50,8 +50,22 @@
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            Cart (0)
+                                            <router-link
+                                                to="/CheckOut"
+                                                style="
+                                                    color: white;
+                                                    text-decoration: none;
+                                                "
+                                            >
+                                                <i
+                                                    class="fa fa-shopping-cart"
+                                                ></i>
+                                                Cart ({{
+                                                    Object.keys(
+                                                        $store.state.Order
+                                                    ).length
+                                                }})
+                                            </router-link>
                                         </a>
                                     </li>
 

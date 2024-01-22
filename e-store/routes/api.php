@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 <?php
-
 use App\Http\Controllers\Api\AcessController;
 use App\Http\Controllers\Api\CatgoryContoller;
 use App\Http\Controllers\Api\CobonDiscountController;

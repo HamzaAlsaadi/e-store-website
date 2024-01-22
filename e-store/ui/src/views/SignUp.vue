@@ -2,23 +2,11 @@
     <html lang="en">
         <head>
             <meta charset="UTF-8" />
-            <meta
-                name="description"
-                content=" Today in this blog you will learn how to create a responsive Login & Registration Form in HTML CSS & JavaScript. The blog will cover everything from the basics of creating a Login & Registration in HTML, to styling it with CSS and adding with JavaScript."
-            />
-            <meta
-                name="keywords"
-                content=" 
- Animated Login & Registration Form,Form Design,HTML and CSS,HTML CSS JavaScript,login & registration form,login & signup form,Login Form Design,registration form,Signup Form,HTML,CSS,JavaScript,
-"
-            />
 
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             />
-
-            <title>Login & Signup Form HTML CSS | CodingNepal</title>
             <link rel="stylesheet" href="style.css" />
         </head>
         <HeaderSignUp />
@@ -67,25 +55,31 @@
                     <header>Login</header>
                     <form action="#">
                         <input
+                            v-model="email"
                             class="bbb"
                             type="text"
                             placeholder="Email address"
                             required
                         />
                         <input
+                            v-model="password"
                             class="bbb"
                             type="password"
                             placeholder="Password"
                             required
                         />
+
                         <a href="#"
                             ><router-link to="/ForgotPassword">
                                 Forgot password?</router-link
                             >
                         </a>
-                        <router-link to="/UserAccount" class="qwq"
-                            ><input type="submit" class="bbb" value="Login"
-                        /></router-link>
+                        <input
+                            type="button"
+                            class="bbb"
+                            value="Login"
+                            @click="login()"
+                        />
                     </form>
                 </div>
             </section>
@@ -96,6 +90,7 @@
 <script>
 import axios from "axios";
 import HeaderSignUp from "@/components/Header.SignUp.vue";
+import router from "@/router";
 export default {
     name: "SignUp",
     data() {
@@ -104,6 +99,7 @@ export default {
             email: "",
             password: "",
             Nationality: "sryia",
+            route: "",
         };
     },
     components: {
@@ -123,12 +119,39 @@ export default {
             })
                 .then(function (response) {
                     console.log(response);
-                    window.alert(response.data.name + " regestir succesful");
+
+                    window.alert(" regestir succesful");
                 })
                 .catch(function (error) {
                     console.log(error);
 
                     window.alert(error.response.message);
+                });
+        },
+        login() {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/auth/login",
+                data: {
+                    email: this.email,
+                    password: this.password,
+                },
+            })
+                .then(function (response) {
+                    if (response.status == 200) {
+                        console.log(response.status);
+                        window.alert("LogIn succesful");
+                        window.localStorage.setItem(
+                            "token",
+                            response.data.token
+                        ),
+                            router.push("/UserAccount");
+                    }
+                })
+                .catch(function (error) {
+                    router.push("/SignUp");
+                    alert("Email Or Password invalid");
+                    console.log(error);
                 });
         },
 
@@ -226,21 +249,18 @@ export default {
 .wwrapper.active .signup header {
     opacity: 0.6;
 }
-
 .qwq {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 40px;
 }
-
 .wwrapper form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 40px;
 }
-
 .bbb {
     height: 60px;
     outline: none;
@@ -253,7 +273,6 @@ export default {
     background: #464545;
     transition: all 0.3s ease;
 }
-
 .bbb:hover {
     background: #696868;
 }
@@ -261,7 +280,6 @@ export default {
 .form.login input {
     border: 1px solid #aaa;
 }
-
 form .checkbox {
     gap: 10px;
 }
@@ -300,7 +318,6 @@ form input [type="submit"] {
     border: none;
     transition: all 0.3s ease;
 }
-
 .form.login input[type="submit"]:hover {
     background: #696868;
 }
@@ -311,6 +328,5 @@ form input [type="submit"] {
 
 .link-container {
     padding: 10px;
-    /* قيمة ال Padding حسب احتياجاتك */
 }
 </style>

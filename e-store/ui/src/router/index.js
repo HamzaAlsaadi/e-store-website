@@ -32,9 +32,20 @@ import ViVo from "../views/Vivo";
 import XiaOmi from "../views/Xiaomi";
 import ZtE from "../views/Zte";
 import CompanyAdmin from "../views/CompanyAdmin";
+import LatestProduct from "../views/LatestProduct";
+import Admin from "../views/Admin";
 
-CompanyAdmin;
 const routes = [
+    {
+        path: "/AdmIn",
+        name: "AdmIn",
+        component: Admin,
+    },
+    {
+        path: "/LatestProduct",
+        name: "LatestProduct",
+        component: LatestProduct,
+    },
     {
         path: "/CompanyAdmin",
         name: "CompanyAdmin",

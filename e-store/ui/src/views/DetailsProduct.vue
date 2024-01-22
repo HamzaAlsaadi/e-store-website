@@ -1,5 +1,6 @@
 <template>
     <body>
+        <HeaderPage />
         <div class="container">
             <div class="box">
                 <div class="images">
@@ -17,7 +18,7 @@
                     </div>
                 </div>
                 <div class="basic-info">
-                    <h1>aaa</h1>
+                    <h1>{{ products.mobile_name }}</h1>
                     <div class="rate">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -36,17 +37,13 @@
                             />
                         </svg>
                     </div>
-                    <strong class="h1">$250</strong>
 
                     <div class="product-price">
                         <p class="last-price">
-                            Old Price : <span>{{ products.Price }}</span>
-                        </p>
-                        <p class="new-price">
-                            New Price : <span>$249.00 (5%)</span>
+                            <span>Price :</span>
                         </p>
                     </div>
-
+                    <strong class="h1">${{ products.Price }}</strong>
                     <div class="options">
                         <button><a href="#">Buy It Now</a></button>
                         <button><a href="#">Add to Cart</a></button>
@@ -56,19 +53,33 @@
                 <div class="product-specs">
                     <h2 class="text-center">Product Specifications</h2>
                     <ul>
-                        <li>Brand :</li>
-                        <li>Model : <input type="text" /></li>
-                        <li>Color : <input type="text" /></li>
-                        <li>Weight : <input type="text" /></li>
+                        <li>Cpu : {{ products.Cpu_spsecfication }}</li>
+                        <li>Gpu :{{ products.Gpu_spsecfication }}</li>
+                        <li>Screen Size : {{ products.Screen_Size }}</li>
+                        <li>
+                            battery :
+                            {{ products.battery_spsecfication }}
+                        </li>
+                        <li>
+                            Front Camera :
+                            {{ products.Front_camera_spsecfication }}
+                        </li>
+                        <li>
+                            Back Camera :
+                            {{ products.Back_camera_spsecfication }}
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
+        <FooTer />
     </body>
 </template>
 <script>
 import axios from "axios";
 import store from "@/store";
+import HeaderPage from "@/components/Header.vue";
+import FooTer from "@/components/footer.vue";
 export default {
     name: "DetailsProduct",
     data() {
@@ -77,6 +88,7 @@ export default {
             rating: 0,
         };
     },
+    components: { HeaderPage, FooTer },
     methods: {
         getorders() {
             axios({
@@ -117,11 +129,9 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
-
 body {
     background-color: #423f3e;
 }
-
 :root {
     --primary-color: #90e0ef;
     --secondary-color: #00b4d5;
@@ -248,9 +258,8 @@ body {
 }
 
 .product-specs li {
-    font-size: 12px;
-
-    margin-bottom: 10px;
+    font-size: 17px;
+    margin-bottom: 5px;
 }
 
 .product-specs input {
@@ -268,16 +277,13 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
 }
-
 .product-price span {
     font-weight: 400;
 }
-
 .last-price span {
     color: #f64749;
-    text-decoration: line-through;
+    font-size: 40px;
 }
-
 .new-price span {
     color: #256eff;
 }
@@ -289,7 +295,6 @@ body {
             "info info"
             "images description";
     }
-
     .box .basic-info .options a {
         padding: 8.5px 12px;
     }
@@ -300,7 +305,6 @@ body {
         position: absolute;
         align-self: flex-end;
     }
-
     .box .basic-info .options {
         position: absolute;
         align-self: flex-end;
@@ -315,11 +319,9 @@ body {
             "images info"
             "description description";
     }
-
     .box .images {
         gap: 3px;
     }
-
     .box .images .img-holder img {
         border-radius: 5px;
     }

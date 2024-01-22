@@ -242,17 +242,6 @@
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"
-                                                                        >NOTHING</a
-                                                                    >
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
-                                                                <li>
-                                                                    <a href="#"
                                                                         ><router-link
                                                                             to="Lg"
                                                                             >LG</router-link
@@ -299,20 +288,7 @@
                                                                         ></a
                                                                     >
                                                                 </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Infinix"
-                                                                            >INFINIX</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
+
                                                                 <li>
                                                                     <a href="#"
                                                                         ><router-link
@@ -462,6 +438,15 @@ export default {
     opacity: 1;
     visibility: visible;
 }
+.mega-links {
+    list-style-type: none;
+}
+.mega-links li {
+    display: inline-block;
+}
+.mega-links li a {
+    display: block;
+}
 
 .mega-box {
     position: absolute;
@@ -483,7 +468,7 @@ export default {
 }
 
 .mega-box .content .row {
-    width: calc(25% - 30px);
+    flex: calc(100% / 3);
     line-height: 45px;
 }
 

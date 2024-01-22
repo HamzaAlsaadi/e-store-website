@@ -83,9 +83,9 @@
                                             >Username</label
                                         >
                                         <input
+                                            v-model="user.name"
                                             type="text"
                                             class="form-control mb-1"
-                                            value=""
                                             placeholder="nmaxwell"
                                         />
                                     </div>
@@ -309,7 +309,32 @@
     </body>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+    data() {
+        return { user: {} };
+    },
+    methods: {
+        getprofile() {
+            const token = window.localStorage.getItem("token");
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/get/profile/",
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    this.user = response.data;
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
+    },
+    mounted() {
+        this.getprofile();
+    },
+};
 </script>
 <style scoped>
 body {
@@ -318,7 +343,6 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
-
 .ui-w-80 {
     width: 80px !important;
     height: auto;
