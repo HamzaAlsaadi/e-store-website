@@ -50,7 +50,6 @@
                         />
                     </form>
                 </div>
-
                 <div class="form login">
                     <header>Login</header>
                     <form action="#">
@@ -99,7 +98,7 @@ export default {
             email: "",
             password: "",
             Nationality: "sryia",
-            route: "",
+            Type_of_user: 0,
         };
     },
     components: {
@@ -135,12 +134,16 @@ export default {
                 data: {
                     email: this.email,
                     password: this.password,
+                    Type_of_user: this.Type_of_user,
                 },
             })
                 .then(function (response) {
                     if (response.status == 200) {
+                        console.log(response);
+
                         console.log(response.status);
                         window.alert("LogIn succesful");
+                        router.push("/UserAccount");
                         window.localStorage.setItem(
                             "token",
                             response.data.token

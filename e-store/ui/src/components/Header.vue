@@ -361,7 +361,11 @@
                                 <a class="nav-link" href="#">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Latest Phones</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >Latest Phones</router-link
+                                    ></a
+                                >
                             </li>
 
                             <li class="nav-item">
