@@ -62,13 +62,45 @@
                                         type="search"
                                         placeholder="Search your product"
                                         class="form-control"
+                                        v-model="prname"
                                     />
-                                    <button class="btn bg-white" type="submit">
+                                    <button
+                                        class="btn bg-white"
+                                        type="button"
+                                        @click="getsearchdata()"
+                                    >
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <select class="btn bg-white"></select>
-                                    <select class="btn bg-white"></select>
-                                    <select class="btn bg-white"></select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
                                 </div>
                             </form>
                         </div>
@@ -245,15 +277,34 @@
 </template>
 <script>
 import axios from "axios";
+import store from "@/store";
 
 export default {
     name: "HeaderPage",
     data() {
         return {
             companies: [],
+            companys: [],
+            prname: "",
         };
     },
     methods: {
+        getcompany() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Company",
+            })
+                .then((response) => {
+                    this.companys = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.data);
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
         getorders() {
             axios({
                 method: "get",
@@ -269,9 +320,27 @@ export default {
                     window.alert("hi");
                 });
         },
+        getsearchdata() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Serach/searchByName",
+                data: {
+                    mobile_name: this.prname,
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    store.state.products = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     beforeMount() {
         this.getorders();
+
+        this.getcompany();
     },
 };
 </script>

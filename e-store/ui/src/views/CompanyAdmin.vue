@@ -22,24 +22,25 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Depart</th>
-                        <th>Date</th>
-                        <th>Join Time</th>
-                        <th>Logout Time</th>
+                        <th>address</th>
+                        <th>created at</th>
+                        <th>updated at</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>Sam David</td>
-                        <td>Design</td>
-                        <td>03-24-22</td>
-                        <td>8:00AM</td>
-                        <td>3:00PM</td>
+                    <tr v-for="element in companies" :key="element.id">
+                        <td>{{ element.id }}</td>
+                        <td>{{ element.company_name }}</td>
+                        <td>{{ element.company_address }}</td>
+                        <td>{{ element.created_at }}</td>
+                        <td>{{ element.updated_at }}</td>
                         <td>
-                            <button class="dd">
+                            <button
+                                class="dd"
+                                @click="deletecompany(element.id)"
+                            >
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
@@ -68,6 +69,7 @@ export default {
         return {
             namecompany: "",
             address: "",
+            companies: [],
         };
     },
     methods: {
@@ -92,6 +94,43 @@ export default {
                     window.alert("hi");
                 });
         },
+        getcompany() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Company/",
+            })
+                .then((response) => {
+                    console.log(response);
+                    this.companies = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.data);
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        deletecompany(id) {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/delete-Company?id=" + id,
+            })
+                .then((response) => {
+                    console.log(response);
+                    window.location.reload();
+                })
+                .catch(function (error) {
+                    console.log(error.data);
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+    },
+    mounted() {
+        this.getcompany();
     },
 };
 </script>

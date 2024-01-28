@@ -319,6 +319,9 @@ export default {
     },
     beforeMount() {
         this.getorders();
+        if (!window.localStorage.key("token")) {
+            router.push("/");
+        }
     },
 };
 </script>

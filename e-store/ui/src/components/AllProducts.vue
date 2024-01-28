@@ -12,7 +12,7 @@
             <div id="product-1" class="row">
                 <!-- Single Product -->
                 <div
-                    v-for="product in products"
+                    v-for="product in $store.state.products"
                     :key="product.id"
                     id="product-1"
                     class="col-md-6 col-lg-4 col-xl-3"
@@ -123,7 +123,7 @@ export default {
     name: "AllProducts",
 
     data() {
-        return { products: [] };
+        return {};
     },
     methods: {
         getorders() {
@@ -132,7 +132,8 @@ export default {
                 url: "http://127.0.0.1:8000/api/products/",
             })
                 .then((response) => {
-                    this.products = response.data;
+                    store.state.products = response.data;
+                    console.log(response);
                 })
                 .catch(function (error) {
                     window.alert(error.response);
