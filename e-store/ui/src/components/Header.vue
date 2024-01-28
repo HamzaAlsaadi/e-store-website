@@ -329,8 +329,10 @@ export default {
                 },
             })
                 .then((response) => {
-                    console.log(response);
                     store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(this.prname);
                 })
                 .catch((error) => {
                     console.log(error);
