@@ -11,12 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $token_id = auth()->user()->id;
+        $user = User::where('id', $token_id)->first();
 
-        $user = User::all();
-        return response()->json($user);
+        if ($user->Type_of_user == '1') {
+            $user = User::all();
+            return response()->json($user);
+        } else {
+            return response()->json(['message' => 'You are not allowed to view this page']);
+        }
     }
+
     public function show(Request $request)
     {
         $token_id = auth()->user()->id;
@@ -113,31 +120,37 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find($request->input('id'));
         if (!$user) {
             return response()->json(['error' => 'user not found'], 404);
         }
         $this->validate($request, [
             'name' => 'required',
             'Nationality' => 'required',
-            'Type_of_user' => 'required',
-            'email' => 'required',
-            'password' => 'required',
             // Add validation rules for other fields
         ]);
         $user->update($request->all());
         return response()->json($user, 200);
     }
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['error' => 'user not found'], 404);
-        }
 
-        $user->delete();
-        return response()->json(['message' => 'user deleted successfully'], 200);
+        $token_id = auth()->user()->id;
+        $user = User::where('id', $token_id)->first();
+
+        if ($user->Type_of_user == '1') {
+            $user_del = User::find($request->input('id_user_to_delete'));
+
+            if ($user_del) {
+                $user_del->delete();
+                return response()->json(['message' => 'user deleted successfully'], 200);
+            } else {
+                return response()->json(['message' => ' not found user in store']);
+            }
+        } else {
+            return response()->json(['message' => 'You are not allowed to view this page']);
+        }
     }
 }

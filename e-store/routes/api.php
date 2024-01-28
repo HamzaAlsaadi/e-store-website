@@ -58,7 +58,7 @@ Route::get('product-of-company/{companyId}', [CompanyController::class, 'getComp
 
 
 
-Route::post('store-from-csv', [StoreCsvController::class, 'uploadCSV']);
+Route::post('/user/store/product/csv', [StoreCsvController::class, 'uploadCSV'])->middleware('auth:sanctum');
 
 
 
@@ -68,10 +68,14 @@ Route::get('Serach/searchByCategory', [SerachController::class, 'searchByCategor
 Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany']);
 
 
-Route::apiResource('User', UserController::class)->middleware('auth:sanctum');
+Route::post('user/all-users', [UserController::class, 'index'])->middleware('auth:sanctum');
+Route::post('user/show-user', [UserController::class, 'show'])->middleware('auth:sanctum');
+Route::post('user/delete-user', [UserController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('user/update-user', [UserController::class, 'update'])->middleware('auth:sanctum');
 
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
+
 
 
 Route::post('/create-order', [OrderProdctController::class, 'createOrder'])->middleware('auth:sanctum');
