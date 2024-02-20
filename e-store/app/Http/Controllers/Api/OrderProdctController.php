@@ -28,37 +28,41 @@ class OrderProdctController extends Controller
         */
 
         try {
+            $jsonData = $request->json()->all();
+            $cartItems = $jsonData['cartItems'];
 
-            $cartItems = json_decode($request->input('cartItems'), true);
-
-
+            var_dump($cartItems);
             if ($request->cartItems) {
 
                 $totalPrice = 0;
                 $cartCount = 0;
-
-                foreach ($cartItems as $cartItem) {
-                    $totalPrice += $cartItem["price"] + $cartItem["quantity"];
-                    $cartCount += $cartItem["quantity"];
-                };
-
+                if (is_iterable($cartItems)) {
+                    foreach ($cartItems as $cartItem) {
+                        $totalPrice += $cartItem["price"] + $cartItem["quantity"];
+                        $cartCount += $cartItem["quantity"];
+                    };
+                }
                 $order = Order::create([
                     'user_id' => Auth::user()->id,
                     'total_price' => $totalPrice,
                 ]);
 
                 $order_id = $order->id;
-                foreach ($cartItems as $cartItem) {
-                    PivotOrderProduct::create([
-                        "product_id" => $cartItem["id"],
-                        "quantity" => $cartItem["quantity"],
-                        "order_id" => $order_id
-                    ]);
+                if (is_iterable($cartItems)) {
+                    foreach ($cartItems as $cartItem) {
+                        PivotOrderProduct::create([
+                            "product_id" => $cartItem["id"],
+                            "quantity" => $cartItem["quantity"],
+                            "order_id" => $order_id
+                        ]);
+                    }
                 }
+                return response()->json(true, 200);
+            } else {
+                return response()->json(false, 201);
             }
-
-            return response()->json(true, 200);
         } catch (\Exception $e) {
+            print($e);
             return response()->json('there a problem recheck the data you send');
         }
     }
@@ -118,17 +122,6 @@ class OrderProdctController extends Controller
         $endDateTime = Carbon::parse($endDate)->endOfDay();
 
         $orders = Order::whereBetween('created_at', [$startDateTime, $endDateTime])->get();
-
-        return response()->json($orders);
-    }
-    public function getOrdersInTime(Request $request)
-    {
-        $startDate = $request->input('start_date'); // Format: 'YYYY-MM-DD'
-
-        $startDateTime = Carbon::parse($startDate)->startOfDay();
-
-
-        $orders = Order::where('created_at', [$startDateTime])->get();
 
         return response()->json($orders);
     }
