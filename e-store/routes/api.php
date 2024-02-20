@@ -56,7 +56,7 @@ Route::get('product-of-company/{companyId}', [CompanyController::class, 'getComp
 
 
 
-Route::post('/user/store/product/csv', [StoreCsvController::class, 'uploadCSV'])->middleware('auth:sanctum');
+Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv']);
 
 
 
