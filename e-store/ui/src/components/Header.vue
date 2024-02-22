@@ -67,16 +67,21 @@
                                     <button
                                         class="btn bg-white"
                                         type="button"
-                                        @click="getsearchdata()"
+                                        @click="
+                                            getsearchdata() + getsearchcompany()
+                                        "
                                     >
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <select class="btn bg-white">
+                                    <select
+                                        class="btn bg-white"
+                                        v-model="prcompany"
+                                    >
                                         <option
                                             style=""
-                                            v-for="(company, index) in companys"
+                                            v-for="company in companys"
                                             :key="company.id"
-                                            :value="index"
+                                            :value="company.company_name"
                                         >
                                             {{ company.company_name }}
                                         </option>
@@ -286,6 +291,7 @@ export default {
             companies: [],
             companys: [],
             prname: "",
+            prcompany: "",
         };
     },
     methods: {
@@ -312,6 +318,7 @@ export default {
             })
                 .then((response) => {
                     this.companies = response.data;
+                    store.state.products = response.data;
                 })
                 .catch(function (error) {
                     window.alert(error.response);
@@ -323,16 +330,34 @@ export default {
         getsearchdata() {
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/Serach/searchByName",
-                data: {
-                    mobile_name: this.prname,
-                },
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByName" +
+                    "?mobile_name=" +
+                    this.prname,
             })
                 .then((response) => {
                     store.state.products = response.data;
 
                     console.log(response);
-                    console.log(this.prname);
+                    console.log(this.prcompany);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcompany() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCompany" +
+                    "?company=" +
+                    this.prcompany,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(this.prcompany);
                 })
                 .catch((error) => {
                     console.log(error);
