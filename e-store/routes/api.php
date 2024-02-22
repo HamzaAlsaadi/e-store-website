@@ -58,7 +58,7 @@ Route::get('product-of-company/{companyId}', [CompanyController::class, 'getComp
 
 
 
-Route::post('/user/store/product/csv', [StoreCsvController::class, 'uploadCSV'])->middleware('auth:sanctum');
+Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv'])->middleware('auth:sanctum');;
 
 
 
@@ -78,12 +78,23 @@ Route::post('/auth/login', [UserController::class, 'loginUser']);
 
 
 
+
+
+
+
 Route::post('/create-order', [OrderProdctController::class, 'createOrder'])->middleware('auth:sanctum');
 Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTimeRange'])->middleware('auth:sanctum');
-Route::post('/order-on-time', [OrderProdctController::class, 'getOrdersInTime'])->middleware('auth:sanctum');
 Route::apiResource('/order', OrderProdctController::class)->middleware('auth:sanctum');
+
+
+
+Route::get('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
+
+
+
+    
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
-Route::post('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
+
 Route::apiResource('/cobon', Couppon::class)->middleware('auth:sanctum');
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');
 
