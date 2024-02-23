@@ -27,28 +27,31 @@ class ProductRatingController extends Controller
         print($user->id);
         print($request->productId);
         // Check if the user has already rated the product
-        // $existingRating = RateProduct::where('user_id', $user->id)
-        //     ->where('product_id', $request->productId)
-        //     ->first();
+        $existingRating = RateProduct::where('user_id', $user->id)
+            ->where('product_id', $request->productId)
+            ->first();
 
-        // if ($existingRating) {
-        RateProduct::updateOrCreate(
-            ['number_of_rate_for_product' => $request->input('rating')],
-            ['product_id' => $product->id],
-            ['user_id' => $user->id],
+        if ($existingRating) {
+            $existingRating->delete();
 
-        );
-        // return response()->json(['message' => 'You have already rated this product'], 400);
-        // }
+            $rating = new RateProduct();
+            $rating->user_id = $user->id;
+            $rating->product_id = $product->id;
+            $rating->number_of_rate_for_product = $request->input('rating');
 
-        // Create a new rating
-        // $rating = new RateProduct();
-        // $rating->user_id = $user->id;
-        // $rating->product_id = $product->id;
-        // $rating->number_of_rate_for_product = $request->input('rating');
+            $rating->save();
 
-        // $rating->save();
+            return response()->json(['message' => 'Product rated successfully'], 200);
+        } else {
+            // Create a new rating
+            $rating = new RateProduct();
+            $rating->user_id = $user->id;
+            $rating->product_id = $product->id;
+            $rating->number_of_rate_for_product = $request->input('rating');
 
-        return response()->json(['message' => 'Product rated successfully'], 200);
+            $rating->save();
+
+            return response()->json(['message' => 'Product rated successfully'], 200);
+        }
     }
 }
