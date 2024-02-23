@@ -97,13 +97,10 @@ export default {
             })
                 .then((response) => {
                     this.products = response.data;
-                    console.log(response.data);
+                    console.log(response);
                 })
                 .catch(function (error) {
                     window.alert(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
                 });
         },
         rateProduct(rating) {
@@ -120,6 +117,8 @@ export default {
             console.log("تم تقييم المنتج بنجاح: " + rating);
         },
         rate() {
+            const token = window.localStorage.getItem("token");
+
             axios({
                 method: "get",
                 url:
@@ -127,10 +126,10 @@ export default {
                     store.state.productID +
                     "/rate?rating=" +
                     this.rating,
+                headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {
-                    this.products = response.data;
-                    console.log(response.data);
+                    console.log(response);
                 })
                 .catch(function (error) {
                     window.alert(error.response);

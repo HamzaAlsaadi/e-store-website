@@ -6,14 +6,18 @@
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-                        <h2>SAMSUNG</h2>
+                        <h2>{{ company.company_name }}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-1" class="single-product">
+                <div
+                    v-for="product in $store.state.products"
+                    :key="product.id"
+                    id="product-1"
+                    class="col-md-6 col-lg-4 col-xl-3"
+                >
+                    <div class="single-product">
                         <div class="part-1">
                             <ul>
                                 <li>
@@ -49,8 +53,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" v-on:click="Add">
-                                        {{ count }}
+                                    <a
+                                        @click="
+                                            AddProduct(
+                                                product.id,
+                                                product.mobile_name,
+                                                product.Price,
+                                                product.imge
+                                            )
+                                        "
+                                        href="#"
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -68,7 +81,11 @@
                                 </li>
                                 <li>
                                     <a href="#"
-                                        ><router-link to="/DetailsProduct"
+                                        ><router-link
+                                            :to="
+                                                '/DetailsProduct?id=' +
+                                                product.id
+                                            "
                                             ><svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
@@ -88,219 +105,10 @@
                             </ul>
                         </div>
                         <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product ------------------------------------------------------------------------>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            <span class="discount">15% off</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-1" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            <span class="discount">15% off</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
+                            <h3 class="product-title">
+                                {{ product.mobile_name }}
+                            </h3>
+                            <h4 class="product-price">{{ product.Price }}$</h4>
                         </div>
                     </div>
                 </div>
@@ -312,11 +120,84 @@
 <script>
 import FooTer from "@/components/footer.vue";
 import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
+import store from "@/store";
+import axios from "axios";
 export default {
     name: "SamSung",
     components: {
         HeaderAllCategories,
         FooTer,
+    },
+    data() {
+        return { company: "" };
+    },
+    methods: {
+        getorders() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/product-of-company/" +
+                    store.state.companyid,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        AddProduct(id, name_mobile, Price, img) {
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    if (id == store.state.Order[index]["id"]) {
+                        store.state.Order[index]["count"]++;
+                        console.log(store.state.Order);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
+            }
+            store.state.Order[store.state.counter] = {
+                id: id,
+                name: name_mobile,
+                Price: Price,
+                img: img,
+                count: 1,
+            };
+            store.state.counter++;
+            console.log(store.state.Order);
+        },
+
+        getcompany() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Company/" +
+                    store.state.companyid,
+            })
+                .then((response) => {
+                    this.company = response.data;
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                });
+        },
+    },
+    beforeMount() {
+        this.getcompany();
+        this.getorders();
     },
 };
 </script>

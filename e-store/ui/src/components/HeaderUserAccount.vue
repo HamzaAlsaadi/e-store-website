@@ -237,6 +237,11 @@
                                                                 >
                                                                     <a href="#"
                                                                         ><router-link
+                                                                            @click="
+                                                                                get(
+                                                                                    company.id
+                                                                                )
+                                                                            "
                                                                             to="Samsung"
                                                                             >{{
                                                                                 company.company_name
@@ -289,14 +294,35 @@
 import axios from "axios";
 
 import router from "@/router";
+import store from "@/store";
 export default {
     name: "HeaderUserAccount",
     data() {
         return {
             companies: [],
+            companys: [],
         };
     },
     methods: {
+        getcompany() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Company",
+            })
+                .then((response) => {
+                    this.companys = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        get(id) {
+            store.state.companyid = id;
+            console.log(store.state.companyid);
+        },
         logout() {
             window.localStorage.removeItem("token");
             router.push("/");

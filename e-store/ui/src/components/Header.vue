@@ -231,11 +231,17 @@
                                                                 >
                                                                     <a href="#"
                                                                         ><router-link
+                                                                            @click="
+                                                                                get(
+                                                                                    company.id
+                                                                                )
+                                                                            "
+                                                                            co
                                                                             to="Samsung"
                                                                             >{{
                                                                                 company.company_name
-                                                                            }}</router-link
-                                                                        >
+                                                                            }}
+                                                                        </router-link>
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -321,6 +327,10 @@ export default {
                 .catch(function () {
                     window.alert("hi");
                 });
+        },
+        get(id) {
+            store.state.companyid = id;
+            console.log(store.state.companyid);
         },
         getorders() {
             axios({

@@ -210,12 +210,11 @@ export default {
         };
     },
     methods: {
-        onFileChange(event) {
-            var files = event.target.files || event.dataTransfer.files;
+        onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
             if (!files.length) return;
             this.createInput(files[0]);
         },
-
         createInput(file) {
             var reader = new FileReader();
             var vm = this;
@@ -224,8 +223,9 @@ export default {
             };
             reader.readAsText(file);
         },
-
         doAjaxPost() {
+            const token = window.localStorage.getItem("token");
+
             var formData = new FormData();
             var file = document.querySelector("#file");
             formData.append("file", file.files[0]);
@@ -233,6 +233,7 @@ export default {
                 method: "post",
                 url: "http://127.0.0.1:8000/api/user/store/product/csv",
                 data: formData,
+                headers: { Authorization: `Bearer ${token}` },
             })
                 .then(function (response) {
                     console.log(response);

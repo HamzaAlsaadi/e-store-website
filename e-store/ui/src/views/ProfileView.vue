@@ -318,7 +318,7 @@ export default {
             const token = window.localStorage.getItem("token");
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/get/profile",
+                url: "http://127.0.0.1:8000/api/user/show-user",
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {

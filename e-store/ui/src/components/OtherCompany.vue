@@ -29,115 +29,115 @@
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Asus"
+                <router-link to="Samsung"
                     ><img
                         src="@/assets/Image/asus.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Google">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Google.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Honor"
+                <router-link to="Samsung"
                     ><img
                         src="@/assets/Image/Honor.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Htc">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Htc.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Huawei">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Huawei.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Infinix">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Infinix.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Lenovo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Lenovo.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Lg">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Lg.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Meizu">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Meizu.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Motorola">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Motorola.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Nokia">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Nokia.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Oneplus">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Oneplus.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Oppo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Oppo.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Realme">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Realme.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Sony">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Sony.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Tecno">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Tecno.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Vivo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Vivo.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Xiaomi">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Xiaomi.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Zte">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Zte.jpg"
                         alt="Image 1"
