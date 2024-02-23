@@ -1,6 +1,5 @@
 <template>
     <body>
-        <HeaderPage />
         <div class="container">
             <div class="box">
                 <div class="images">
@@ -29,7 +28,7 @@
                             viewBox="0 0 16 16"
                             v-for="(star, index) in 5"
                             :key="index"
-                            @click="rateProduct(index + 1)"
+                            @click="rateProduct(index + 1) + rate()"
                             :class="{ active: index < rating }"
                         >
                             <path
@@ -78,7 +77,6 @@
 <script>
 import axios from "axios";
 import store from "@/store";
-import HeaderPage from "@/components/Header.vue";
 import FooTer from "@/components/footer.vue";
 export default {
     name: "DetailsProduct",
@@ -88,7 +86,7 @@ export default {
             rating: 0,
         };
     },
-    components: { HeaderPage, FooTer },
+    components: { FooTer },
     methods: {
         getorders() {
             axios({
@@ -120,6 +118,26 @@ export default {
 
             this.rating = rating;
             console.log("تم تقييم المنتج بنجاح: " + rating);
+        },
+        rate() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/products/" +
+                    store.state.productID +
+                    "/rate?rating=" +
+                    this.rating,
+            })
+                .then((response) => {
+                    this.products = response.data;
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
         },
     },
     beforeMount() {

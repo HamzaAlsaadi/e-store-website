@@ -35,8 +35,15 @@ import CompanyAdmin from "../views/CompanyAdmin";
 import LatestProduct from "../views/LatestProduct";
 import Admin from "../views/Admin";
 import OfferProduct from "../views/OfferProduct";
+import AddProduct from "../views/AddProduct";
 
 const routes = [
+    {
+        path: "/AddProduct",
+        name: "AddProduct",
+        component: AddProduct,
+    },
+
     {
         path: "/OfferProduct",
         name: "OfferProduct",

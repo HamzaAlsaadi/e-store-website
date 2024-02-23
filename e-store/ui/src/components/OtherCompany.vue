@@ -162,7 +162,16 @@
 export default {
     name: "OtherCompany",
     mounted() {
-        const initSlider = () => {
+        this.initSlider();
+        window.addEventListener("resize", this.initSlider);
+        window.addEventListener("load", this.initSlider);
+    },
+    beforeUnmount() {
+        window.removeEventListener("resize", this.initSlider);
+        window.removeEventListener("load", this.initSlider);
+    },
+    methods: {
+        initSlider() {
             const imageList = document.querySelector(
                 ".slider-wrapper .image-list"
             );
@@ -230,12 +239,11 @@ export default {
                 updateScrollThumbPosition();
                 handleSlideButtons();
             });
-        };
-        window.addEventListener("resize", initSlider);
-        window.addEventListener("load", initSlider);
+        },
     },
 };
 </script>
+
 <style scoped>
 * {
     margin: 0;

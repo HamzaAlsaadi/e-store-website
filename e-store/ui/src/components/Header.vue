@@ -67,15 +67,14 @@
                                     <button
                                         class="btn bg-white"
                                         type="button"
-                                        @click="
-                                            getsearchdata() + getsearchcompany()
-                                        "
+                                        @click="getsearchdata()"
                                     >
                                         <i class="fa fa-search"></i>
                                     </button>
                                     <select
                                         class="btn bg-white"
                                         v-model="prcompany"
+                                        @change="getsearchcompany()"
                                     >
                                         <option
                                             style=""
@@ -265,7 +264,20 @@
                                     ></a
                                 >
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >Regex</router-link
+                                    ></a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >NLP</router-link
+                                    ></a
+                                >
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
                                     ><router-link to="Compare"
@@ -304,7 +316,6 @@ export default {
                     this.companys = response.data;
                 })
                 .catch(function (error) {
-                    console.log(error.data);
                     console.log(error.response);
                 })
                 .catch(function () {
@@ -339,7 +350,6 @@ export default {
                     store.state.products = response.data;
 
                     console.log(response);
-                    console.log(this.prcompany);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -357,7 +367,7 @@ export default {
                     store.state.products = response.data;
 
                     console.log(response);
-                    console.log(this.prcompany);
+                    console.log(store.state.products);
                 })
                 .catch((error) => {
                     console.log(error);
