@@ -25,17 +25,18 @@ class ProductRatingController extends Controller
 
         // print(Auth::user()->id);
         print($user->id);
-
+        print($request->productId);
         // Check if the user has already rated the product
-        $existingRating = RateProduct::where('user_id', $user->id)
-            ->where('product_id', $request->productId)
-            ->first();
+        // $existingRating = RateProduct::where('user_id', $user->id)
+        //     ->where('product_id', $request->productId)
+        //     ->first();
 
         // if ($existingRating) {
         RateProduct::updateOrCreate(
-            ['user_id' => $user->id],
             ['number_of_rate_for_product' => $request->input('rating')],
-            ['product_id' => $product->id]
+            ['product_id' => $product->id],
+            ['user_id' => $user->id],
+
         );
         // return response()->json(['message' => 'You have already rated this product'], 400);
         // }
