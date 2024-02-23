@@ -65,6 +65,7 @@ Route::get('Serach/searchByPrice', [SerachController::class, 'searchByPrice']);
 Route::get('Serach/searchByCategory', [SerachController::class, 'searchByCategory']);
 Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany']);
 
+Route::apiResource('user', UserController::class)->middleware('auth:sanctum');
 
 Route::post('user/all-users', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::post('user/show-user', [UserController::class, 'show'])->middleware('auth:sanctum');
@@ -90,7 +91,7 @@ Route::get('products/{productId}/rate', [ProductRatingController::class, 'ratePr
 
 
 
-    
+
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
 
 Route::apiResource('/cobon', Couppon::class)->middleware('auth:sanctum');
