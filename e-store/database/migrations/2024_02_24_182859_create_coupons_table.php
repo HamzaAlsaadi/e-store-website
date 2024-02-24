@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('couppons', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('coupons_id');
             $table->string('code')->unique();
             $table->decimal('discount', 8, 2);
             $table->date('expiration_date');
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('couppons');
+        Schema::dropIfExists('coupons');
     }
 };

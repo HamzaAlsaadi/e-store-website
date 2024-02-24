@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;
-use App\Models\Couppon;
-use App\Models\couppon_order;
-use App\Models\coupponorder;
+use App\Models\coupon;
+use App\Models\coupon_order;
+// use App\Models\Couppon;
+// use App\Models\couppon_order;
+// use App\Models\coupponorder;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,7 @@ class CobonDiscountController extends Controller
         $couponCode = $request->input('coupon_code');
 
         // Find the coupon in the database by the provided code
-        $coupon = Couppon::where('code', $couponCode)
+        $coupon = coupon::where('code', $couponCode)
             ->where('expiration_date', '>=', Carbon::now()) // Check if the coupon is not expired
             ->first();
 
@@ -44,14 +46,14 @@ class CobonDiscountController extends Controller
                 $order = Order::where('user_id', Auth::user()->id)
                     ->where('total_price', $totalPrice)->pluck('id')->toArray();
                 // Apply the discount to the total price
-                // var_dump($order);
+                var_dump($order);
                 $discountedPrice = $totalPrice - ($totalPrice * ($coupon->discount / 100));
                 //insert here to couppon order table
-                // couppon_order::create([
-                //     "couppon_id " => $coupon->id,
-                //     "order_id " => $order[0],
+                coupon_order::create([
+                    "couppon_id " => $coupon->id,
+                    "order_id " => $order[0],
 
-                // ]);
+                ]);
 
                 // Return the discounted price
                 return response()->json(['discounted_price' => $discountedPrice]);
@@ -63,11 +65,13 @@ class CobonDiscountController extends Controller
         }
     }
 
+
     public function index()
     {
-        $coupons = Couppon::all();
+        $coupons = coupon::all();
         return response()->json($coupons);
     }
+
 
     public function store(Request $request)
     {
@@ -77,33 +81,33 @@ class CobonDiscountController extends Controller
             'expiration_date' => 'required|date'
         ]);
 
-        $coupon = Couppon::create($validatedData);
-        return response()->json($coupon, 201);
+        $coupon = coupon::create($validatedData);
+        return response()->json($coupon, 200);
     }
 
     public function show($id)
     {
-        $coupon = Couppon::findOrFail($id);
+        $coupon = coupon::findOrFail($id);
         return response()->json($coupon);
     }
 
-    public function update(Request $request, $id)
+    public function update_cobon(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'code' => 'required|unique:coupons,code,' . $id,
+            'code' => 'required',
             'discount' => 'required|numeric',
             'expiration_date' => 'required|date'
         ]);
 
-        $coupon = Couppon::findOrFail($id);
+        $coupon = coupon::findOrFail($id);
         $coupon->update($validatedData);
         return response()->json($coupon, 200);
     }
 
     public function destroy($id)
     {
-        $coupon = Couppon::findOrFail($id);
+        $coupon = coupon::findOrFail($id);
         $coupon->delete();
-        return response()->json(null, 204);
+        return response()->json(['msg=>delete success'], 200);
     }
 }

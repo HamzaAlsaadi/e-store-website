@@ -14,9 +14,8 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price');
+            $table->decimal('percent_of_discount');
             $table->dateTime('expiration_date');
-            $table->foreignIdFor(product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
