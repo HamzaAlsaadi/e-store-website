@@ -1,77 +1,26 @@
 <template>
     <body>
         <HeaderAdmin />
-        <div class="container">
-            <header>Add Company</header>
-
-            <form action="#">
-                <div class="form">
-                    <div class="detalis">
-                        <span class="title">Detalis </span>
-
-                        <div class="fields">
-                            <div class="input-field">
-                                <label> Name Company </label>
-                                <input
-                                    v-model="namecompany"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                />
-                            </div>
-                            <div class="input-field">
-                                <label>Address Company </label>
-                                <input
-                                    v-model="address"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                />
-                            </div>
-
-                            <div class="input-field">
-                                <label>imge</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter your name"
-                                />
-                            </div>
-                        </div>
-                        <button
-                            type="button"
-                            class="nextbtn"
-                            @click="Addcompany()"
-                        >
-                            Ok
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
         <section class="attendance">
             <div class="attendance-list">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>address</th>
-                            <th>created at</th>
-                            <th>updated at</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
+                            <th>Username</th>
+                            <th>Nationality</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="element in companies" :key="element.id">
+                        <tr v-for="element in users" :key="element.id">
                             <td>{{ element.id }}</td>
-                            <td>{{ element.company_name }}</td>
-                            <td>{{ element.company_address }}</td>
-                            <td>{{ element.created_at }}</td>
-                            <td>{{ element.updated_at }}</td>
+                            <td>{{ element.name }}</td>
+                            <td>{{ element.Nationality }}</td>
 
                             <td>
                                 <button
                                     class="dd"
-                                    @click="deletecompany(element.id)"
+                                    @click="deleteuser(element.id)"
                                 >
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -90,7 +39,7 @@
             </div>
         </section>
         <div id="popup" class="containeraaab" v-show="isPopupVisible">
-            <header>Edit Company</header>
+            <header>Edit User</header>
 
             <form action="#">
                 <div class="form">
@@ -99,25 +48,17 @@
 
                         <div class="fields">
                             <div class="input-field">
-                                <label> Name Company </label>
+                                <label> Username </label>
                                 <input
-                                    v-model="namecompany"
+                                    v-model="username"
                                     type="text"
                                     placeholder="Enter your name"
                                 />
                             </div>
                             <div class="input-field">
-                                <label>Address Company </label>
+                                <label>Nationality </label>
                                 <input
-                                    v-model="address"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                />
-                            </div>
-
-                            <div class="input-field">
-                                <label>imge</label>
-                                <input
+                                    v-model="nationality"
                                     type="text"
                                     placeholder="Enter your name"
                                 />
@@ -127,7 +68,7 @@
                         <button
                             type="button"
                             class="nextbtn"
-                            @click="editcompany() + saveEdit()"
+                            @click="saveEdit()"
                         >
                             Save
                         </button>
@@ -145,7 +86,7 @@ import FooTer from "@/components/footer.vue";
 import axios from "axios";
 
 export default {
-    name: "CompanyAdmin",
+    name: "UsersAdmin",
     components: {
         HeaderAdmin,
         FooTer,
@@ -154,16 +95,14 @@ export default {
         return {
             isPopupVisible: false,
 
-            namecompany: "",
-            address: "",
-            companies: [],
-            idpro: null,
+            username: "",
+            nationality: "",
+            users: [],
         };
     },
     methods: {
-        editData(qw) {
+        editData() {
             this.isPopupVisible = true;
-            this.idpro = qw;
         },
         cancelEdit() {
             this.isPopupVisible = false;
@@ -173,58 +112,14 @@ export default {
             this.isPopupVisible = false;
         },
 
-        Addcompany() {
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/create-Company",
-                data: {
-                    company_name: this.namecompany,
-                    company_address: this.address,
-                },
-            })
-                .then((response) => {
-                    console.log(response);
-                    alert(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error.data);
-                    console.log(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
-                });
-        },
-        editcompany() {
-            axios({
-                method: "post",
-                url:
-                    "http://127.0.0.1:8000/api/update-Company?company_name=" +
-                    this.namecompany +
-                    "&company_address=" +
-                    this.address +
-                    "&id=" +
-                    this.idpro,
-            })
-                .then((response) => {
-                    console.log(response);
-                    alert(response.data);
-                })
-                .catch(function (error) {
-                    console.log(error.data);
-                    console.log(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
-                });
-        },
-        getcompany() {
+        getusers() {
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/Company/",
+                url: "http://127.0.0.1:8000/api/user/all",
             })
                 .then((response) => {
                     console.log(response);
-                    this.companies = response.data;
+                    this.users = response.data;
                 })
                 .catch(function (error) {
                     console.log(error.data);
@@ -234,10 +129,10 @@ export default {
                     window.alert("hi");
                 });
         },
-        deletecompany(id) {
+        deleteuser(id) {
             axios({
                 method: "post",
-                url: "http://127.0.0.1:8000/api/delete-Company?id=" + id,
+                url: "http://127.0.0.1:8000/api/delete-catgory?id=" + id,
             })
                 .then((response) => {
                     console.log(response);
@@ -253,7 +148,7 @@ export default {
         },
     },
     mounted() {
-        this.getcompany();
+        this.getuser();
     },
 };
 </script>

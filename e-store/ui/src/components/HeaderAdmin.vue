@@ -2,7 +2,6 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Ecommerce Navbar Design</title>
 
         <link
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -195,6 +194,13 @@
                                 <a class="nav-link" href="#"
                                     ><router-link to="/AddProduct"
                                         >Products</router-link
+                                    ></a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/UsersAdmin"
+                                        >Users</router-link
                                     ></a
                                 >
                             </li>

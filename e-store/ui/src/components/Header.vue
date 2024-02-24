@@ -256,13 +256,14 @@
                                                                             "
                                                                         >
                                                                             <router-link
+                                                                                v-if="
+                                                                                    category.Company_id ===
+                                                                                    company.id
+                                                                                "
                                                                                 to="/CategoryPage"
                                                                             >
                                                                                 {{
-                                                                                    category.Company_id ===
-                                                                                    company.id
-                                                                                        ? category.name
-                                                                                        : ""
+                                                                                    category.name
                                                                                 }}
                                                                             </router-link>
                                                                         </a>

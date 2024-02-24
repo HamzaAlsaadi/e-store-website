@@ -18,8 +18,14 @@ import OfferProduct from "../views/OfferProduct";
 import AddProduct from "../views/AddProduct";
 import CategoryPage from "../views/CategoryPage";
 import AddCategory from "../views/AddCategory";
+import UsersAdmin from "../views/UsersAdmin";
 
 const routes = [
+    {
+        path: "/UsersAdmin",
+        name: "UsersAdmin",
+        component: UsersAdmin,
+    },
     {
         path: "/AddCategory",
         name: "AddCategory",

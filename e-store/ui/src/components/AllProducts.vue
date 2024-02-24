@@ -17,7 +17,13 @@
                         class="col-md-6 col-lg-4 col-xl-3"
                     >
                         <div class="single-product">
-                            <div class="part-1">
+                            <div
+                                class="part-1"
+                                :style="{
+                                    backgroundImage:
+                                        'url(' + product.imge + ')',
+                                }"
+                            >
                                 <ul>
                                     <li>
                                         <a href="#">
@@ -125,7 +131,10 @@ export default {
     name: "AllProducts",
 
     data() {
-        return {};
+        return {
+            img: [],
+            product: {},
+        };
     },
     methods: {
         getorders() {
@@ -135,7 +144,9 @@ export default {
             })
                 .then((response) => {
                     store.state.products = response.data;
-                    console.log(response);
+                    this.product = response.data;
+                    console.log(this.product);
+                    this.img = store.state.products;
                 })
                 .catch(function (error) {
                     window.alert(error.response);
