@@ -224,15 +224,18 @@
                                                                 class="mega-links"
                                                             >
                                                                 <li
+                                                                    class="dropdown"
                                                                     v-for="company in companies"
                                                                     :key="
                                                                         company.id
                                                                     "
                                                                 >
-                                                                    <a href="#"
+                                                                    <a
+                                                                        href="#"
+                                                                        class="dropbtn"
                                                                         ><router-link
                                                                             @click="
-                                                                                get(
+                                                                                getcompid(
                                                                                     company.id
                                                                                 )
                                                                             "
@@ -243,6 +246,27 @@
                                                                             }}
                                                                         </router-link>
                                                                     </a>
+                                                                    <div
+                                                                        class="dropdown-content"
+                                                                    >
+                                                                        <a
+                                                                            v-for="category in categorys"
+                                                                            :key="
+                                                                                category.id
+                                                                            "
+                                                                        >
+                                                                            <router-link
+                                                                                to="/CategoryPage"
+                                                                            >
+                                                                                {{
+                                                                                    category.Company_id ===
+                                                                                    company.id
+                                                                                        ? category.name
+                                                                                        : ""
+                                                                                }}
+                                                                            </router-link>
+                                                                        </a>
+                                                                    </div>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -259,9 +283,6 @@
                                         >Offers</router-link
                                     ></a
                                 >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Categories</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
@@ -308,6 +329,7 @@ export default {
         return {
             companies: [],
             companys: [],
+            categorys: [],
             prname: "",
             prcompany: "",
         };
@@ -328,7 +350,22 @@ export default {
                     window.alert("hi");
                 });
         },
-        get(id) {
+        getcategory() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/catgory",
+            })
+                .then((response) => {
+                    this.categorys = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        getcompid(id) {
             store.state.companyid = id;
             console.log(store.state.companyid);
         },
@@ -388,6 +425,7 @@ export default {
         this.getorders();
 
         this.getcompany();
+        this.getcategory();
     },
 };
 </script>
@@ -399,6 +437,59 @@ export default {
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.main-navbar .top-navbar .nav-links li {
+    list-style-type: none;
+    display: inline;
+    margin-right: 20px;
+}
+
+.brand-name {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.top-navbar {
+    background-color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {

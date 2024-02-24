@@ -1,56 +1,141 @@
 <template>
     <body>
         <HeaderAdmin />
+        <div class="container">
+            <header>Add Company</header>
 
-        <form class="contact-form">
-            <h1>Add Company</h1>
-            <label> Name Company : </label>
-            <div class="txtb">
-                <input type="text" v-model="namecompany" />
-            </div>
+            <form action="#">
+                <div class="form">
+                    <div class="detalis">
+                        <span class="title">Detalis </span>
 
-            <label> Address Company : </label>
-            <div class="txtb">
-                <input type="text" v-model="address" />
-            </div>
+                        <div class="fields">
+                            <div class="input-field">
+                                <label> Name Company </label>
+                                <input
+                                    v-model="namecompany"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <div class="input-field">
+                                <label>Address Company </label>
+                                <input
+                                    v-model="address"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
 
-            <button type="button" @click="Addcompany()" class="btn">Add</button>
-        </form>
-        <div class="attendance-list">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>address</th>
-                        <th>created at</th>
-                        <th>updated at</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="element in companies" :key="element.id">
-                        <td>{{ element.id }}</td>
-                        <td>{{ element.company_name }}</td>
-                        <td>{{ element.company_address }}</td>
-                        <td>{{ element.created_at }}</td>
-                        <td>{{ element.updated_at }}</td>
-                        <td>
-                            <button
-                                class="dd"
-                                @click="deletecompany(element.id)"
-                            >
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button><i class="fas fa-edit"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <div class="input-field">
+                                <label>imge</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            class="nextbtn"
+                            @click="Addcompany()"
+                        >
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
+        <section class="attendance">
+            <div class="attendance-list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>address</th>
+                            <th>created at</th>
+                            <th>updated at</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="element in companies" :key="element.id">
+                            <td>{{ element.id }}</td>
+                            <td>{{ element.company_name }}</td>
+                            <td>{{ element.company_address }}</td>
+                            <td>{{ element.created_at }}</td>
+                            <td>{{ element.updated_at }}</td>
+
+                            <td>
+                                <button
+                                    class="dd"
+                                    @click="deletecompany(element.id)"
+                                >
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button
+                                    class="dd"
+                                    @click="editData(element.id)"
+                                >
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div id="popup" class="containeraaab" v-show="isPopupVisible">
+            <header>Edit Company</header>
+
+            <form action="#">
+                <div class="form">
+                    <div class="detalis">
+                        <span class="title">Detalis </span>
+
+                        <div class="fields">
+                            <div class="input-field">
+                                <label> Name Company </label>
+                                <input
+                                    v-model="namecompany"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <div class="input-field">
+                                <label>Address Company </label>
+                                <input
+                                    v-model="address"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+
+                            <div class="input-field">
+                                <label>imge</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                        </div>
+                        <button @click="cancelEdit">Cancel</button>
+                        <button
+                            type="button"
+                            class="nextbtn"
+                            @click="saveEdit()"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <FooTer />
     </body>
 </template>
@@ -67,12 +152,25 @@ export default {
     },
     data() {
         return {
+            isPopupVisible: false,
+
             namecompany: "",
             address: "",
             companies: [],
         };
     },
     methods: {
+        editData() {
+            this.isPopupVisible = true;
+        },
+        cancelEdit() {
+            this.isPopupVisible = false;
+        },
+        saveEdit() {
+            console.log("save ok");
+            this.isPopupVisible = false;
+        },
+
         Addcompany() {
             axios({
                 method: "post",
@@ -136,100 +234,54 @@ export default {
 </script>
 <style scoped>
 * {
-    background-color: black;
-}
-
-.contact-form {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 0 20px #000000b3;
-    font-family: "Montserrat";
-    color: white;
+    font-family: "poppins", "sans-serif";
 }
-
-.contact-form h1 {
-    margin-top: 0;
-    font-weight: 200;
-}
-
-.txtb {
-    border: 1px solid gray;
-    margin: 8px 0;
-    padding: 12px 18px;
-    border-radius: 8px;
-    background: white;
-}
-
-.txtb label {
-    display: block;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-size: 14px;
-}
-
-.txtb input {
-    width: 100%;
-    border: none;
-    background: white;
-    outline: none;
-    font-size: 18px;
-    margin-top: 6px;
-}
-
-.btn {
-    background: #333;
-    padding: 14px 0;
-    color: black;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 8px;
-    width: 50%;
-    border-radius: 8px;
-    box-shadow: none;
-    transition: 0.5s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #979797;
-}
-
-.attendance-list {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #000000;
-    border-radius: 10px;
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-
 .table {
     border-collapse: collapse;
-    margin: 25px 0;
+    table-layout: fixed;
     font-size: 15px;
     min-width: 100%;
     overflow: hidden;
-    border-radius: 5px 5px 0 0;
+    border-radius: 4px;
 }
 
-table thead tr {
-    color: #fff;
-    background: #454545;
+.table thead tr {
+    background: #000000;
     text-align: left;
     font-weight: bold;
+    color: white;
 }
 
-.table th,
+.table th {
+    padding: 12px 15px;
+    text-align: center;
+    word-break: break-all;
+    color: white;
+}
+tr td a {
+    color: #000000;
+}
+.dd {
+    font-size: 30px;
+
+    color: #000000;
+}
+
+.dd:hover {
+    color: #3f3e3e;
+}
 .table td {
     padding: 12px 15px;
+    text-align: center;
+    word-break: break-all;
 }
 
 .table tbody tr {
     border-bottom: 1px solid #ddd;
-}
-
-.table tbody tr {
-    background: #979797;
+    background: #e9e9e9;
 }
 
 .table tbody tr:last-of-type {
@@ -240,8 +292,8 @@ table thead tr {
     padding: 6px 20px;
     border-radius: 10px;
     cursor: pointer;
-    color: #000000;
-    background-color: #454545;
+    color: #ffffff;
+    background-color: #000000;
     border: 1px solid #ffffff;
 }
 
@@ -249,5 +301,261 @@ table thead tr {
     background: #373737;
     color: #fff;
     transition: 0.5rem;
+}
+
+.aa {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 17px;
+}
+
+.order {
+    font-size: 25px;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.oo {
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px;
+    margin-top: 10px;
+    font-family: sans-serif;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.add-product .s1,
+.s2 {
+    background-color: #000000;
+    color: white;
+    width: 100px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    transition: 0.5s ease;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.add-product .s1:hover,
+.add-product .s2:hover {
+    background-color: #3f3e3e;
+}
+
+tr td a {
+    color: #000000;
+}
+
+tr td a:hover,
+.dd:hover {
+    color: #ffffff;
+}
+
+.dd {
+    color: #000000;
+}
+
+body {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: black;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.containeraaab {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 90%;
+    max-width: 100%;
+    height: 500px;
+    max-height: 90vh;
+    overflow: scroll;
+}
+
+.containeraaab header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.container header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.containeraaab header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: rgb(26, 37, 37);
+}
+.container header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: rgb(26, 37, 37);
+}
+.containeraaab form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 100px;
+    background-color: #fff;
+}
+.container form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 100px;
+    background-color: #fff;
+}
+
+.containeraaab form .details {
+    margin-top: 10px;
+}
+.container form .details {
+    margin-top: 10px;
+}
+
+.containeraaab form .title {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+.container form .title {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+
+.containeraaab form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.container form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+form .fields .input-field {
+    display: flex;
+    width: calc(100% / 3 -15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+.input-field label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.input-field input {
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+.input-field input:is(:focus, :valid) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.containeraaab form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 25px 0;
+    color: #fff;
+    background-color: #000;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 25px 0;
+    color: #fff;
+    background-color: #000;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #242424;
+}
+
+.containeraaab form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 400px) {
+    .containeraaab {
+        width: 90%;
+        height: auto;
+    }
+    .container {
+        width: 90%;
+        height: auto;
+    }
 }
 </style>

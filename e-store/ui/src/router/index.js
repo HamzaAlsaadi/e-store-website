@@ -16,6 +16,7 @@ import LatestProduct from "../views/LatestProduct";
 import Admin from "../views/Admin";
 import OfferProduct from "../views/OfferProduct";
 import AddProduct from "../views/AddProduct";
+import CategoryPage from "../views/CategoryPage";
 
 const routes = [
     {
@@ -113,6 +114,11 @@ const routes = [
         path: "/SignUp",
         name: "SignUp",
         component: SignUp,
+    },
+    {
+        path: "/CategoryPage",
+        name: "CategoryPage",
+        component: CategoryPage,
     },
 ];
 

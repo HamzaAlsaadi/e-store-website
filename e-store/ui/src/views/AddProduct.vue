@@ -4,14 +4,13 @@
         <div class="oo">
             <p class="order">Mangment Product</p>
             <div class="add-product">
-                <button class="s1" type="button" @click="doAjaxPost">
-                    Add csv
-                </button>
+                <button class="s1" @click.prevent="submit">Import</button>
+
                 <input
-                    @change="onFileChange"
-                    id="file"
                     type="file"
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    @change="handleFileObject()"
+                    accept=".csv"
+                    ref="file"
                 />
             </div>
         </div>
@@ -156,6 +155,8 @@
                         <th>Price</th>
                         <th>Company_id</th>
                         <th>category_id</th>
+                        <th>Delete</th>
+                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,13 +173,145 @@
                         <td>{{ element.Price }}</td>
                         <td>{{ element.Company_id }}</td>
                         <td>{{ element.category_id }}</td>
-
-                        <td><button>View Detiles</button></td>
+                        <td>
+                            <button
+                                class="dd"
+                                @click="deleteproduct(element.id)"
+                            >
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="dd" @click="editData(element.id)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
+    <div id="popup" class="containeraaab" v-show="isPopupVisible">
+        <header>Edit Product</header>
+
+        <form action="#">
+            <div class="form">
+                <div class="detalis">
+                    <span class="title">Detalis </span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Mobile Name</label>
+                            <input
+                                v-model="mobilename"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Cpu Spsecfication</label>
+                            <input
+                                v-model="cpu"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Gpu Spsecfication</label>
+                            <input
+                                v-model="gpu"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+
+                        <div class="input-field">
+                            <label>Battery Spsecfication</label>
+                            <input
+                                v-model="batt"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Front_camera Spsecfication</label>
+                            <input
+                                v-model="front"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Back Camera_spsecfication</label>
+                            <input
+                                type="text"
+                                v-model="back"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detalis">
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Screen Size</label>
+                            <input
+                                v-model="screen"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Type of charge</label>
+                            <input
+                                v-model="type"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Price</label>
+                            <input
+                                v-model="price"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+
+                        <div class="input-field">
+                            <label>Company Id</label>
+                            <input
+                                v-model="comid"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>Category Id</label>
+                            <input
+                                v-model="catid"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
+                            <label>imge</label>
+                            <input type="text" placeholder="Enter your name" />
+                        </div>
+                    </div>
+                    <button @click="cancelEdit">Cancel</button>
+                    <button
+                        type="button"
+                        class="nextbtn"
+                        @click="editproduct() + saveEdit()"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
     <FooTer />
 </template>
 <script>
@@ -194,6 +327,7 @@ export default {
     },
     data() {
         return {
+            isPopupVisible: false,
             comid: "",
             catid: "",
             price: "",
@@ -206,40 +340,63 @@ export default {
             mobilename: "",
             cpu: "",
             Products: [],
-            fileinput: null,
+            file: null,
         };
     },
     methods: {
-        onFileChange(e) {
-            var files = e.target.files || e.dataTransfer.files;
-            if (!files.length) return;
-            this.createInput(files[0]);
+        editData() {
+            this.isPopupVisible = true;
         },
-        createInput(file) {
-            var reader = new FileReader();
-            var vm = this;
-            reader.onload = () => {
-                vm.fileinput = reader.result;
-            };
-            reader.readAsText(file);
+        cancelEdit() {
+            this.isPopupVisible = false;
         },
-        doAjaxPost() {
+        saveEdit() {
+            console.log("save ok");
+            this.isPopupVisible = false;
+        },
+        uploadFile(event) {
+            this.file = event.target.files[0];
+            console.log(this.file);
+        },
+        submitFile() {
             const token = window.localStorage.getItem("token");
 
-            var formData = new FormData();
-            var file = document.querySelector("#file");
-            formData.append("file", file.files[0]);
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/user/store/product/csv",
-                data: formData,
-                headers: { Authorization: `Bearer ${token}` },
-            })
-                .then(function (response) {
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/user/store/product/csv",
+                    this.file,
+
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+
+                            "Content-Type": "multipart/form-data",
+                        },
+                    }
+                )
+                .then((response) => {
                     console.log(response);
                 })
-                .catch(function (response) {
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+        deleteproduct(id) {
+            axios({
+                method: "post",
+                url: " http://127.0.0.1:8000/api/delete-product?id=" + id,
+            })
+                .then((response) => {
                     console.log(response);
+                    window.alert("OK");
+                })
+                .catch(function (error) {
+                    console.log(error.data);
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
                 });
         },
 
@@ -247,6 +404,36 @@ export default {
             axios({
                 method: "post",
                 url: "http://127.0.0.1:8000/api/create-product",
+                data: {
+                    mobile_name: this.mobilename,
+                    Cpu_spsecfication: this.cpu,
+                    Gpu_spsecfication: this.gpu,
+                    battery_spsecfication: this.batt,
+                    Front_camera_spsecfication: this.front,
+                    Back_camera_spsecfication: this.back,
+                    Screen_Size: this.screen,
+                    Type_of_charge: this.type,
+                    Price: this.price,
+                    category_id: this.catid,
+                    Company_id: this.comid,
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    alert(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error.data);
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        editproduct(id) {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/update-product?id=" + id,
                 data: {
                     mobile_name: this.mobilename,
                     Cpu_spsecfication: this.cpu,
@@ -325,7 +512,18 @@ export default {
     word-break: break-all;
     color: white;
 }
+tr td a {
+    color: #000000;
+}
+.dd {
+    font-size: 30px;
 
+    color: #000000;
+}
+
+.dd:hover {
+    color: #3f3e3e;
+}
 .table td {
     padding: 12px 15px;
     text-align: center;
@@ -429,7 +627,29 @@ body {
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
+.containeraaab {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 90%;
+    max-width: 100%;
+    height: 500px;
+    max-height: 90vh;
+    overflow: scroll;
+}
 
+.containeraaab header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
 .container header {
     position: relative;
     font-size: 20px;
@@ -437,6 +657,16 @@ body {
     color: #333;
 }
 
+.containeraaab header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: rgb(26, 37, 37);
+}
 .container header::before {
     content: "";
     position: absolute;
@@ -447,7 +677,12 @@ body {
     border-radius: 8px;
     background-color: rgb(26, 37, 37);
 }
-
+.containeraaab form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 100px;
+    background-color: #fff;
+}
 .container form {
     position: relative;
     margin-top: 16px;
@@ -455,10 +690,19 @@ body {
     background-color: #fff;
 }
 
+.containeraaab form .details {
+    margin-top: 10px;
+}
 .container form .details {
     margin-top: 10px;
 }
 
+.containeraaab form .title {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
 .container form .title {
     font-size: 19px;
     font-weight: 500;
@@ -466,6 +710,12 @@ body {
     color: #333;
 }
 
+.containeraaab form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 .container form .fields {
     display: flex;
     align-items: center;
@@ -502,6 +752,22 @@ form .fields .input-field {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
 }
 
+.containeraaab form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 25px 0;
+    color: #fff;
+    background-color: #000;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
 .container form button {
     display: flex;
     align-items: center;
@@ -523,9 +789,24 @@ form button:hover {
     background-color: #242424;
 }
 
+.containeraaab form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .container form button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@media (max-width: 400px) {
+    .containeraaab {
+        width: 90%;
+        height: auto;
+    }
+    .container {
+        width: 90%;
+        height: auto;
+    }
 }
 </style>

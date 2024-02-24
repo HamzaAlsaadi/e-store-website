@@ -9,6 +9,7 @@ export default createStore({
         products: [],
         companyname: "",
         companyid: 0,
+        categoryid: 0,
     },
     getters: {},
     mutations: {},

@@ -49,33 +49,6 @@
                                 class="tab-pane fade active show"
                                 id="account-general"
                             >
-                                <div class="card-body media align-items-center">
-                                    <img
-                                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                        alt
-                                        class="d-block ui-w-80"
-                                    />
-                                    <div class="media-body ml-6">
-                                        <label class="btn btn-dark">
-                                            Upload new photo
-                                            <input
-                                                type="file"
-                                                class="account-settings-fileinput"
-                                            />
-                                        </label>
-                                        &nbsp;
-                                        <button
-                                            type="button"
-                                            class="btn btn-dark md-btn-flat"
-                                        >
-                                            Reset
-                                        </button>
-                                        <div class="blockquote-footer">
-                                            Allowed JPG, GIF or PNG. Max size of
-                                            800K
-                                        </div>
-                                    </div>
-                                </div>
                                 <hr class="border-light m-0" />
                                 <div class="card-body">
                                     <div class="form-group">
@@ -115,7 +88,9 @@
                                         >
                                             Your email is not confirmed. Please
                                             check your inbox.<br />
-                                            <a href="javascript:void(0)"
+                                            <a
+                                                @click="veryfi()"
+                                                href="javascript:void(0)"
                                                 >Resend confirmation</a
                                             >
                                         </div>
@@ -314,6 +289,21 @@ export default {
         return { user: {} };
     },
     methods: {
+        veryfi() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/send-verfiy-email/" +
+                    this.user.email,
+            })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
         getprofile() {
             const token = window.localStorage.getItem("token");
             axios({
