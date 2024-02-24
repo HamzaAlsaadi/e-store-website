@@ -290,17 +290,19 @@ export default {
     },
     methods: {
         veryfi() {
+            const token = window.localStorage.getItem("token");
+
             axios({
                 method: "get",
                 url:
                     "http://127.0.0.1:8000/api/send-verfiy-email/" +
                     this.user.email,
+                headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {
                     console.log(response.data);
                 })
                 .catch(function (error) {
-                    window.alert(error.response);
                     console.log(error);
                 });
         },

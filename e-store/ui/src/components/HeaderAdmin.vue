@@ -185,7 +185,11 @@
                                 <a class="nav-link" href="#">Offers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Categories</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/AddCategory"
+                                        >Category</router-link
+                                    ></a
+                                >
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"

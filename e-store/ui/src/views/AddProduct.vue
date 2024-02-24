@@ -341,11 +341,13 @@ export default {
             cpu: "",
             Products: [],
             file: null,
+            idpro: null,
         };
     },
     methods: {
-        editData() {
+        editData(qw) {
             this.isPopupVisible = true;
+            this.idpro = qw;
         },
         cancelEdit() {
             this.isPopupVisible = false;
@@ -430,21 +432,35 @@ export default {
                     window.alert("hi");
                 });
         },
-        editproduct(id) {
+        editproduct() {
             axios({
                 method: "post",
-                url: "http://127.0.0.1:8000/api/update-product?id=" + id,
+                url:
+                    "http://127.0.0.1:8000/api/update-product?mobile_name=" +
+                    this.mobilename +
+                    "&Cpu_spsecfication=" +
+                    this.cpu +
+                    "&Gpu_spsecfication=" +
+                    this.gpu +
+                    "&battery_spsecfication=" +
+                    this.batt +
+                    "&Front_camera_spsecfication=" +
+                    this.front +
+                    "&Back_camera_spsecfication=" +
+                    this.back +
+                    "&Screen_Size=" +
+                    this.screen +
+                    "&Type_of_charge=" +
+                    this.type +
+                    "&Price=" +
+                    this.price +
+                    "&category_id=" +
+                    this.catid +
+                    "&Company_id=" +
+                    this.comid +
+                    "&id=" +
+                    this.idpro,
                 data: {
-                    mobile_name: this.mobilename,
-                    Cpu_spsecfication: this.cpu,
-                    Gpu_spsecfication: this.gpu,
-                    battery_spsecfication: this.batt,
-                    Front_camera_spsecfication: this.front,
-                    Back_camera_spsecfication: this.back,
-                    Screen_Size: this.screen,
-                    Type_of_charge: this.type,
-                    Price: this.price,
-                    category_id: this.catid,
                     Company_id: this.comid,
                 },
             })

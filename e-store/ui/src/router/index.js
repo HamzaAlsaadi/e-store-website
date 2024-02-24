@@ -17,8 +17,15 @@ import Admin from "../views/Admin";
 import OfferProduct from "../views/OfferProduct";
 import AddProduct from "../views/AddProduct";
 import CategoryPage from "../views/CategoryPage";
+import AddCategory from "../views/AddCategory";
 
 const routes = [
+    {
+        path: "/AddCategory",
+        name: "AddCategory",
+        component: AddCategory,
+    },
+
     {
         path: "/AddProduct",
         name: "AddProduct",
