@@ -69,7 +69,7 @@ Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany'
 
 Route::apiResource('user', UserController::class)->middleware('auth:sanctum');
 
-Route::post('user/all-users', [UserController::class, 'index'])->middleware('auth:sanctum');
+Route::get('user/all-users', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::post('user/show-user', [UserController::class, 'show'])->middleware('auth:sanctum');
 Route::post('user/delete-user', [UserController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('user/update-user', [UserController::class, 'update'])->middleware('auth:sanctum');
@@ -96,8 +96,13 @@ Route::get('/send-verfiy-email/{email}', [UserController::class, 'sendVerficatio
 
 
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
+Route::post('/update-cobon/{id}', [CobonDiscountController::class, 'update_cobon'])->middleware('auth:sanctum');
 
-Route::apiResource('/cobon', Couppon::class)->middleware('auth:sanctum');
+Route::apiResource('/cobon', CobonDiscountController::class)->middleware('auth:sanctum');
+
+
+
+
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');
 
 Route::get('/products/valid_offers', [ProductController::class, 'productsWithValidOffers']);
