@@ -58,13 +58,53 @@
                             <form role="search">
                                 <div class="input-group">
                                     <input
+                                        style="width: 430px"
                                         type="search"
                                         placeholder="Search your product"
                                         class="form-control"
+                                        v-model="prname"
                                     />
-                                    <button class="btn bg-white" type="submit">
+                                    <button
+                                        class="btn bg-white"
+                                        type="button"
+                                        @click="getsearchdata()"
+                                    >
                                         <i class="fa fa-search"></i>
                                     </button>
+                                    <select
+                                        class="btn bg-white"
+                                        v-model="prcompany"
+                                        @change="getsearchcompany()"
+                                    >
+                                        <option
+                                            style=""
+                                            v-for="company in companys"
+                                            :key="company.id"
+                                            :value="company.company_name"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
                                 </div>
                             </form>
                         </div>
@@ -143,7 +183,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li class="nav-item dropdown">
                                     <a
                                         class="nav-link dropdown-toggle"
@@ -184,7 +223,6 @@
                         class="navbar-brand d-block d-sm-block d-md-none d-lg-none"
                         href="#"
                     >
-                        Funda Ecom
                     </a>
                     <button
                         class="navbar-toggler"
@@ -204,10 +242,8 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
-                                    ><router-link to="/UserAccount"
-                                        >Home</router-link
-                                    ></a
-                                >
+                                    ><router-link to="/">Home</router-link>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <nav>
@@ -225,29 +261,61 @@
                                                 <div class="mega-box">
                                                     <div class="content">
                                                         <div class="row">
-                                                            <header></header>
                                                             <ul
                                                                 class="mega-links"
                                                             >
                                                                 <li
+                                                                    class="dropdown"
                                                                     v-for="company in companies"
                                                                     :key="
                                                                         company.id
                                                                     "
                                                                 >
-                                                                    <a href="#"
+                                                                    <a
+                                                                        href="#"
+                                                                        class="dropbtn"
                                                                         ><router-link
                                                                             @click="
-                                                                                get(
+                                                                                getcompid(
                                                                                     company.id
                                                                                 )
                                                                             "
+                                                                            co
                                                                             to="Samsung"
                                                                             >{{
                                                                                 company.company_name
-                                                                            }}</router-link
-                                                                        >
+                                                                            }}
+                                                                        </router-link>
                                                                     </a>
+                                                                    <div
+                                                                        class="dropdown-content"
+                                                                    >
+                                                                        <template
+                                                                            v-for="category in categorys"
+                                                                        >
+                                                                            <a
+                                                                                :key="
+                                                                                    category.id
+                                                                                "
+                                                                                v-if="
+                                                                                    category.Company_id ===
+                                                                                    company.id
+                                                                                "
+                                                                            >
+                                                                                <router-link
+                                                                                    @click="
+                                                                                        getidcategory(
+                                                                                            category.id
+                                                                                        )
+                                                                                    "
+                                                                                    to="/CategoryPage"
+                                                                                    >{{
+                                                                                        category.name
+                                                                                    }}</router-link
+                                                                                >
+                                                                            </a>
+                                                                        </template>
+                                                                    </div>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -266,22 +334,32 @@
                                 >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Categories</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="#"
                                     ><router-link to="LatestProduct"
                                         >Latest Phones</router-link
                                     ></a
                                 >
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >Regex</router-link
+                                    ></a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >NLP</router-link
+                                    ></a
+                                >
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
                                     ><router-link to="Compare"
                                         >Compare</router-link
-                                    ></a
-                                >
+                                    >
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -290,6 +368,7 @@
         </div>
     </body>
 </template>
+
 <script>
 import axios from "axios";
 
@@ -301,9 +380,34 @@ export default {
         return {
             companies: [],
             companys: [],
+            categorys: [],
+            prname: "",
+            prcompany: "",
         };
     },
     methods: {
+        getidcategory(id) {
+            store.state.categoryid = id;
+        },
+        getcategory() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/catgory",
+            })
+                .then((response) => {
+                    this.categorys = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        getcompid(id) {
+            store.state.companyid = id;
+            console.log(store.state.companyid);
+        },
         getcompany() {
             axios({
                 method: "get",
@@ -319,10 +423,7 @@ export default {
                     window.alert("hi");
                 });
         },
-        get(id) {
-            store.state.companyid = id;
-            console.log(store.state.companyid);
-        },
+
         logout() {
             window.localStorage.removeItem("token");
             router.push("/");
@@ -342,8 +443,45 @@ export default {
                     window.alert("hi");
                 });
         },
+        getsearchdata() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByName" +
+                    "?mobile_name=" +
+                    this.prname,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcompany() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCompany" +
+                    "?company=" +
+                    this.prcompany,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     beforeMount() {
+        this.getcompany();
+        this.getcategory();
         this.getorders();
         if (!window.localStorage.key("token")) {
             router.push("/");
@@ -359,6 +497,61 @@ export default {
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    display: block;
+}
+
+.main-navbar .top-navbar .nav-links li {
+    list-style-type: none;
+    display: inline;
+    margin-right: 20px;
+}
+
+.brand-name {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.top-navbar {
+    background-color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {

@@ -249,24 +249,31 @@
                                                                     <div
                                                                         class="dropdown-content"
                                                                     >
-                                                                        <a
+                                                                        <template
                                                                             v-for="category in categorys"
-                                                                            :key="
-                                                                                category.id
-                                                                            "
                                                                         >
-                                                                            <router-link
+                                                                            <a
+                                                                                :key="
+                                                                                    category.id
+                                                                                "
                                                                                 v-if="
                                                                                     category.Company_id ===
                                                                                     company.id
                                                                                 "
-                                                                                to="/CategoryPage"
                                                                             >
-                                                                                {{
-                                                                                    category.name
-                                                                                }}
-                                                                            </router-link>
-                                                                        </a>
+                                                                                <router-link
+                                                                                    @click="
+                                                                                        getidcategory(
+                                                                                            category.id
+                                                                                        )
+                                                                                    "
+                                                                                    to="/CategoryPage"
+                                                                                    >{{
+                                                                                        category.name
+                                                                                    }}</router-link
+                                                                                >
+                                                                            </a>
+                                                                        </template>
                                                                     </div>
                                                                 </li>
                                                             </ul>
@@ -350,6 +357,9 @@ export default {
                 .catch(function () {
                     window.alert("hi");
                 });
+        },
+        getidcategory(id) {
+            store.state.categoryid = id;
         },
         getcategory() {
             axios({
@@ -465,14 +475,16 @@ export default {
 }
 
 .dropdown-content a {
+    display: block;
+
     color: black;
     text-align: center;
     text-decoration: none;
-    display: block;
 }
 
 .dropdown-content a:hover {
     background-color: #ddd;
+    display: block;
 }
 
 .main-navbar .top-navbar .nav-links li {

@@ -68,7 +68,7 @@
                         <button
                             type="button"
                             class="nextbtn"
-                            @click="saveEdit()"
+                            @click="edituser() + saveEdit()"
                         >
                             Save
                         </button>
@@ -98,11 +98,13 @@ export default {
             username: "",
             nationality: "",
             users: [],
+            idpro: null,
         };
     },
     methods: {
-        editData() {
+        editData(qw) {
             this.isPopupVisible = true;
+            this.idpro = qw;
         },
         cancelEdit() {
             this.isPopupVisible = false;
@@ -113,9 +115,15 @@ export default {
         },
 
         getusers() {
+            const token = window.localStorage.getItem("token");
+
             axios({
                 method: "get",
                 url: "http://127.0.0.1:8000/api/user/all",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
+                },
             })
                 .then((response) => {
                     console.log(response);
@@ -129,26 +137,9 @@ export default {
                     window.alert("hi");
                 });
         },
-        deleteuser(id) {
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/delete-catgory?id=" + id,
-            })
-                .then((response) => {
-                    console.log(response);
-                    window.location.reload();
-                })
-                .catch(function (error) {
-                    console.log(error.data);
-                    console.log(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
-                });
-        },
     },
     mounted() {
-        this.getuser();
+        this.getusers();
     },
 };
 </script>

@@ -3,16 +3,20 @@
     <HeaderAllCategories />
     <section class="section-products">
         <div class="container">
-            <div class="row justify-content-center text-center">
+            <div
+                v-for="product in category"
+                :key="product.id"
+                class="row justify-content-center text-center"
+            >
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-                        <h2>{{ company.company_name }} {{ category.name }}</h2>
+                        <h2></h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div
-                    v-for="product in $store.state.products"
+                    v-for="product in category"
                     :key="product.id"
                     id="product-1"
                     class="col-md-6 col-lg-4 col-xl-3"
@@ -129,19 +133,20 @@ export default {
         FooTer,
     },
     data() {
-        return { company: "" };
+        return { company: "", category: {} };
     },
     methods: {
         getorders() {
             axios({
                 method: "get",
                 url:
-                    "http://127.0.0.1:8000/api/product-of-company/" +
-                    store.state.companyid,
+                    "http://127.0.0.1:8000/api/products-in-catgory/" +
+                    store.state.categoryid,
             })
                 .then((response) => {
-                    store.state.products = response.data;
+                    this.category = response.data;
                     console.log(response);
+                    console.log(store.state.categoryid);
                 })
                 .catch(function (error) {
                     window.alert(error.response);
@@ -178,40 +183,9 @@ export default {
             store.state.counter++;
             console.log(store.state.Order);
         },
+    },
 
-        getcompany() {
-            axios({
-                method: "get",
-                url:
-                    "http://127.0.0.1:8000/api/Company/" +
-                    store.state.companyid,
-            })
-                .then((response) => {
-                    this.company = response.data;
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    window.alert(error.response);
-                });
-        },
-    },
-    getcompany() {
-        axios({
-            method: "get",
-            url:
-                "http://127.0.0.1:8000/api/products-in-catgory/" +
-                store.state.categoryid,
-        })
-            .then((response) => {
-                this.company = response.data;
-                console.log(response);
-            })
-            .catch(function (error) {
-                window.alert(error.response);
-            });
-    },
     beforeMount() {
-        this.getcompany();
         this.getorders();
     },
 };
