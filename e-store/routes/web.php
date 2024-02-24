@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CheckOutMiddleWare;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\CartController;
@@ -84,4 +85,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::get('/Order/history', [OrderController::class, 'get_User_Orders'])->name('history.order');
         Route::get('/Order/products/{id}', [OrderController::class, 'getOrder_Product'])->name('product.order');
     });
+
+    Route::get('/verfiy-mail/{token}', [UserController::class, 'verficationMail']);
 });
