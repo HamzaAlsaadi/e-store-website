@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class UserController extends Controller
 {
@@ -151,6 +157,53 @@ class UserController extends Controller
             }
         } else {
             return response()->json(['message' => 'You are not allowed to view this page']);
+        }
+    }
+
+
+
+    public function sendVerfication($email)
+    {
+        if (auth()->user()) {
+            $user = User::where('email', $email)->get();
+            if (count($user) > 0) {
+
+                $random = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain . '/verfiy-mail/' . $random;
+                $data['url'] = $url;
+                $data['email'] = $email;
+                $data['title'] = "Email Verification";
+                $data['body'] = "please check here to below to vefiy your mail";
+
+                FacadesMail::send('vefiyEmail', ['data' => $data], function ($message) use ($data) {
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $user = User::find($user[0]['id']);
+                $user->remember_token = $random;
+                $user->save();
+                return response()->json(['success' => true, 'msg' => 'mail send successful']);
+            } else {
+                return response()->json(['success' => false, 'msg' => 'user is not found']);
+            }
+        } else {
+            return response()->json(['success' => false, 'msg' => 'user is not Auth']);
+        }
+    }
+
+    public function verficationMail($token)
+    {
+        $user = User::where('remember_token', $token)->get();
+        if (count($user) > 0) {
+
+            $user = User::find($user[0]['id']);
+            $user->remember_token = $token;
+            $user->email_verified_at = carbon::now()->format('Y-m-d H:i:s');
+            $user->save();
+            return "<h1>Email verfied seccsfuly </h1>";
+        } else {
+            return view('404');
         }
     }
 }

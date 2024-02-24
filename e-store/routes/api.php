@@ -90,6 +90,7 @@ Route::apiResource('/order', OrderProdctController::class)->middleware('auth:san
 Route::get('products/{productId}/rate', [ProductRatingController::class, 'rateProduct'])->middleware('auth:sanctum');
 
 
+Route::get('/send-verfiy-email/{email}', [UserController::class, 'sendVerfication'])->middleware('auth:sanctum');
 
 
 Route::post('/discount', [CobonDiscountController::class, 'applyDiscount'])->middleware('auth:sanctum');
