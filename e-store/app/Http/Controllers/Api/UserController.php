@@ -19,11 +19,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        // print('fdfs');
         $token_id = auth()->user()->id;
         $user = User::where('id', $token_id)->first();
 
         if ($user->Type_of_user == '1') {
             $user = User::all();
+            // var_dump(User::all());
             return response()->json($user);
         } else {
             return response()->json(['message' => 'You are not allowed to view this page']);
