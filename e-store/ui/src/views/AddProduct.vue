@@ -119,6 +119,14 @@
                                 />
                             </div>
                             <div class="input-field">
+                                <label>Offer Id</label>
+                                <input
+                                    v-model="offerid"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <div class="input-field">
                                 <label>imge</label>
                                 <input
                                     ref="fileInput"
@@ -291,6 +299,14 @@
                             />
                         </div>
                         <div class="input-field">
+                            <label>Offer Id</label>
+                            <input
+                                v-model="offerid"
+                                type="text"
+                                placeholder="Enter your name"
+                            />
+                        </div>
+                        <div class="input-field">
                             <label>Category Id</label>
                             <input
                                 v-model="catid"
@@ -341,6 +357,7 @@ export default {
             front: "",
             batt: "",
             gpu: "",
+            offerid: "",
             mobilename: "",
             cpu: "",
             Products: [],
@@ -429,7 +446,8 @@ export default {
                     Price: this.price,
                     category_id: this.catid,
                     Company_id: this.comid,
-                    imge: this.selectedFile,
+                    offer_id: this.offerid,
+                    imge: "qweqweqwe",
                 },
             })
                 .then((response) => {

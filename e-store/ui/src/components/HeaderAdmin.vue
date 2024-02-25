@@ -181,7 +181,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Offers</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/AddOffer"
+                                        >Offer</router-link
+                                    ></a
+                                >
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
@@ -206,7 +210,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Copon</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/AddCobon"
+                                        >Cobon</router-link
+                                    ></a
+                                >
                             </li>
                         </ul>
                     </div>

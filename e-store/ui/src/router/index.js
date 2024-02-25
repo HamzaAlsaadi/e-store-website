@@ -19,8 +19,20 @@ import AddProduct from "../views/AddProduct";
 import CategoryPage from "../views/CategoryPage";
 import AddCategory from "../views/AddCategory";
 import UsersAdmin from "../views/UsersAdmin";
+import AddCobon from "../views/AddCobon";
+import AddOffer from "../views/AddOffer";
 
 const routes = [
+    {
+        path: "/AddOffer",
+        name: "AddOffer",
+        component: AddOffer,
+    },
+    {
+        path: "/AddCobon",
+        name: "AddCobon",
+        component: AddCobon,
+    },
     {
         path: "/UsersAdmin",
         name: "UsersAdmin",
