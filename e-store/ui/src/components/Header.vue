@@ -211,11 +211,8 @@
                                             <li
                                                 class="position-static menu-item-has-children"
                                             >
-                                                <a class="nav-link" href="#"
-                                                    ><router-link
-                                                        to="/AllCategories"
-                                                        >All Company
-                                                    </router-link>
+                                                <a class="nav-link" href="#">
+                                                    All Company
                                                 </a>
                                                 <div class="mega-box">
                                                     <div class="content">
@@ -240,7 +237,7 @@
                                                                                 )
                                                                             "
                                                                             co
-                                                                            to="Samsung"
+                                                                            to="Company"
                                                                             >{{
                                                                                 company.company_name
                                                                             }}

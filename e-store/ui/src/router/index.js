@@ -10,7 +10,7 @@ import ProfileView from "../views/ProfileView";
 import DetailsProduct from "../views/DetailsProduct";
 import CheckOut from "../views/CheckOut";
 import ComPare from "../views/Compare";
-import SamSung from "../views/Samsung";
+import ComPany from "../views/Company";
 import CompanyAdmin from "../views/CompanyAdmin";
 import LatestProduct from "../views/LatestProduct";
 import Admin from "../views/Admin";
@@ -60,9 +60,9 @@ const routes = [
     },
 
     {
-        path: "/Samsung",
-        name: "Samsung",
-        component: SamSung,
+        path: "/Company",
+        name: "Company",
+        component: ComPany,
     },
     {
         path: "/Compare",

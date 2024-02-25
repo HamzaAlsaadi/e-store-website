@@ -157,15 +157,7 @@
 
                                         <li>
                                             <a class="dropdown-item" href="#">
-                                                <router-link
-                                                    to="/FAQ"
-                                                    style="
-                                                        text-decoration: none;
-                                                    "
-                                                >
-                                                    FAQ's Customer
-                                                    Support</router-link
-                                                ></a
+                                                FAQ's Customer Support</a
                                             >
                                         </li>
                                         <li>
@@ -176,6 +168,7 @@
                                                     style="
                                                         text-decoration: none;
                                                     "
+                                                    class="dropdown-item"
                                                 >
                                                     Sign Out
                                                 </button></a
@@ -281,7 +274,7 @@
                                                                                 )
                                                                             "
                                                                             co
-                                                                            to="Samsung"
+                                                                            to="Company"
                                                                             >{{
                                                                                 company.company_name
                                                                             }}

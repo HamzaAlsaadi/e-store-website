@@ -62,25 +62,15 @@
                                             placeholder="nmaxwell"
                                         />
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Name</label
-                                        >
-                                        <input
-                                            v-model="user.email"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Nelle Maxwell"
-                                        />
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="form-label text-white"
                                             >E-mail</label
                                         >
                                         <input
+                                            v-model="user.email"
                                             type="text"
                                             class="form-control mb-1"
-                                            value=""
                                             placeholder="nmaxwell@mail.com"
                                         />
                                         <div

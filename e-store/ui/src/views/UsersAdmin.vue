@@ -18,10 +18,7 @@
                             <td>{{ element.Nationality }}</td>
 
                             <td>
-                                <button
-                                    class="dd"
-                                    @click="deleteuser(element.id)"
-                                >
+                                <button class="dd">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -64,11 +61,11 @@
                                 />
                             </div>
                         </div>
-                        <button @click="cancelEdit">Cancel</button>
+                        <button @click="cancelEdit()">Cancel</button>
                         <button
                             type="button"
                             class="nextbtn"
-                            @click="edituser() + saveEdit()"
+                            @click="saveEdit()"
                         >
                             Save
                         </button>
@@ -97,7 +94,7 @@ export default {
 
             username: "",
             nationality: "",
-            users: [],
+            users: {},
             idpro: null,
         };
     },
@@ -120,6 +117,7 @@ export default {
             axios({
                 method: "get",
                 url: "http://127.0.0.1:8000/api/user/all",
+
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",

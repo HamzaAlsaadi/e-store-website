@@ -145,7 +145,7 @@ export default {
                             response.data.token
                         );
                         if (response.data.type_of_user == 1) {
-                            router.push("/Admin");
+                            router.push("/CompanyAdmin");
                         } else router.push("/UserAccount");
                     }
                 })

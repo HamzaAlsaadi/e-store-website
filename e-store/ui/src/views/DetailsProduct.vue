@@ -1,5 +1,6 @@
 <template>
     <body>
+        <HeaderAllCategories />
         <div class="container">
             <div class="box">
                 <div class="images">
@@ -44,8 +45,32 @@
                     </div>
                     <strong class="h1">${{ products.Price }}</strong>
                     <div class="options">
-                        <button><a href="#">Buy It Now</a></button>
-                        <button><a href="#">Add to Cart</a></button>
+                        <button>
+                            <router-link
+                                to="CheckOut"
+                                @click="
+                                    AddProduct(
+                                        products.id,
+                                        products.mobile_name,
+                                        products.Price,
+                                        products.imge
+                                    )
+                                "
+                                >Buy It Now</router-link
+                            >
+                        </button>
+                        <button
+                            @click="
+                                AddProduct(
+                                    products.id,
+                                    products.mobile_name,
+                                    products.Price,
+                                    products.imge
+                                )
+                            "
+                        >
+                            Add to Cart
+                        </button>
                     </div>
                 </div>
 
@@ -78,16 +103,46 @@
 import axios from "axios";
 import store from "@/store";
 import FooTer from "@/components/footer.vue";
+import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
 export default {
     name: "DetailsProduct",
     data() {
         return {
             products: {},
+
             rating: 0,
         };
     },
-    components: { FooTer },
+    components: { FooTer, HeaderAllCategories },
     methods: {
+        AddProduct(id, name_mobile, Price, img) {
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    if (id == store.state.Order[index]["id"]) {
+                        store.state.Order[index]["count"]++;
+                        console.log(store.state.Order);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
+            }
+            store.state.Order[store.state.counter] = {
+                id: id,
+                name: name_mobile,
+                Price: Price,
+                img: img,
+                count: 1,
+            };
+            store.state.counter++;
+            console.log(store.state.Order);
+        },
         getorders() {
             axios({
                 method: "get",

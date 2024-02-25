@@ -1,4 +1,5 @@
 <template>
+    <HeaderAllCategories />
     <div class="container mt-5 p-3 rounded cart">
         <div class="row no-gutters">
             <div class="col-md-8">
@@ -220,11 +221,17 @@
             </div>
         </div>
     </div>
+    <FooTer />
 </template>
 <script>
+import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
+import FooTer from "@/components/footer.vue";
+
 import store from "@/store";
 export default {
     name: "CheckOut",
+    components: { HeaderAllCategories, FooTer },
+
     data() {
         return {
             totalprice: 0,
@@ -260,7 +267,6 @@ export default {
             }
             delete store.state.Order[i];
             store.state.counter--;
-
             this.total_price();
         },
         checkout() {
