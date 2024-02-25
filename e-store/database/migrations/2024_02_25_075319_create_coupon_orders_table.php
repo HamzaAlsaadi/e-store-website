@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\coupon;
-use App\Models\Couppon;
 use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('coupon_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(coupon::class);
+
+            // $table->foreignIdFor(coupon::class);
+            $table->foreignIdFor(coupon::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             // $table->foreign('coupons_id')->references('id')->on('coupons');
             // $table->foreign('id')->references('id')->on('coupons')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
-            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('couppon_orders');
+        Schema::dropIfExists('coupon_orders');
     }
 };
