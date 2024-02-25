@@ -33,10 +33,10 @@ class ProductController extends Controller
             'Screen_Size' => 'required',
             'Type_of_charge' => 'required',
             'Price' => 'required',
-            'imge' => 'required',
+            'imge' => 'nullable|required',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
-            'offer_id' => 'required'
+            'offer_id' => 'nullable|required'
             // Add other validation rules for your fields
         ]);
 
