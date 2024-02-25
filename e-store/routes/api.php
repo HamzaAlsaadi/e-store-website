@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\OrderProdctController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PillController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('products', ProductController::class);
+// Route::get('get-all-products', [ProductController::class, 'index']);
 Route::post('create-product', [ProductController::class, 'create']);
 Route::post('update-product', [ProductController::class, 'update_product']);
 Route::post('delete-product', [ProductController::class, 'destroy']);
@@ -65,7 +67,7 @@ Route::get('Serach/searchByPrice', [SerachController::class, 'searchByPrice']);
 Route::get('Serach/searchByCategory', [SerachController::class, 'searchByCategory']);
 Route::get('Serach/searchByCompany', [SerachController::class, 'searchByCompany']);
 
-Route::apiResource('user', UserController::class)->middleware('auth:sanctum');
+// Route::apiResource('user', UserController::class)->middleware('auth:sanctum');
 
 Route::get('user/all-users', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::post('user/show-user', [UserController::class, 'show'])->middleware('auth:sanctum');
@@ -111,7 +113,7 @@ Route::get('/offers', [OfferController::class, 'allOffers']);
 Route::get('/show/offer/{id}', [OfferController::class, 'show_precent_offer']);
 
 
-
+Route::post('/payemnt', [PaymentController::class, 'post_payment']);
 
 
 
