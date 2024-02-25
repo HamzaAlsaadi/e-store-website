@@ -121,8 +121,11 @@
                             <div class="input-field">
                                 <label>imge</label>
                                 <input
-                                    type="text"
-                                    placeholder="Enter your name"
+                                    ref="fileInput"
+                                    @change="handleFileUpload"
+                                    type="file"
+                                    name=""
+                                    value=""
                                 />
                             </div>
                         </div>
@@ -329,6 +332,7 @@ export default {
         return {
             isPopupVisible: false,
             comid: "",
+            img: "",
             catid: "",
             price: "",
             type: "",
@@ -342,9 +346,14 @@ export default {
             Products: [],
             file: null,
             idpro: null,
+            selectedFile: null,
         };
     },
     methods: {
+        handleFileUpload(event) {
+            this.selectedFile = event.target.files[0];
+            console.log(event.target.files[0].name);
+        },
         editData(qw) {
             this.isPopupVisible = true;
             this.idpro = qw;
@@ -403,6 +412,8 @@ export default {
         },
 
         Addproduct() {
+            let formData = new FormData();
+            formData.append("image", this.selectedFile);
             axios({
                 method: "post",
                 url: "http://127.0.0.1:8000/api/create-product",
@@ -418,15 +429,17 @@ export default {
                     Price: this.price,
                     category_id: this.catid,
                     Company_id: this.comid,
+                    imge: this.selectedFile,
                 },
             })
                 .then((response) => {
                     console.log(response);
                     alert(response.data);
                 })
-                .catch(function (error) {
+                .catch(function (error, response) {
                     console.log(error.data);
                     console.log(error.response);
+                    console.log(response);
                 })
                 .catch(function () {
                     window.alert("hi");
