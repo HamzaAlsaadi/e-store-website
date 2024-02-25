@@ -7,12 +7,14 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\coupon;
 use App\Models\coupon_order;
+use App\Models\coupon_orders;
 // use App\Models\Couppon;
 // use App\Models\couppon_order;
 // use App\Models\coupponorder;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CobonDiscountController extends Controller
 {
@@ -34,25 +36,28 @@ class CobonDiscountController extends Controller
 
             // var_dump($order);
             // print($order);
-            $isUsed = Order::where('user_id', Auth::user()->id)
-                ->where('total_price', $totalPrice)
-                ->whereHas('coupon', function ($query) use ($couponCode) {
-                    $query->where('code', $couponCode);
+            $order = Order::where('user_id', Auth::user()->id)
+                ->where('total_price', $totalPrice)->pluck('id')->toArray();
+
+            $isUsed = coupon_orders::where('order_id', $order[0])
+                ->whereHas('order', function ($query) {
+                    $query->where('user_id', Auth::user()->id);
                 })
                 ->exists();
 
+            // print($isUsed);
+
             if (!$isUsed) {
                 // The coupon is valid and not used by the user
-                $order = Order::where('user_id', Auth::user()->id)
-                    ->where('total_price', $totalPrice)->pluck('id')->toArray();
+
                 // Apply the discount to the total price
-                var_dump($order);
+                // var_dump($order);
+                // print($coupon->id);
+
                 $discountedPrice = $totalPrice - ($totalPrice * ($coupon->discount / 100));
                 //insert here to couppon order table
-                coupon_order::create([
-                    "couppon_id " => $coupon->id,
-                    "order_id " => $order[0],
-
+                DB::table('coupon_orders')->insert([
+                    ['coupon_id' => $coupon->id, 'order_id' => $order[0], 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
                 ]);
 
                 // Return the discounted price
@@ -94,7 +99,7 @@ class CobonDiscountController extends Controller
     public function update_cobon(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'code' => 'required',
+            '   ' => 'required',
             'discount' => 'required|numeric',
             'expiration_date' => 'required|date'
         ]);

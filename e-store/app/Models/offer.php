@@ -9,8 +9,9 @@ class offer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['percent_of_discount', 'expiration_date'];
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }
