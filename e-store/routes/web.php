@@ -34,7 +34,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::group(['prefix' => 'dashboard', 'middleware' => [ 'AdminMiddleware']], function ()
     {
-        Route::get('', [AdminController::class, 'index']);
+        Route::get('/', [AdminController::class, 'index']);
         Route::get('/add-company',[AdminController::class, 'addcompany'])->name('add.comany');
         Route::post('/store-company',[AdminController::class, 'storecompany'])->name('store.comany');
         Route::get('/add-category',[AdminController::class, 'addcategory'])->name('add.category');
