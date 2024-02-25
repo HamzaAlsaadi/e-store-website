@@ -27,7 +27,7 @@ class CompanyController extends Controller
             'company_name' => 'required|unique:companies,company_name',
 
             'company_address' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required',
 
         ]);
 
@@ -60,7 +60,7 @@ class CompanyController extends Controller
             'company_name' => 'required|unique:companies,company_name',
 
             'company_address' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required',
             // Add validation rules for other fields
         ]);
         $company->update($request->all());
