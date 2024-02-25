@@ -99,17 +99,24 @@ Route::post('/update-cobon/{id}', [CobonDiscountController::class, 'update_cobon
 Route::apiResource('/cobon', CobonDiscountController::class)->middleware('auth:sanctum');
 
 
+Route::post('/offers/store', [OfferController::class, 'store']);
+
+Route::delete('/offers/{offerId}', [OfferController::class, 'deleteOffer']);
+
+Route::post('/offers/modify/{offerId}', [OfferController::class, 'modifyOffer']);
+
+Route::get('/offers', [OfferController::class, 'allOffers']);
+
+
+Route::get('/show/offer/{id}', [OfferController::class, 'show_precent_offer']);
+
+
+
+
 
 
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');
 
-Route::get('/products/valid_offers', [ProductController::class, 'productsWithValidOffers']);
-
-Route::post('/offers/store', [OfferController::class, 'store']);
-
-Route::delete('/offers/{offerId}', [OfferController::class, 'deleteOffer']);
-Route::put('/offers/{offerId}', [OfferController::class, 'modifyOffer']);
-Route::get('/offers', [OfferController::class, 'allOffersWithProductNames']);
 
 Route::post('/send-message', [ContactController::class, 'sendMessage'])->middleware('auth:sanctum');
 Route::post('/send-response/{messageId}', [ContactController::class, 'sendResponse'])->middleware('auth:sanctum');

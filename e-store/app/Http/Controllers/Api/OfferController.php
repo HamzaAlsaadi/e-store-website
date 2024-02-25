@@ -9,28 +9,28 @@ use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-    public function store(Request $request, $product_id)
-{
-    $product = Product::findOrFail($product_id);
+    public function store(Request $request)
+    {
+        // $product = Product::findOrFail($product_id);
 
-    $validatedData = $request->validate([
-        'price' => 'required|numeric',
-        'expiration_date' => 'required|date', // Add validation for expiration date
-        // Other validation rules for the offer
-    ]);
+        $validatedData = $request->validate([
+            'percent_of_discount' => 'required',
+            'expiration_date' => 'required|date', // Add validation for expiration date
+            // Other validation rules for the offer
+        ]);
 
-    $offer = new offer([
-        'price' => $validatedData['price'],
-        'expiration_date' => $validatedData['expiration_date'], // Assign expiration date
-        // Other offer details
-    ]);
+        offer::create([
+            'percent_of_discount' => $validatedData['percent_of_discount'],
+            'expiration_date' => $validatedData['expiration_date'], // Assign expiration date
+            // Other offer details
+        ]);
 
-    $product->offers()->save($offer);
 
-    return response()->json(['message' => 'Offer created successfully'], 201);
-}
 
-public function deleteOffer($offerId)
+        return response()->json(['message' => 'Offer created successfully'], 201);
+    }
+
+    public function deleteOffer($offerId)
     {
         $offer = Offer::findOrFail($offerId);
         $offer->delete();
@@ -44,13 +44,13 @@ public function deleteOffer($offerId)
 
         // Validate request data
         $validatedData = $request->validate([
-            'price' => 'numeric',
-            'expiration_date' => 'date',
+            'percent_of_discount' => 'required',
+            'expiration_date' => 'required|date',
         ]);
 
         // Update offer details
-        if (isset($validatedData['price'])) {
-            $offer->price = $validatedData['price'];
+        if (isset($validatedData['percent_of_discount'])) {
+            $offer->percent_of_discount = $validatedData['percent_of_discount'];
         }
 
         if (isset($validatedData['expiration_date'])) {
@@ -62,10 +62,18 @@ public function deleteOffer($offerId)
         return response()->json(['message' => 'Offer modified successfully'], 200);
     }
 
-    public function allOffersWithProductNames()
+    public function allOffers()
     {
-        $offers = Offer::with('product:name')->get();
+        $offers = Offer::all();
 
-        return response()->json(['offers_with_product_names' => $offers], 200);
+        return response()->json($offers, 200);
+    }
+
+    public function show_precent_offer($id)
+    {
+        $offer = offer::where('id', $id)->get(['percent_of_discount']);
+
+
+        return response()->json($offer, 200);
     }
 }

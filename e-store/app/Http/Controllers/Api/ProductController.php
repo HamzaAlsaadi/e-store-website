@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Models\offer;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -35,6 +36,7 @@ class ProductController extends Controller
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id' => 'required|exists:offers,id'
             // Add other validation rules for your fields
         ]);
 
@@ -78,6 +80,7 @@ class ProductController extends Controller
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id' => 'required|exists:offers,id'
             // Add other validation rules for your fields
         ]);
 
@@ -106,17 +109,5 @@ class ProductController extends Controller
         $products = Product::orderBy('created_at', 'desc')->get();
 
         return response()->json($products);
-    }
-
-
-    public function productsWithValidOffers()
-    {
-        $productsWithOffers = Product::has('offers')
-            ->whereHas('offers', function ($query) {
-                $query->where('expiration_date', '>', now());
-            })
-            ->get();
-
-        return response()->json(['products_with_valid_offers' => $productsWithOffers], 200);
     }
 }

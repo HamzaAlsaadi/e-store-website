@@ -33,6 +33,6 @@ class Product extends Model
     }
     public function offers()
     {
-        return $this->hasMany(Offer::class);
+        return $this->belongsTo(Offer::class);
     }
 }
