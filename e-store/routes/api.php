@@ -121,7 +121,9 @@ Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middlew
 
 
 Route::post('/send-message', [ContactController::class, 'sendMessage'])->middleware('auth:sanctum');
-Route::post('/send-response/{messageId}', [ContactController::class, 'sendResponse'])->middleware('auth:sanctum');
+Route::get('/all-message', [ContactController::class, 'get_all_message'])->middleware('auth:sanctum');
+
+// Route::post('/send-response/{messageId}', [ContactController::class, 'sendResponse'])->middleware('auth:sanctum');
 
 // Route::post('password/email',  ForgotPasswordController::class);
 // Route::post('password/code/check', CodeCheckController::class);
