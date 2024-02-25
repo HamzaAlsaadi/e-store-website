@@ -155,12 +155,9 @@ export default {
         },
 
         addoffer() {
-            const token = window.localStorage.getItem("token");
-
             axios({
                 method: "post",
                 url: "http://127.0.0.1:8000/api/offers/store",
-                headers: { Authorization: `Bearer ${token}` },
 
                 data: {
                     percent_of_discount: this.percentofdiscount,

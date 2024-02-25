@@ -4,13 +4,15 @@
         <div class="oo">
             <p class="order">Mangment Product</p>
             <div class="add-product">
-                <button class="s1" @click.prevent="submit">Import</button>
+                <button class="s1" @click="submitFile">Import</button>
 
                 <input
                     type="file"
-                    @change="handleFileObject()"
-                    accept=".csv"
+                    @change="changecsv"
+                    accept="csv/*"
                     ref="file"
+                    id="csv"
+                    name="csv"
                 />
             </div>
         </div>
@@ -129,11 +131,12 @@
                             <div class="input-field">
                                 <label>imge</label>
                                 <input
-                                    ref="fileInput"
-                                    @change="handleFileUpload"
                                     type="file"
-                                    name=""
-                                    value=""
+                                    name="image"
+                                    accept="image/*"
+                                    id="image"
+                                    class="mx-3"
+                                    @change="changefile"
                                 />
                             </div>
                         </div>
@@ -364,13 +367,20 @@ export default {
             file: null,
             idpro: null,
             selectedFile: null,
+            csv: "",
         };
     },
     methods: {
-        handleFileUpload(event) {
-            this.selectedFile = event.target.files[0];
-            console.log(event.target.files[0].name);
+        changecsv(event) {
+            this.csv = event.target.files[0];
         },
+        changefile() {
+            const input = document.getElementById("image");
+            const file = input.files;
+            this.img = file;
+            console.log(this.img);
+        },
+
         editData(qw) {
             this.isPopupVisible = true;
             this.idpro = qw;
@@ -382,17 +392,19 @@ export default {
             console.log("save ok");
             this.isPopupVisible = false;
         },
-        uploadFile(event) {
-            this.file = event.target.files[0];
-            console.log(this.file);
-        },
+
         submitFile() {
+            const formData = new FormData();
+            // get the item
+            // append data
+            formData.append("csv_file", this.csv);
+            console.log(this.csv);
             const token = window.localStorage.getItem("token");
 
             axios
                 .post(
                     "http://127.0.0.1:8000/api/user/store/product/csv",
-                    this.file,
+                    formData,
 
                     {
                         headers: {
@@ -429,27 +441,31 @@ export default {
         },
 
         Addproduct() {
-            let formData = new FormData();
-            formData.append("image", this.selectedFile);
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/create-product",
-                data: {
-                    mobile_name: this.mobilename,
-                    Cpu_spsecfication: this.cpu,
-                    Gpu_spsecfication: this.gpu,
-                    battery_spsecfication: this.batt,
-                    Front_camera_spsecfication: this.front,
-                    Back_camera_spsecfication: this.back,
-                    Screen_Size: this.screen,
-                    Type_of_charge: this.type,
-                    Price: this.price,
-                    category_id: this.catid,
-                    Company_id: this.comid,
-                    offer_id: this.offerid,
-                    imge: "qweqweqwe",
-                },
-            })
+            const formData = new FormData();
+            // get the item
+            const imgFile = document.querySelector("#image");
+            // append data
+            formData.append("mobile_name", this.mobilename);
+            formData.append("Cpu_spsecfication", this.cpu);
+            formData.append("Gpu_spsecfication", this.gpu);
+            formData.append("battery_spsecfication", this.batt);
+            formData.append("Front_camera_spsecfication", this.front);
+            formData.append("Back_camera_spsecfication", this.back);
+            formData.append("Screen_Size", this.screen);
+            formData.append("Type_of_charge", this.type);
+            formData.append("Price", this.price);
+            formData.append("imge", imgFile.files[0]);
+            formData.append("category_id", this.catid);
+            formData.append("Company_id", this.comid);
+            formData.append("offer_id", this.offerid);
+            console.log(formData);
+
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/create-product",
+
+                    formData
+                )
                 .then((response) => {
                     console.log(response);
                     alert(response.data);
