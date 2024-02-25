@@ -99,7 +99,7 @@ class CobonDiscountController extends Controller
     public function update_cobon(Request $request, $id)
     {
         $validatedData = $request->validate([
-            '   ' => 'required',
+            'code' => 'required',
             'discount' => 'required|numeric',
             'expiration_date' => 'required|date'
         ]);
