@@ -17,14 +17,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('mobile_name');
-            $table->string('Cpu_spsecfication');
-            $table->string('Gpu_spsecfication');
-            $table->string('battery_spsecfication');
-            $table->string('Front_camera_spsecfication');
-            $table->string('Back_camera_spsecfication');
-            $table->string('Screen_Size');
-            $table->string('Type_of_charge');
-            $table->string('Price');
+            $table->text('Cpu_spsecfication');
+            $table->text('Gpu_spsecfication');
+            $table->text('battery_spsecfication');
+            $table->text('Front_camera_spsecfication');
+            $table->text('Back_camera_spsecfication');
+            $table->text('Screen_Size');
+            $table->text('Type_of_charge');
+            $table->text('Price');
             $table->string('imge')->nullable()->default('none');
             $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
