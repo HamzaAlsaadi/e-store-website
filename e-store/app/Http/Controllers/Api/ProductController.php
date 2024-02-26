@@ -23,6 +23,8 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
+
+
         $validatedData = $request->validate([
             'mobile_name' => 'required',
             'Cpu_spsecfication' => 'required',
@@ -33,12 +35,20 @@ class ProductController extends Controller
             'Screen_Size' => 'required',
             'Type_of_charge' => 'required',
             'Price' => 'required',
-            'imge' => 'nullable|required',
+            'imge' => 'required',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
             'offer_id' => 'nullable|required'
             // Add other validation rules for your fields
         ]);
+        if ($request->hasFile('imge')) {
+            $image = $request->file('imge');
+            $path = public_path() . '/images/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $validatedData['imge'] = $path . $filename;
+        }
 
         $product = Product::create($validatedData);
 
@@ -83,7 +93,14 @@ class ProductController extends Controller
             'offer_id' => 'nullable|required|exists:offers,id'
             // Add other validation rules for your fields
         ]);
+        if ($request->hasFile('imge')) {
+            $image = $request->file('imge');
+            $path = public_path() . '/images/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
 
+            $validatedData['imge'] = $path . $filename;
+        }
         $product->update($validatedData);
 
         return response()->json($product, 200);
