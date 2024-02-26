@@ -30,10 +30,11 @@ class SerachController extends Controller
     public function searchByCategory(Request $request)
     {
         $category = $request->input('category');
-
-        $products = Product::whereHas('category', function ($query) use ($category) {
-            $query->where('name', $category);
-        })->get();
+        $productName = $request->input('product');
+        $products = Product::where('mobile_name', 'like', "%$productName%")
+            ->whereHas('category', function ($query) use ($category) {
+                $query->where('name', $category);
+            })->get();
 
         return response()->json($products);
     }
@@ -41,10 +42,12 @@ class SerachController extends Controller
     public function searchByCompany(Request $request)
     {
         $companyName = $request->input('company');
-
-        $products = Product::whereHas('company', function ($query) use ($companyName) {
-            $query->where('company_name', $companyName);
-        })->get();
+        $productName = $request->input('product');
+        // print($companyName);
+        $products = Product::where('mobile_name', 'like', "%$productName%")
+            ->whereHas('company', function ($query) use ($companyName) {
+                $query->where('company_name', $companyName);
+            })->get();
 
         return response()->json($products);
     }
