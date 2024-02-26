@@ -22,16 +22,25 @@ class CompanyController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validate($request, [
 
-            'company_name' => 'required|unique:companies,company_name',
-
+        $validatedData = $request->validate([
+            'company_name' => 'required',
             'company_address' => 'required',
             'image' => 'required',
-
+            // Add other validation rules for your fields
         ]);
 
-        $company = Company::create($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = public_path() . '/images/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $validatedData['image'] = $path . $filename;
+        }
+        // var_dump($validatedData);
+        $company = Company::create($validatedData);
+
         return response()->json($company, 201);
     }
 
@@ -56,14 +65,22 @@ class CompanyController extends Controller
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }
-        $this->validate($request, [
-            'company_name' => 'required|unique:companies,company_name',
-
+        $validatedData = $request->validate([
+            'company_name' => 'required',
             'company_address' => 'required',
             'image' => 'required',
-            // Add validation rules for other fields
+            // Add other validation rules for your fields
         ]);
-        $company->update($request->all());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = public_path() . '/images/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $validatedData['image'] = $path . $filename;
+        }
+        $company->update($validatedData);
         return response()->json($company, 200);
     }
 
