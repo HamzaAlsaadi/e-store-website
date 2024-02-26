@@ -32,7 +32,7 @@ class CompanyController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = public_path() . '/images/';
+            $path = public_path() . '\\images\\';
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
@@ -74,7 +74,7 @@ class CompanyController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = public_path() . '/images/';
+            $path = public_path() . '\\images\\';
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
