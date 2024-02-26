@@ -100,7 +100,7 @@
                 <td>{{$products->offer->percent_of_discount}}</td>
                 <td>
                     <a href="{{ route('product.update',$products->id) }}"><button class="btn btn-danger">update</button></a>
-                    <form action="{{ route('products.destroy',$products->id)}}" method="post">
+                    <form action="{{ route('products.destroy1',$products->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

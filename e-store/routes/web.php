@@ -13,7 +13,7 @@ use App\Http\Controllers\web\OrderController;
 use App\Http\Controllers\web\OfferController;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-define('pagination_count',3);
+define('pagination_count', 4);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,7 +46,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::get('/admin-main',[AdminController::class, 'main'])->name('admin.main');
         Route::delete('/company-destroy/{id}',[AdminController::class, 'companydistroy'])->name('company.destroy');
         Route::delete('/category-destroy/{id}',[AdminController::class, 'categorydistroy'])->name('category.destroy');
-        Route::delete('/prduct-destroy/{id}',[AdminController::class, 'productdistroy'])->name('products.destroy');
+        Route::delete('/prduct-destroy/{id}',[AdminController::class, 'productdistroy'])->name('products.destroy1');
         Route::get('/company-update/{id}',[AdminController::class, 'companyupdate'])->name('company.update');
         Route::get('/category-update/{id}}',[AdminController::class, 'categoryupdate'])->name('category.update');
         Route::get('/products-update/{id}',[AdminController::class, 'productupdate'])->name('product.update');

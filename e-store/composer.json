@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^1.1",
         "mcamara/laravel-localization": "^1.8",
         "stripe/stripe-php": "^13.7"
     },

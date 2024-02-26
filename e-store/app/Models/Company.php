@@ -19,4 +19,9 @@ class Company extends Model
     {
         return $this->hasMany(product::class);
     }
+
+    public function gsm()
+    {
+        return $this->hasMany(Gsm::class);
+    }
 }
