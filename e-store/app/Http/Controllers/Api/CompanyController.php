@@ -36,7 +36,7 @@ class CompanyController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['image'] = $path . $filename;
+            $validatedData['imge'] = 'public\\images\\' . $filename;
         }
         // var_dump($validatedData);
         $company = Company::create($validatedData);
@@ -78,7 +78,7 @@ class CompanyController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['image'] = $path . $filename;
+            $validatedData['imge'] = 'public\\images\\' . $filename;
         }
         $company->update($validatedData);
         return response()->json($company, 200);
