@@ -22,8 +22,14 @@ import UsersAdmin from "../views/UsersAdmin";
 import AddCobon from "../views/AddCobon";
 import AddOffer from "../views/AddOffer";
 import TableOfMessage from "../views/TableOfMessage";
+import ContactUs from "../views/ContactUs";
 
 const routes = [
+    {
+        path: "/ContactUs",
+        name: "ContactUs",
+        component: ContactUs,
+    },
     {
         path: "/TableOfMessage",
         name: "TableOfMessage",

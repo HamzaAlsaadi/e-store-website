@@ -9,39 +9,22 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>View</th>
+                        <th>User ID</th>
+                        <th>Email</th>
+                        <th>Content</th>
+                        <th>Admin Response</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>Sam David</td>
-                        <td>03-24-22</td>
-                        <td>
-                            <button>
-                                <a href="#"
-                                    ><router-link to="viewmes"
-                                        >View Details</router-link
-                                    ></a
-                                >
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Sam David</td>
-                        <td>03-24-22</td>
-                        <td>
-                            <button>
-                                <a href="#"
-                                    ><router-link to="viewmes"
-                                        >View Details</router-link
-                                    ></a
-                                >
-                            </button>
-                        </td>
+                    <tr v-for="elemnts in messages" :key="elemnts.id">
+                        <td>{{ elemnts.userid }}</td>
+                        <td>{{ elemnts.email }}</td>
+                        <td>{{ elemnts.content }}</td>
+                        <td>{{ elemnts.admin_response }}</td>
+                        <td>{{ elemnts.created_at }}</td>
+                        <td>{{ elemnts.updated_at }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -67,9 +50,12 @@ export default {
     },
     methods: {
         getmessage() {
+            const token = window.localStorage.getItem("token");
+
             axios({
                 method: "get",
                 url: "http://127.0.0.1:8000/api/all-message",
+                headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {
                     console.log(response);

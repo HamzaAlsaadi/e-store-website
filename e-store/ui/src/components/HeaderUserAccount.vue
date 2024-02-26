@@ -147,11 +147,10 @@
                                             <router-link
                                                 to="/ProfileView"
                                                 style="text-decoration: none"
+                                                class="dropdown-item"
                                             >
-                                                <a class="dropdown-item">
-                                                    <i class="fa fa-user"> </i>
-                                                    Profile</a
-                                                ></router-link
+                                                <i class="fa fa-user"> </i>
+                                                Profile</router-link
                                             >
                                         </li>
 
@@ -161,18 +160,23 @@
                                             >
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
-                                                <button
-                                                    @click="logout()"
-                                                    type="button"
-                                                    style="
-                                                        text-decoration: none;
-                                                    "
-                                                    class="dropdown-item"
-                                                >
-                                                    Sign Out
-                                                </button></a
+                                            <router-link
+                                                to="/ContactUs"
+                                                style="text-decoration: none"
+                                                class="dropdown-item"
                                             >
+                                                Contact Us</router-link
+                                            >
+                                        </li>
+                                        <li>
+                                            <button
+                                                @click="logout()"
+                                                type="button"
+                                                style="text-decoration: none"
+                                                class="dropdown-item"
+                                            >
+                                                Sign Out
+                                            </button>
                                         </li>
                                     </ul>
                                 </li>
