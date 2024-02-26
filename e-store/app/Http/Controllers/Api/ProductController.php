@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+
         return response()->json($products, 200);
     }
 
@@ -47,7 +48,7 @@ class ProductController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['imge'] = $path . $filename;
+            $validatedData['imge'] = 'public\\images\\' . $filename;
         }
 
         $product = Product::create($validatedData);
@@ -64,6 +65,8 @@ class ProductController extends Controller
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
+        // print(asset($product->imge));
+        // print('<br>');
         return response()->json($product, 200);
     }
 
@@ -99,7 +102,7 @@ class ProductController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['imge'] = $path . $filename;
+            $validatedData['imge'] = 'public\\images\\' . $filename;
         }
         $product->update($validatedData);
 
