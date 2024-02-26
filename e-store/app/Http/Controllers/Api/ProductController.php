@@ -48,7 +48,7 @@ class ProductController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['imge'] = 'public\\images\\' . $filename;
+            $validatedData['imge'] =  $filename;
         }
 
         $product = Product::create($validatedData);
@@ -102,7 +102,7 @@ class ProductController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
-            $validatedData['imge'] = 'public\\images\\' . $filename;
+            $validatedData['imge'] =  $filename;
         }
         $product->update($validatedData);
 
