@@ -6,10 +6,6 @@
                     <div class="header">
                         <h3>Featured Product</h3>
                         <h2>Popular Products</h2>
-                        <img
-                            src="C:\Users\ASUSD\Documents\GitHub\e-store-website\e-store\public/images/1708934618.jpg"
-                            alt=""
-                        />
                     </div>
                 </div>
                 <div id="product-1" class="row">
@@ -25,7 +21,9 @@
                                 class="part-1"
                                 :style="{
                                     backgroundImage:
-                                        'url(' + product.imge + ')',
+                                        'url(http://127.0.0.1:8000/public/api/' +
+                                        product.imge +
+                                        ')',
                                 }"
                             >
                                 <ul>
@@ -262,6 +260,9 @@ a:hover {
     max-height: 290px;
     margin-bottom: 20px;
     overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .section-products .single-product .part-1::before {
@@ -280,7 +281,6 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: no-repeat center;
     background-size: cover;
     transition: all 0.3s;
 }

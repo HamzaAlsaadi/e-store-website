@@ -128,8 +128,10 @@
                                 ${{ product.Price }}
                             </h4>
                             <h4 class="product-price">
-                                {{
-                                    counter.percent_of_discount * product.Price
+                                ${{
+                                    ((100 - counter.percent_of_discount) *
+                                        product.Price) /
+                                    100
                                 }}
                             </h4>
                         </div>

@@ -23,8 +23,14 @@ import AddCobon from "../views/AddCobon";
 import AddOffer from "../views/AddOffer";
 import TableOfMessage from "../views/TableOfMessage";
 import ContactUs from "../views/ContactUs";
+import FaQ from "../views/FAQ";
 
 const routes = [
+    {
+        path: "/FaQ",
+        name: "FaQ",
+        component: FaQ,
+    },
     {
         path: "/ContactUs",
         name: "ContactUs",

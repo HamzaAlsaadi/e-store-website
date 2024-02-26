@@ -155,9 +155,13 @@
                                         </li>
 
                                         <li>
-                                            <a class="dropdown-item" href="#">
-                                                FAQ's Customer Support</a
+                                            <router-link
+                                                to="/FaQ"
+                                                style="text-decoration: none"
+                                                class="dropdown-item"
                                             >
+                                                FAQ's Customer Support
+                                            </router-link>
                                         </li>
                                         <li>
                                             <router-link
