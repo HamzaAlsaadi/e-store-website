@@ -28,7 +28,11 @@
                                 backgroundImage: 'url(' + product.imge + ')',
                             }"
                         >
-                            <span class="discount">15% off</span>
+                            <span
+                                class="discount"
+                                v-if="product.offer_id == idoffer"
+                                >{{ counter.percent_of_discount }} % off</span
+                            >
 
                             <ul>
                                 <li>
@@ -145,9 +149,27 @@ export default {
         return {
             img: [],
             product: {},
+            idoffer: 1,
+            counter: {},
         };
     },
     methods: {
+        getoffer() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/show/offer/" + this.idoffer,
+            })
+                .then((response) => {
+                    this.counter = response.data;
+                    console.log(this.counter);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
         getorders() {
             axios({
                 method: "get",
@@ -197,6 +219,7 @@ export default {
     },
     beforeMount() {
         this.getorders();
+        this.getoffer();
     },
 };
 </script>

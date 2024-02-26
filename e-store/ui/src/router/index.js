@@ -21,8 +21,14 @@ import AddCategory from "../views/AddCategory";
 import UsersAdmin from "../views/UsersAdmin";
 import AddCobon from "../views/AddCobon";
 import AddOffer from "../views/AddOffer";
+import TableOfMessage from "../views/TableOfMessage";
 
 const routes = [
+    {
+        path: "/TableOfMessage",
+        name: "TableOfMessage",
+        component: TableOfMessage,
+    },
     {
         path: "/AddOffer",
         name: "AddOffer",

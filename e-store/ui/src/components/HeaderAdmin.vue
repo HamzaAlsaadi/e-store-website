@@ -70,7 +70,11 @@
                         <div class="col-md-5 my-auto">
                             <ul class="nav justify-content-end">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"> Message </a>
+                                    <router-link to="TableOfMessage">
+                                        <a class="nav-link" href="#">
+                                            Message
+                                        </a></router-link
+                                    >
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a

@@ -116,7 +116,7 @@ export default {
 
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/user/all",
+                url: "http://127.0.0.1:8000/api/user/all-user",
 
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -127,6 +127,7 @@ export default {
             })
                 .then((response) => {
                     this.productbeforpagi = response.data;
+                    this.products = response.data;
                     this.makepagi();
                 })
                 .catch(function (error) {
@@ -161,7 +162,7 @@ export default {
             console.log(store.state.Order);
         },
         makepagi() {
-            for (var i = 0; i < 12; i++) {
+            for (var i = 0; i < 3; i++) {
                 this.products.push(this.productbeforpagi[i]);
             }
         },
