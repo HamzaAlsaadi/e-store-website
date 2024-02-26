@@ -6,6 +6,10 @@
                     <div class="header">
                         <h3>Featured Product</h3>
                         <h2>Popular Products</h2>
+                        <img
+                            src="C:\Users\ASUSD\Documents\GitHub\e-store-website\e-store\public/images/1708934618.jpg"
+                            alt=""
+                        />
                     </div>
                 </div>
                 <div id="product-1" class="row">
@@ -276,7 +280,7 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../assets/product-1.jpg") no-repeat center;
+    background: no-repeat center;
     background-size: cover;
     transition: all 0.3s;
 }

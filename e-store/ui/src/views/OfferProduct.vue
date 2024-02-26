@@ -124,8 +124,14 @@
                             <h3 class="product-title">
                                 {{ product.mobile_name }}
                             </h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">{{ product.Price }}$</h4>
+                            <h4 class="product-old-price">
+                                ${{ product.Price }}
+                            </h4>
+                            <h4 class="product-price">
+                                {{
+                                    counter.percent_of_discount * product.Price
+                                }}
+                            </h4>
                         </div>
                     </div>
                 </div>
