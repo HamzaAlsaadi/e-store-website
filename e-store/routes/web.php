@@ -1,6 +1,8 @@
-`<?php
+<?php
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CheckOutMiddleWare;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\web\CartController;
@@ -26,8 +28,7 @@ define('pagination_count', 4);
 */
 
 
-Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function()
-{
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('/', function () {
         return view('web.layout');
     });
@@ -65,8 +66,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/home', [WebController::class, 'index'])->name('web');
 
 
-    Route::group(['prefix' => 'home', 'middleware' => [ 'auth']], function ()
-    {
+    Route::group(['prefix' => 'home', 'middleware' => ['auth']], function () {
         Route::get('/product_info/{id}', [WebController::class, 'productinfo'])->name('web.product_deatails');
         Route::get('/company', [WebController::class, 'company'])->name('web.company');
         Route::get('/category', [WebController::class, 'category'])->name('web.category');
@@ -82,7 +82,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::GET('/filter',  [SearchController::class, 'filter'])->name('filter');
         Route::GET('/filter_respone',  [SearchController::class, 'respone'])->name('respone.filter');
         Route::post('/review/store/{id}',  [RateProductController::class, 'store'])->name('review.store');
-        Route::get('/review/show/{id},' , [RateProductController::class, 'show'])->name('review.show');
+        Route::get('/review/show/{id},', [RateProductController::class, 'show'])->name('review.show');
         Route::resource('profile', ProfileController::class);
         Route::PUT('profile/updateprofile/{id}', [ProfileController::class,'update'])->name('update.profile');
         Route::get('/order_place,' , [OrderController::class, 'store'])->name('Order.Place');
@@ -95,9 +95,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/session', [PaymentController::class, 'session'])->name('session');
     Route::get('/success', [PaymentController::class, 'success'])->name('success');
 
-
+    Route::get('/verfiy-mail/{token}', [UserController::class, 'verficationMail']);
 });
-
-
-
-

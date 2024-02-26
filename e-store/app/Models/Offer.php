@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
-    protected $fillable = ['Type', 'percent_of_discount'];
 
-
+    protected $fillable = ['percent_of_discount', 'expiration_date'];
     public function product()
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(Product::class);
     }
 }

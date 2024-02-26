@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Models\offer;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -20,7 +21,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'mobile_name' => 'required',
@@ -32,9 +33,10 @@ class ProductController extends Controller
             'Screen_Size' => 'required',
             'Type_of_charge' => 'required',
             'Price' => 'required',
-            'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'imge' => 'nullable|required',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id' => 'nullable|required'
             // Add other validation rules for your fields
         ]);
 
@@ -58,9 +60,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update_product(Request $request)
     {
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
@@ -75,9 +77,10 @@ class ProductController extends Controller
             'Screen_Size' => 'required',
             'Type_of_charge' => 'required',
             'Price' => 'required',
-            'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'imge' => 'required',
             'category_id' => 'required|exists:categories,id',
             'Company_id' => 'required|exists:companies,id',
+            'offer_id' => 'nullable|required|exists:offers,id'
             // Add other validation rules for your fields
         ]);
 
@@ -89,9 +92,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
@@ -106,17 +109,5 @@ class ProductController extends Controller
         $products = Product::orderBy('created_at', 'desc')->get();
 
         return response()->json($products);
-    }
-
-
-    public function productsWithValidOffers()
-    {
-        $productsWithOffers = Product::has('offers')
-            ->whereHas('offers', function ($query) {
-                $query->where('expiration_date', '>', now());
-            })
-            ->get();
-
-        return response()->json(['products_with_valid_offers' => $productsWithOffers], 200);
     }
 }

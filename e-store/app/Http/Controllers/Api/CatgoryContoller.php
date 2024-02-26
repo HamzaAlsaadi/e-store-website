@@ -20,7 +20,7 @@ class CatgoryContoller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name',
@@ -48,9 +48,9 @@ class CatgoryContoller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $Category = Category::find($id);
+        $Category = Category::find($request->id);
         if (!$Category) {
             return response()->json(['error' => 'Category not found'], 404);
         }
@@ -66,9 +66,9 @@ class CatgoryContoller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $Category = Category::find($id);
+        $Category = Category::find($request->id);
         if (!$Category) {
             return response()->json(['error' => 'Category not found'], 404);
         }
@@ -76,7 +76,7 @@ class CatgoryContoller extends Controller
         $Category->delete();
         return response()->json(['message' => 'Category deleted successfully'], 200);
     }
-    public function getCompanyProducts($categoryId)
+    public function getCategoryProducts($categoryId)
     {
         $category = Category::find($categoryId);
 
