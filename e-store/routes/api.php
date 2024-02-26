@@ -43,6 +43,8 @@ Route::post('update-product', [ProductController::class, 'update_product']);
 Route::post('delete-product', [ProductController::class, 'destroy']);
 Route::get('latest-product', [ProductController::class, 'getProductsSortedByLatestTime']);
 
+Route::get('get-image-link/{image}', [ProductController::class, 'getImage']);
+
 Route::apiResource('catgory', CatgoryContoller::class);
 Route::post('create-catgory', [CatgoryContoller::class, 'create']);
 Route::post('update-catgory', [CatgoryContoller::class, 'update']);

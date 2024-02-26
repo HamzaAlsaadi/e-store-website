@@ -44,9 +44,10 @@ class ProductController extends Controller
         ]);
         if ($request->hasFile('imge')) {
             $image = $request->file('imge');
-            $path = public_path() . '\\images\\';
+            $path = base_path() . '\\storage\\app\\public\\images';
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
+            // print($path);
 
             $validatedData['imge'] =  $filename;
         }
@@ -98,10 +99,11 @@ class ProductController extends Controller
         ]);
         if ($request->hasFile('imge')) {
             $image = $request->file('imge');
-            $path = public_path() . '\\images\\';
+            $path = base_path() . '\\storage\\app\\public\\images';
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move($path, $filename);
 
+            // print($path);
             $validatedData['imge'] =  $filename;
         }
         $product->update($validatedData);
@@ -123,6 +125,20 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully'], 200);
     }
+
+    public function getImage($image)
+    {
+
+        $filePath = storage_path('app\\public\\images\\' . $image);
+        // print($filePath);
+        if (file_exists($filePath)) {
+            return response()->file($filePath);
+        }
+        return response()->json(['error' => 'Image not found'], 404);
+    }
+
+
+
 
     public function getProductsSortedByLatestTime()
     {
