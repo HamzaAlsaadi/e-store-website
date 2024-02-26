@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Gsm extends Model
+class Mobolist extends Model
 {
     use HasFactory;
+    protected $keyType = 'string'; // Set the key type to UUID
+    public $incrementing = false; // Disable auto-incrementing
+
     protected $fillable=['name_phone','image_phone','url_phone','networt_technology','sim','demenation','weight'
     ,'build','size','display','resoulation','chiapest'
     ,'cpu','gpu','camera','camera_f','feature_camera'
     ,'video','sensores','battarey','charghing','usb','model'
     ,'price','colores','company_id'];
-    protected $keyType = 'string'; // Set the key type to UUID
-    public $incrementing = false; // Disable auto-incrementing
 
     public function company()
     {

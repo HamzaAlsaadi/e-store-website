@@ -34,7 +34,7 @@ class SearchController extends Controller
      {
         $products = Product::query();
             if ($request->has('company')) {
-                $products = $products->where('Company_id', $request->input('company'));
+                $products = $products->where('company_id', $request->input('company'));
             }
             if ($request->has('category')) {
                 $products = $products->where('category_id', $request->input('category'));

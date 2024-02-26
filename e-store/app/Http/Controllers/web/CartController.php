@@ -49,7 +49,7 @@ class CartController extends Controller
                 "name" => $product->mobile_name,
                 "quantity" => $request->quantity,
                 "price" => $product->Price,
-                "Company_id" => $product->Company_id,
+                "company_id" => $product->company_id,
                 "category_id" => $product->category_id
             ];
         }
@@ -81,8 +81,5 @@ class CartController extends Controller
             return redirect()->back()->with('success', 'Product has been deleted!');
         }
     }
-
-
-
 
 }

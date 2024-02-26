@@ -61,7 +61,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories,name',
-            'Company_id' => 'required',
+            'company_id' => 'required',
          ]);
          if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -109,7 +109,7 @@ class AdminController extends Controller
             'Price' => 'required',
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
             'offer_id'=>'nullable|exists:offers,id'
 
         ]);
@@ -131,7 +131,7 @@ class AdminController extends Controller
             'Screen_Size' => $request->input('Screen_Size'),
             'Type_of_charge' => $request->input('Type_of_charge'),
             'Price' => $request->input('Price'),
-            'Company_id' => $request->input('Company_id'),
+            'company_id' => $request->input('company_id'),
             'category_id' => $request->input('category_id'),
             'imge' => $imageName,
             'offer_id'=>$request->input('offer_id')
@@ -190,7 +190,7 @@ class AdminController extends Controller
                 'Screen_Size' => $row[7],
                 'Type_of_charge' => $row[8],
                 'Price' => $row[9],
-                'Company_id' => $row[10],
+                'company_id' => $row[10],
                 'category_id' => $row[11],
             ]);
             $product->save();
@@ -212,7 +212,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|unique:categories,name',
-            'Company_id' => 'sometimes|required'
+            'company_id' => 'sometimes|required'
          ]);
          if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -221,8 +221,8 @@ class AdminController extends Controller
         if ($request->input('name')) {
             $category->name = $request->input('name');
         }
-        if ($request->input('Company_id')) {
-            $category->Company_id = $request->input('Company_id');
+        if ($request->input('company_id')) {
+            $category->company_id = $request->input('Company_id');
         }
          $category->save();
          return redirect()->back()->with(['success'=>'updtae category done']);
@@ -262,7 +262,7 @@ class AdminController extends Controller
             'Price' => 'required',
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
             'offer_id'=>'nullable|exists:offers,id'
 
         ]);
@@ -280,7 +280,7 @@ class AdminController extends Controller
             $product->Screen_Size = $request->input('Screen_Size');
             $product->Type_of_charge = $request->input('Type_of_charge');
             $product->Price = $request->input('Price');
-            $product->Company_id = $request->input('Company_id');
+            $product->company_id = $request->input('company_id');
             $product->category_id = $request->input('category_id');
             $product->offer_id= $request->input('offer_id');
 
