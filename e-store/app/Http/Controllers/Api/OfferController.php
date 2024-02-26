@@ -71,9 +71,9 @@ class OfferController extends Controller
 
     public function show_precent_offer($id)
     {
-        $offer = offer::where('id', $id)->get(['percent_of_discount']);
+        $offer = offer::where('id', $id)->get('percent_of_discount');
 
 
-        return response()->json($offer, 200);
+        return response()->json($offer[0], 200);
     }
 }

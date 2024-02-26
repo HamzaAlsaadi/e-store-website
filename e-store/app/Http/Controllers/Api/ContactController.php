@@ -29,19 +29,25 @@ class ContactController extends Controller
         return response()->json(['message' => 'Message sent successfully'], 200);
     }
 
-    public function sendResponse(Request $request, $messageId)
+    public function get_all_message()
     {
-        $validatedData = $request->validate([
-            'admin_response' => 'required',
-        ]);
-
-        $message = messages::findOrFail($messageId);
-        $message->admin_response = $validatedData['admin_response'];
-        $message->save();
-
-        // Notify the user about the response
-        Notification::send($message->user, new MessageResponse($message));
-
-        return response()->json(['message' => 'Response sent successfully'], 200);
+        $all_message = messages::all();
+        return response()->json($all_message, 200);
     }
+
+    // public function sendResponse(Request $request, $messageId)
+    // {
+    //     $validatedData = $request->validate([
+    //         'admin_response' => 'required',
+    //     ]);
+
+    //     $message = messages::findOrFail($messageId);
+    //     $message->admin_response = $validatedData['admin_response'];
+    //     $message->save();
+
+    //     // Notify the user about the response
+    //     Notification::send($message->user, new MessageResponse($message));
+
+    //     return response()->json(['message' => 'Response sent successfully'], 200);
+    // }
 }
