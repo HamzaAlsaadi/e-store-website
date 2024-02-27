@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Company extends Model
 {
     use HasFactory;
+
     protected $fillable = ['company_name','company_address'];
     protected $keyType = 'string'; // Set the key type to UUID
     public $incrementing = false; // Disable auto-incrementing
+
 
     public function category()
     {
