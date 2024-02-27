@@ -5,7 +5,7 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
                         <h3>Featured Product</h3>
-                        <h2>Popular Products</h2>
+                        <h2>All Mobile Phone</h2>
                     </div>
                 </div>
                 <div id="product-1" class="row">
@@ -21,7 +21,7 @@
                                 class="part-1"
                                 :style="{
                                     backgroundImage:
-                                        'url(http://127.0.0.1:8000/public/api/' +
+                                        'url(http://127.0.0.1:8000/api/get-image-link/' +
                                         product.imge +
                                         ')',
                                 }"
@@ -264,8 +264,20 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.section-products .single-product .part-1:hover {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.2, 1.2) rotate(5deg);
+    transition: all 0.3s;
+}
 
-.section-products .single-product .part-1::before {
+.section-products .single-product .part-1:hover::before {
     position: absolute;
     content: "";
     top: 0;
@@ -273,6 +285,7 @@ a:hover {
     width: 100%;
     height: 100%;
     z-index: -1;
+    transform: scale(1.2, 1.2) rotate(5deg);
     transition: all 0.3s;
 }
 
@@ -283,6 +296,7 @@ a:hover {
 .section-products #product-1 .part-1::before {
     background-size: cover;
     transition: all 0.3s;
+    transform: scale(1.2, 1.2) rotate(5deg);
 }
 
 .section-products #product-2 .part-1::before {

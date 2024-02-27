@@ -19,6 +19,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="elemnts in messages" :key="elemnts.id">
+                        <td>{{ elemnts.id }}</td>
                         <td>{{ elemnts.userid }}</td>
                         <td>{{ elemnts.email }}</td>
                         <td>{{ elemnts.content }}</td>

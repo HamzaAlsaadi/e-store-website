@@ -5,16 +5,16 @@
             <div class="box">
                 <div class="images">
                     <div class="img-holder active">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                 </div>
                 <div class="basic-info">
@@ -109,7 +109,7 @@ export default {
     data() {
         return {
             products: {},
-
+            imges: "http://127.0.0.1:8000/api/get-image-link/",
             rating: 0,
         };
     },

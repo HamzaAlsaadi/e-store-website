@@ -55,14 +55,14 @@
                             </h5>
                         </div>
                         <div class="col-md-5 my-auto">
-                            <form role="search">
+                            <form role="search" class="search-form">
                                 <div class="input-group">
                                     <input
-                                        style="width: 430px"
                                         type="search"
                                         placeholder="Search your product"
                                         class="form-control"
                                         v-model="prname"
+                                        @click="toggleSelectVisibility"
                                     />
                                     <button
                                         class="btn bg-white"
@@ -71,40 +71,48 @@
                                     >
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <select
-                                        class="btn bg-white"
-                                        v-model="prcompany"
-                                        @change="getsearchcompany()"
+                                    <div
+                                        class="mt-3 select-group"
+                                        v-show="showSelect"
                                     >
-                                        <option
-                                            style=""
-                                            v-for="company in companys"
-                                            :key="company.id"
-                                            :value="company.company_name"
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcompany"
+                                            @change="getsearchcompany()"
                                         >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
-                                    <select class="btn bg-white">
-                                        <option
-                                            style=""
-                                            v-for="(company, index) in companys"
-                                            :key="company.id"
-                                            :value="index"
-                                        >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
-                                    <select class="btn bg-white">
-                                        <option
-                                            style=""
-                                            v-for="(company, index) in companys"
-                                            :key="company.id"
-                                            :value="index"
-                                        >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
+                                            <option
+                                                v-for="company in companys"
+                                                :key="company.id"
+                                                :value="company.company_name"
+                                            >
+                                                {{ company.company_name }}
+                                            </option>
+                                        </select>
+                                        <select class="btn bg-white">
+                                            <option
+                                                style=""
+                                                v-for="(
+                                                    company, index
+                                                ) in companys"
+                                                :key="company.id"
+                                                :value="index"
+                                            >
+                                                {{ company.company_name }}
+                                            </option>
+                                        </select>
+                                        <select class="btn bg-white">
+                                            <option
+                                                style=""
+                                                v-for="(
+                                                    company, index
+                                                ) in companys"
+                                                :key="company.id"
+                                                :value="index"
+                                            >
+                                                {{ company.company_name }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -340,6 +348,12 @@ export default {
         };
     },
     methods: {
+        toggleSelectVisibility() {
+            this.showSelect = !this.showSelect;
+        },
+        hideSelect() {
+            this.showSelect = false;
+        },
         getcompany() {
             axios({
                 method: "get",
@@ -634,5 +648,33 @@ header {
         font-size: 12px;
         padding: 8px 10px;
     }
+}
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    width: calc(60% - 40px);
+}
+
+.form-select {
+    height: 35px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.input-group input[type="search"],
+.input-group button,
+.select-group {
+    height: 35px;
+    margin-bottom: 10px;
+    margin-top: 11px;
 }
 </style>
