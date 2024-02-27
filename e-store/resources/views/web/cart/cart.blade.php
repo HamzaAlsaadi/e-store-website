@@ -42,7 +42,7 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                          </form>
                     </td>
-                    <td data-th="Price">{{ DB::table('companies')->where('id',  $details['Company_id'])->value('company_name') }}</td>
+                    <td data-th="Price">{{ DB::table('companies')->where('id',  $details['company_id'])->value('company_name') }}</td>
                     {{ DB::table('categories')->where('id', $details['category_id'])->value('name') }}
                     <td data-th="Price">{{ DB::table('categories')->where('id', $details['category_id'])->value('name') }}</td>
                 </tr>
