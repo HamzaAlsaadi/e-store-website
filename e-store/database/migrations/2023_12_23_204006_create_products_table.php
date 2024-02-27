@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\offer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,8 +26,10 @@ return new class extends Migration
             $table->string('imge')->nullable()->default('none');
             $table->unsignedBigInteger('Company_id');
             $table->unsignedBigInteger('category_id');
+            // $table->unsignedBigInteger('offer_id');
             $table->foreign('Company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignIdFor(offer::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -20,17 +20,27 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $this->validate($request, [
 
-            'company_name' => 'required|unique:companies,company_name',
-
+        $validatedData = $request->validate([
+            'company_name' => 'required',
             'company_address' => 'required',
-
+            'image' => 'required',
+            // Add other validation rules for your fields
         ]);
 
-        $company = Company::create($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = base_path() . '\\storage\\app\\public\\images';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $validatedData['imge'] =  $filename;
+        }
+        // var_dump($validatedData);
+        $company = Company::create($validatedData);
+
         return response()->json($company, 201);
     }
 
@@ -49,28 +59,37 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $company = Company::find($id);
+        $company = Company::find($request->id);
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }
-        $this->validate($request, [
-            'company_name' => 'required|unique:companies,company_name',
-
+        $validatedData = $request->validate([
+            'company_name' => 'required',
             'company_address' => 'required',
-            // Add validation rules for other fields
+            'image' => 'required',
+            // Add other validation rules for your fields
         ]);
-        $company->update($request->all());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = base_path() . '\\storage\\app\\public\\images';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $validatedData['imge'] =  $filename;
+        }
+        $company->update($validatedData);
         return response()->json($company, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $company = Company::find($id);
+        $company = Company::find($request->id);
         if (!$company) {
             return response()->json(['error' => 'Company not found'], 404);
         }

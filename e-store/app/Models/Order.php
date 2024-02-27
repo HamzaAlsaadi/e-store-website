@@ -9,13 +9,22 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['count_of_items_in_order', 'total_price','user_id'];
+    protected $fillable = ['id', 'count_of_items_in_order', 'total_price', 'user_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-    public function order()
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'pivot_order_products')->withPivot('quantity');
+    }
+    public function coupon()
+    {
+        return $this->belongsToMany(coupon::class);
+    }
+    public function orders()
     {
         return $this->hasMany(PivotOrderProduct::class);
     }

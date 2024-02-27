@@ -50,7 +50,6 @@
                         />
                     </form>
                 </div>
-
                 <div class="form login">
                     <header>Login</header>
                     <form action="#">
@@ -139,13 +138,16 @@ export default {
             })
                 .then(function (response) {
                     if (response.status == 200) {
+                        console.log(response.data.type_of_user);
                         console.log(response.status);
                         window.alert("LogIn succesful");
                         window.localStorage.setItem(
                             "token",
                             response.data.token
-                        ),
-                            router.push("/UserAccount");
+                        );
+                        if (response.data.type_of_user == 1) {
+                            router.push("/CompanyAdmin");
+                        } else router.push("/UserAccount");
                     }
                 })
                 .catch(function (error) {

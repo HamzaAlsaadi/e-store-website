@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
+use App\Models\PivotOrderProduct;
 use App\Models\Product as ModelsProduct;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,4 +17,5 @@ class product extends Seeder
     {
         ModelsProduct::factory()->count(50)->create();
     }
+
 }

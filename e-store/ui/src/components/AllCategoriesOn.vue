@@ -265,10 +265,12 @@ body p {
     font-size: 30px;
     font-family: "Arial", sans-serif;
 }
+
 .images {
     display: flex;
     justify-content: space-between;
 }
+
 img {
     width: 100px;
     height: 100px;
@@ -282,7 +284,9 @@ img {
     border-radius: 50%;
     display: inline-block;
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
 body {
     font-family: "Poppins", sans-serif;
     color: #ffffff;

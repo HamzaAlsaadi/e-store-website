@@ -14,6 +14,7 @@
         />
         <link rel="stylesheet" href="style.css" />
     </head>
+
     <body>
         <div class="main-navbar shadow-sm sticky-top">
             <div class="top-navbar">
@@ -57,13 +58,53 @@
                             <form role="search">
                                 <div class="input-group">
                                     <input
+                                        style="width: 430px"
                                         type="search"
                                         placeholder="Search your product"
                                         class="form-control"
+                                        v-model="prname"
                                     />
-                                    <button class="btn bg-white" type="submit">
+                                    <button
+                                        class="btn bg-white"
+                                        type="button"
+                                        @click="getsearchdata()"
+                                    >
                                         <i class="fa fa-search"></i>
                                     </button>
+                                    <select
+                                        class="btn bg-white"
+                                        v-model="prcompany"
+                                        @change="getsearchcompany()"
+                                    >
+                                        <option
+                                            style=""
+                                            v-for="company in companys"
+                                            :key="company.id"
+                                            :value="company.company_name"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
+                                    <select class="btn bg-white">
+                                        <option
+                                            style=""
+                                            v-for="(company, index) in companys"
+                                            :key="company.id"
+                                            :value="index"
+                                        >
+                                            {{ company.company_name }}
+                                        </option>
+                                    </select>
                                 </div>
                             </form>
                         </div>
@@ -106,43 +147,45 @@
                                             <router-link
                                                 to="/ProfileView"
                                                 style="text-decoration: none"
+                                                class="dropdown-item"
                                             >
-                                                <a class="dropdown-item">
-                                                    <i class="fa fa-user"> </i>
-                                                    Profile</a
-                                                ></router-link
+                                                <i class="fa fa-user"> </i>
+                                                Profile</router-link
                                             >
                                         </li>
 
                                         <li>
-                                            <a class="dropdown-item" href="#">
-                                                <router-link
-                                                    to="/FAQ"
-                                                    style="
-                                                        text-decoration: none;
-                                                    "
-                                                >
-                                                    FAQ's Customer
-                                                    Support</router-link
-                                                ></a
+                                            <router-link
+                                                to="/FaQ"
+                                                style="text-decoration: none"
+                                                class="dropdown-item"
+                                            >
+                                                FAQ's Customer Support
+                                            </router-link>
+                                        </li>
+                                        <li>
+                                            <router-link
+                                                to="/ContactUs"
+                                                style="text-decoration: none"
+                                                class="dropdown-item"
+                                            >
+                                                Contact Us</router-link
                                             >
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="#">
-                                                <button
-                                                    @click="logout()"
-                                                    type="button"
+                                                <router-link
+                                                    to="/"
                                                     style="
                                                         text-decoration: none;
                                                     "
                                                 >
-                                                    Sign Out
-                                                </button></a
+                                                    Sign Out</router-link
+                                                ></a
                                             >
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li class="nav-item dropdown">
                                     <a
                                         class="nav-link dropdown-toggle"
@@ -183,7 +226,6 @@
                         class="navbar-brand d-block d-sm-block d-md-none d-lg-none"
                         href="#"
                     >
-                        Funda Ecom
                     </a>
                     <button
                         class="navbar-toggler"
@@ -203,10 +245,8 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
-                                    ><router-link to="/UserAccount"
-                                        >Home</router-link
-                                    ></a
-                                >
+                                    ><router-link to="/">Home</router-link>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <nav>
@@ -224,194 +264,61 @@
                                                 <div class="mega-box">
                                                     <div class="content">
                                                         <div class="row">
-                                                            <header></header>
                                                             <ul
                                                                 class="mega-links"
                                                             >
-                                                                <li>
-                                                                    <a href="#"
+                                                                <li
+                                                                    class="dropdown"
+                                                                    v-for="company in companies"
+                                                                    :key="
+                                                                        company.id
+                                                                    "
+                                                                >
+                                                                    <a
+                                                                        href="#"
+                                                                        class="dropbtn"
                                                                         ><router-link
-                                                                            to="Samsung"
-                                                                            >SAMSUNG</router-link
-                                                                        >
+                                                                            @click="
+                                                                                getcompid(
+                                                                                    company.id
+                                                                                )
+                                                                            "
+                                                                            co
+                                                                            to="Company"
+                                                                            >{{
+                                                                                company.company_name
+                                                                            }}
+                                                                        </router-link>
                                                                     </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Apple"
-                                                                            >APPLE</router-link
-                                                                        ></a
+                                                                    <div
+                                                                        class="dropdown-content"
                                                                     >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Xiaomi"
-                                                                            >XIAOMI</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="HuaWei"
-                                                                            >HUAWEI</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Nokia"
-                                                                            >NOKIA</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Htc"
-                                                                            >HTC</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Tecno"
-                                                                            >TECNO</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        >NOTHING</a
-                                                                    >
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Lg"
-                                                                            >LG</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Honor"
-                                                                            >HONOR</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Google"
-                                                                            >GOOGLE</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Lenovo"
-                                                                            >LENOVO</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Oneplus"
-                                                                            >ONEPLUS</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Oppo"
-                                                                            >OPPO</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Infinix"
-                                                                            >INFINIX</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="row">
-                                                            <ul
-                                                                class="mega-links"
-                                                            >
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Sony"
-                                                                            >SONY</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Realme"
-                                                                            >REALME</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Vivo"
-                                                                            >VIVO</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Zte"
-                                                                            >ZTE</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Meizu"
-                                                                            >MEIZU</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Motorola"
-                                                                            >MOTOROLA</router-link
-                                                                        ></a
-                                                                    >
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                        ><router-link
-                                                                            to="Asus"
-                                                                            >ASUS</router-link
-                                                                        ></a
-                                                                    >
+                                                                        <template
+                                                                            v-for="category in categorys"
+                                                                        >
+                                                                            <a
+                                                                                :key="
+                                                                                    category.id
+                                                                                "
+                                                                                v-if="
+                                                                                    category.Company_id ===
+                                                                                    company.id
+                                                                                "
+                                                                            >
+                                                                                <router-link
+                                                                                    @click="
+                                                                                        getidcategory(
+                                                                                            category.id
+                                                                                        )
+                                                                                    "
+                                                                                    to="/CategoryPage"
+                                                                                    >{{
+                                                                                        category.name
+                                                                                    }}</router-link
+                                                                                >
+                                                                            </a>
+                                                                        </template>
+                                                                    </div>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -423,21 +330,39 @@
                                 </nav>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Offers</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/OfferProduct"
+                                        >Offers</router-link
+                                    ></a
+                                >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Categories</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >Latest Phones</router-link
+                                    ></a
+                                >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Latest Phones</a>
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >Regex</router-link
+                                    ></a
+                                >
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="LatestProduct"
+                                        >NLP</router-link
+                                    ></a
+                                >
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
                                     ><router-link to="Compare"
                                         >Compare</router-link
-                                    ></a
-                                >
+                                    >
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -446,30 +371,81 @@
         </div>
     </body>
 </template>
+
 <script>
-import router from "@/router";
 export default {
     name: "HeaderUserAccount",
-    methods: {
-        logout() {
-            window.localStorage.removeItem("token");
-            router.push("/");
-        },
-    },
 };
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    display: block;
+}
+
+.main-navbar .top-navbar .nav-links li {
+    list-style-type: none;
+    display: inline;
+    margin-right: 20px;
+}
+
+.brand-name {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.top-navbar {
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+}
 
 .nav-links li {
     list-style: none;
 }
+
 .nav-links li a {
     color: #f2f2f2;
     text-decoration: none;
@@ -479,12 +455,15 @@ export default {
     border-radius: 5px;
     transition: all 0.3s ease;
 }
+
 .nav-links li a:hover {
-    background: #542ded;
+    background: white;
 }
+
 .nav-links .mobile-item {
     display: none;
 }
+
 .nav-links .drop-menu {
     position: absolute;
     background: #242526;
@@ -502,6 +481,15 @@ export default {
     opacity: 1;
     visibility: visible;
 }
+.mega-links {
+    list-style-type: none;
+}
+.mega-links li {
+    display: inline-block;
+}
+.mega-links li a {
+    display: block;
+}
 
 .mega-box {
     position: absolute;
@@ -512,16 +500,18 @@ export default {
     opacity: 0;
     visibility: hidden;
 }
+
 .mega-box .content {
-    background: #ddd;
+    background: #464545;
     padding: 25px 20px;
     display: flex;
     width: 100%;
     justify-content: space-between;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
+
 .mega-box .content .row {
-    width: calc(25% - 30px);
+    flex: calc(100% / 3);
     line-height: 45px;
 }
 
@@ -532,38 +522,46 @@ header {
 .main-navbar {
     border-bottom: 1px solid #ccc;
 }
+
 .main-navbar .top-navbar {
-    background-color: black;
+    background-color: #000000;
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .main-navbar .top-navbar .brand-name {
     color: #fff;
 }
+
 .main-navbar .top-navbar .nav-link {
     color: #fff;
     font-size: 16px;
     font-weight: 500;
 }
+
 .main-navbar .top-navbar .dropdown-menu {
     padding: 0px 0px;
     border-radius: 0px;
 }
+
 .main-navbar .top-navbar .dropdown-menu .dropdown-item {
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
     font-size: 14px;
 }
+
 .main-navbar .top-navbar .dropdown-menu .dropdown-item i {
     width: 20px;
     text-align: center;
     color: #2874f0;
     font-size: 14px;
 }
+
 .main-navbar .navbar {
     padding: 0px;
     background-color: #464545;
 }
+
 .main-navbar .navbar .nav-item a {
     padding: 8px 20px;
     color: #000;

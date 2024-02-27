@@ -1,20 +1,20 @@
 <template>
     <body>
-        <HeaderPage />
+        <HeaderAllCategories />
         <div class="container">
             <div class="box">
                 <div class="images">
                     <div class="img-holder active">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                     <div class="img-holder">
-                        <img src="@/assets/product-1.jpg" />
+                        <img :src="imges + products.imge" />
                     </div>
                 </div>
                 <div class="basic-info">
@@ -29,7 +29,7 @@
                             viewBox="0 0 16 16"
                             v-for="(star, index) in 5"
                             :key="index"
-                            @click="rateProduct(index + 1)"
+                            @click="rateProduct(index + 1) + rate()"
                             :class="{ active: index < rating }"
                         >
                             <path
@@ -37,16 +37,40 @@
                             />
                         </svg>
                     </div>
+
                     <div class="product-price">
                         <p class="last-price">
                             <span>Price :</span>
                         </p>
                     </div>
                     <strong class="h1">${{ products.Price }}</strong>
-
                     <div class="options">
-                        <button><a href="#">Buy It Now</a></button>
-                        <button><a href="#">Add to Cart</a></button>
+                        <button>
+                            <router-link
+                                to="CheckOut"
+                                @click="
+                                    AddProduct(
+                                        products.id,
+                                        products.mobile_name,
+                                        products.Price,
+                                        products.imge
+                                    )
+                                "
+                                >Buy It Now</router-link
+                            >
+                        </button>
+                        <button
+                            @click="
+                                AddProduct(
+                                    products.id,
+                                    products.mobile_name,
+                                    products.Price,
+                                    products.imge
+                                )
+                            "
+                        >
+                            Add to Cart
+                        </button>
                     </div>
                 </div>
 
@@ -56,7 +80,6 @@
                         <li>Cpu : {{ products.Cpu_spsecfication }}</li>
                         <li>Gpu :{{ products.Gpu_spsecfication }}</li>
                         <li>Screen Size : {{ products.Screen_Size }}</li>
-
                         <li>
                             battery :
                             {{ products.battery_spsecfication }}
@@ -79,19 +102,47 @@
 <script>
 import axios from "axios";
 import store from "@/store";
-import HeaderPage from "@/components/Header.vue";
 import FooTer from "@/components/footer.vue";
-
+import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
 export default {
     name: "DetailsProduct",
     data() {
         return {
             products: {},
+            imges: "http://127.0.0.1:8000/api/get-image-link/",
             rating: 0,
         };
     },
-    components: { HeaderPage, FooTer },
+    components: { FooTer, HeaderAllCategories },
     methods: {
+        AddProduct(id, name_mobile, Price, img) {
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    if (id == store.state.Order[index]["id"]) {
+                        store.state.Order[index]["count"]++;
+                        console.log(store.state.Order);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
+            }
+            store.state.Order[store.state.counter] = {
+                id: id,
+                name: name_mobile,
+                Price: Price,
+                img: img,
+                count: 1,
+            };
+            store.state.counter++;
+            console.log(store.state.Order);
+        },
         getorders() {
             axios({
                 method: "get",
@@ -101,13 +152,10 @@ export default {
             })
                 .then((response) => {
                     this.products = response.data;
-                    console.log(response.data);
+                    console.log(response);
                 })
                 .catch(function (error) {
                     window.alert(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
                 });
         },
         rateProduct(rating) {
@@ -122,6 +170,28 @@ export default {
 
             this.rating = rating;
             console.log("تم تقييم المنتج بنجاح: " + rating);
+        },
+        rate() {
+            const token = window.localStorage.getItem("token");
+
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/products/" +
+                    store.state.productID +
+                    "/rate?rating=" +
+                    this.rating,
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
         },
     },
     beforeMount() {
@@ -261,7 +331,6 @@ body {
 
 .product-specs li {
     font-size: 17px;
-
     margin-bottom: 5px;
 }
 

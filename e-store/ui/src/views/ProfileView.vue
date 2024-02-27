@@ -49,33 +49,6 @@
                                 class="tab-pane fade active show"
                                 id="account-general"
                             >
-                                <div class="card-body media align-items-center">
-                                    <img
-                                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                        alt
-                                        class="d-block ui-w-80"
-                                    />
-                                    <div class="media-body ml-6">
-                                        <label class="btn btn-dark">
-                                            Upload new photo
-                                            <input
-                                                type="file"
-                                                class="account-settings-fileinput"
-                                            />
-                                        </label>
-                                        &nbsp;
-                                        <button
-                                            type="button"
-                                            class="btn btn-dark md-btn-flat"
-                                        >
-                                            Reset
-                                        </button>
-                                        <div class="blockquote-footer">
-                                            Allowed JPG, GIF or PNG. Max size of
-                                            800K
-                                        </div>
-                                    </div>
-                                </div>
                                 <hr class="border-light m-0" />
                                 <div class="card-body">
                                     <div class="form-group">
@@ -89,25 +62,15 @@
                                             placeholder="nmaxwell"
                                         />
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Name</label
-                                        >
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            value=""
-                                            placeholder="Nelle Maxwell"
-                                        />
-                                    </div>
+
                                     <div class="form-group">
                                         <label class="form-label text-white"
                                             >E-mail</label
                                         >
                                         <input
+                                            v-model="user.email"
                                             type="text"
                                             class="form-control mb-1"
-                                            value=""
                                             placeholder="nmaxwell@mail.com"
                                         />
                                         <div
@@ -115,12 +78,13 @@
                                         >
                                             Your email is not confirmed. Please
                                             check your inbox.<br />
-                                            <a href="javascript:void(0)"
+                                            <a
+                                                @click="veryfi()"
+                                                href="javascript:void(0)"
                                                 >Resend confirmation</a
                                             >
                                         </div>
                                     </div>
-                                    Abo Ali, [12/25/2023 6:52 AM]
                                     <div class="form-group">
                                         <label class="form-label text-white"
                                             >Male</label
@@ -315,15 +279,33 @@ export default {
         return { user: {} };
     },
     methods: {
+        veryfi() {
+            const token = window.localStorage.getItem("token");
+
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/send-verfiy-email/" +
+                    this.user.email,
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
         getprofile() {
             const token = window.localStorage.getItem("token");
             axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/get/profile/",
+                url: "http://127.0.0.1:8000/api/user/show-user",
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {
                     this.user = response.data;
+                    console.log(response.data);
                 })
                 .catch(function (error) {
                     window.alert(error.response);

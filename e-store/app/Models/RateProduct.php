@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RateProduct extends Model
 {
     use HasFactory;
-    protected $fillable=['number_of_rate_for_product','comment','product_id','user_id'];
+    protected $fillable = ['number_of_rate_for_product', 'product_id', 'user_id'];
 
     public function product()
     {
