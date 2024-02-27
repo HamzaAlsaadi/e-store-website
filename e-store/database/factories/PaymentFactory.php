@@ -19,9 +19,9 @@ class PaymentFactory extends Factory
     public function definition(): array
     {
         return [
-        'order_id' => Order::all()->random()->id,
+            'order_id' => Order::all()->random()->id,
             'user_id' => User::all()->random()->id,
-            'payments_descriptions' => fake()->sentence(),
+            'stripe_payment_id' => fake()->sentence(),
 
         ];
     }

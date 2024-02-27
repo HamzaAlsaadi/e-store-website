@@ -24,7 +24,7 @@ class CatgoryContoller extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name',
-            'Company_id' => 'required',
+            'company_id' => 'required',
             // Add other validation rules for your fields
         ]);
 
@@ -56,7 +56,7 @@ class CatgoryContoller extends Controller
         }
         $this->validate($request, [
             'name' => 'required|unique:categories,name',
-            'Company_id' => 'required',
+            'company_id' => 'required',
             // Add validation rules for other fields
         ]);
         $Category->update($request->all());

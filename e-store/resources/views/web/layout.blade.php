@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <title> demo</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -12,7 +14,15 @@
     <script src="https://kit.fontawesome.com/71b7145720.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
-
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <body>
 
     <div class="hero_area">
@@ -32,7 +42,7 @@
                         <a class="nav-link" href="{{ route('web.category') }}">{{ __('word.category') }}</a>
                         <a class="nav-link" href="{{ route('problem') }}">{{ __('word.problem') }}</a>
                         <a class="nav-link "href="{{ route('filter') }}">filter serach</a>
-                        <a class="nav-link "href="">offer product</a>
+                        <a class="nav-link "href="{{ route('offer') }}">offer product</a>
                     </div>
                 </div>
 
@@ -113,14 +123,9 @@
                 {{ session('success') }}
             </div>
         @endif
-        @if (session('error'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                {{ session('error') }}
-            </div>
-        @endif
         @yield('content')
     </div>
+
     @yield('scripts')
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

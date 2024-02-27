@@ -51,7 +51,7 @@ class StoreCsvController extends Controller
                     'Type_of_charge' => $row[7],
                     'Price' => $row[8],
                     'imge' => $row[9],
-                    'Company_id' => $row[10],
+                    'company_id' => $row[10],
                     'category_id' => $row[11],
                     'offer_id' => $row[12]
                 ]);

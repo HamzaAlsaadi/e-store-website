@@ -17,16 +17,6 @@ class OrderProdctController extends Controller
     // OrderController.php
     public function createOrder(Request $request)
     {
-        /*
-
-        the form of array like this ::
-            [
-                 { "price": "12", "quantity": "2", "id": "1" },
-                 { "price": "15", "quantity": "3", "id": "2" }
-            ]
-
-        */
-
         try {
             $jsonData = $request->json()->all();
             $cartItems = $jsonData['cartItems'];

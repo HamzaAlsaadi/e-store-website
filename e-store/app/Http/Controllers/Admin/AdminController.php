@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Company;
 use App\Models\Category;
+use App\Models\Offer;
 use App\Models\Product;
 use Dotenv\Validator as DotenvValidator;
 use Illuminate\Http\Request;
@@ -15,26 +16,26 @@ class AdminController extends Controller
      */
     public function index() //
     {
-        return view('admin.layout');
+        $companies = Company::all();
+        $category = Category::with('company')->get();
+        $products = Product::with('company','category')->get();
+        return view('admin.main', compact('products', 'category','companies'));
     }
-
-    public function addcompany()    //
+    public function addcompany()
     {
-        return view('admin.add-comany');
+        return view('admin.company.add-comany');
     }
-
-    public function storecompany(Request $request)  //
+    public function storecompany(Request $request)
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'company_name' => 'required|unique:companies,company_name',
-
             'company_address' => 'required',
          ]);
-
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
          $company=Company::create($request->all());
          return redirect()->back()->with(['success'=>'add company done']);
-
     }
     public function companydistroy($id)
     {
@@ -46,23 +47,25 @@ class AdminController extends Controller
     public function companyupdate($id)
     {
         $company = Company::findOrfail($id);
-        return view('admin.update-company',compact('company'));
+        return view('admin.company.update-company',compact('company'));
     }
 
 
     public function addcategory()
     {
         $company=Company::all();
-        return view('admin.add-category',compact('company'));
+        return view('admin.category.add-category',compact('company'));
     }
 
     public function storecategory(Request $request)
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'name' => 'required|unique:categories,name',
-            'Company_id' => 'required',
+            'company_id' => 'required',
          ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
          $category=Category::create($request->all());
          return redirect()->back()->with(['success'=>'add category done']);
@@ -78,15 +81,16 @@ class AdminController extends Controller
     {
         $category=Category::findOrfail($id);
         $companies = Company::all();
-        return view('admin.update-category',compact('category','companies'));
+        return view('admin.category.update-category',compact('category','companies'));
     }
 
     public function addphone()
     {
         $company=Company::all();
         $category=Category::all();
+        $offer=Offer::all();
 
-        return view('admin.add-phone', compact(['company', 'category']));
+        return view('admin.product.add-phone', compact(['company', 'category','offer']));
     }
 
 
@@ -105,7 +109,8 @@ class AdminController extends Controller
             'Price' => 'required',
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
+            'offer_id'=>'nullable|exists:offers,id'
 
         ]);
         if ($validator->fails()) {
@@ -126,14 +131,15 @@ class AdminController extends Controller
             'Screen_Size' => $request->input('Screen_Size'),
             'Type_of_charge' => $request->input('Type_of_charge'),
             'Price' => $request->input('Price'),
-            'Company_id' => $request->input('Company_id'),
+            'company_id' => $request->input('company_id'),
             'category_id' => $request->input('category_id'),
             'imge' => $imageName,
+            'offer_id'=>$request->input('offer_id')
         ]);
+
         $product->save();
         return redirect()->route('add.phone')->with('success', 'Product added successfully.');
     }
-
 
 
     public function productdistroy($id)
@@ -149,28 +155,31 @@ class AdminController extends Controller
         $product=Product::findOrfail($id);
         $company = Company::all();
         $category=Category::all();
-        return view('admin.update-product',compact('product','company','category'));
+        $offer=Offer::all();
+        return view('admin.product.update-product',compact('product','company','category','offer'));
     }
 
 
     public function addcsv()
     {
-        return view('admin.add-csv-file-product');
+        return view('admin.csv_product.add-csv-file-product');
     }
 
 
 
     public function storecsv(Request $request)
-
     {
-        $request->validate([
-
+        $validator = Validator::make($request->all(), [
             'csv_file' => 'required|mimes:csv,txt',
-        ]);
+         ]);
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $path = $request->file('csv_file')->getRealPath();
         $data = array_map('str_getcsv', file($path));
         $data = array_slice($data, 1);
         foreach ($data as $row) {
+
             $product = new Product([
                 'mobile_name' => $row[0],
                 'Cpu_spsecfication' => $row[1],
@@ -181,7 +190,7 @@ class AdminController extends Controller
                 'Screen_Size' => $row[7],
                 'Type_of_charge' => $row[8],
                 'Price' => $row[9],
-                'Company_id' => $row[10],
+                'company_id' => $row[10],
                 'category_id' => $row[11],
             ]);
             $product->save();
@@ -203,7 +212,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|unique:categories,name',
-            'Company_id' => 'sometimes|required'
+            'company_id' => 'sometimes|required'
          ]);
          if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -212,8 +221,8 @@ class AdminController extends Controller
         if ($request->input('name')) {
             $category->name = $request->input('name');
         }
-        if ($request->input('Company_id')) {
-            $category->Company_id = $request->input('Company_id');
+        if ($request->input('company_id')) {
+            $category->company_id = $request->input('Company_id');
         }
          $category->save();
          return redirect()->back()->with(['success'=>'updtae category done']);
@@ -253,7 +262,8 @@ class AdminController extends Controller
             'Price' => 'required',
             'imge' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
+            'offer_id'=>'nullable|exists:offers,id'
 
         ]);
         if ($validator->fails()) {
@@ -270,8 +280,9 @@ class AdminController extends Controller
             $product->Screen_Size = $request->input('Screen_Size');
             $product->Type_of_charge = $request->input('Type_of_charge');
             $product->Price = $request->input('Price');
-            $product->Company_id = $request->input('Company_id');
+            $product->company_id = $request->input('company_id');
             $product->category_id = $request->input('category_id');
+            $product->offer_id= $request->input('offer_id');
 
         if ($request->hasFile('imge')) {
             $request->validate([
@@ -284,7 +295,7 @@ class AdminController extends Controller
         }
         $product->save();
 
-        return redirect()->route('add.phone')->with('success', 'Product added successfully.');
+        return redirect()->back()->with('success', 'Product edit successfully.');
     }
 
 }

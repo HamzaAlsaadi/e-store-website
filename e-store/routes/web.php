@@ -5,15 +5,17 @@ use App\Http\Controllers\Admin\CheckOutMiddleWare;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\WebController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProblemController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\RateProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\web\CartController;
+use App\Http\Controllers\web\ProblemController;
+use App\Http\Controllers\search\SearchController;
+use App\Http\Controllers\web\RateProductController;
+use App\Http\Controllers\web\ProfileController;
+use App\Http\Controllers\payment\PaymentController;
+use App\Http\Controllers\web\OrderController;
+use App\Http\Controllers\web\OfferController;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+define('pagination_count', 4);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,27 +33,30 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         return view('web.layout');
     });
 
-    Route::group(['prefix' => 'dashboard', 'middleware' => ['AdminMiddleware']], function () {
-        Route::get('', [AdminController::class, 'index']);
-        Route::get('/add-company', [AdminController::class, 'addcompany'])->name('add.comany');
-        Route::post('/store-company', [AdminController::class, 'storecompany'])->name('store.comany');
-        Route::get('/add-category', [AdminController::class, 'addcategory'])->name('add.category');
-        Route::post('/store-category', [AdminController::class, 'storecategory'])->name('store.category');
-        Route::get('/add-phone', [AdminController::class, 'addphone'])->name('add.phone');
-        Route::post('/store-phone', [AdminController::class, 'storephone'])->name('store.phone');
-        Route::get('/add-csv', [AdminController::class, 'addcsv'])->name('add.csv');
-        Route::post('/store-csv', [AdminController::class, 'storecsv'])->name('store.csv');
-        Route::get('/admin-main', [AdminController::class, 'main'])->name('admin.main');
-        Route::delete('/company-destroy/{id}', [AdminController::class, 'companydistroy'])->name('company.destroy');
-        Route::delete('/category-destroy/{id}', [AdminController::class, 'categorydistroy'])->name('category.destroy');
-        Route::delete('/prduct-destroy/{id}', [AdminController::class, 'productdistroy'])->name('products.destroy');
-        Route::get('/company-update/{id}', [AdminController::class, 'companyupdate'])->name('company.update');
-        Route::get('/category-update/{id}}', [AdminController::class, 'categoryupdate'])->name('category.update');
-        Route::get('/products-update/{id}', [AdminController::class, 'productupdate'])->name('product.update');
-        Route::PUT('/update-category/{id}', [AdminController::class, 'updatecate'])->name('update.category');
-        Route::PUT('/update-company/{id}', [AdminController::class, 'updatecomp'])->name('update.company');
-        Route::PUT('/update-product/{id}', [AdminController::class, 'updateprod'])->name('update.product');
-        Route::get('/Order', [OrderController::class, 'getOrder'])->name('admin.order');
+    Route::group(['prefix' => 'dashboard', 'middleware' => [ 'AdminMiddleware']], function ()
+    {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::get('/add-company',[AdminController::class, 'addcompany'])->name('add.comany');
+        Route::post('/store-company',[AdminController::class, 'storecompany'])->name('store.comany');
+        Route::get('/add-category',[AdminController::class, 'addcategory'])->name('add.category');
+        Route::post('/store-category',[AdminController::class, 'storecategory'])->name('store.category');
+        Route::get('/add-phone',[AdminController::class, 'addphone'])->name('add.phone');
+        Route::post('/store-phone',[AdminController::class, 'storephone'])->name('store.phone');
+        Route::get('/add-csv',[AdminController::class, 'addcsv'])->name('add.csv');
+        Route::post('/store-csv',[AdminController::class, 'storecsv'])->name('store.csv');
+        Route::get('/admin-main',[AdminController::class, 'main'])->name('admin.main');
+        Route::delete('/company-destroy/{id}',[AdminController::class, 'companydistroy'])->name('company.destroy');
+        Route::delete('/category-destroy/{id}',[AdminController::class, 'categorydistroy'])->name('category.destroy');
+        Route::delete('/prduct-destroy/{id}',[AdminController::class, 'productdistroy'])->name('products.destroy1');
+        Route::get('/company-update/{id}',[AdminController::class, 'companyupdate'])->name('company.update');
+        Route::get('/category-update/{id}}',[AdminController::class, 'categoryupdate'])->name('category.update');
+        Route::get('/products-update/{id}',[AdminController::class, 'productupdate'])->name('product.update');
+        Route::PUT('/update-category/{id}',[AdminController::class, 'updatecate'])->name('update.category');
+        Route::PUT('/update-company/{id}',[AdminController::class, 'updatecomp'])->name('update.company');
+        Route::PUT('/update-product/{id}',[AdminController::class, 'updateprod'])->name('update.product');
+        Route::get('/Order',[OrderController::class, 'getOrder'])->name('admin.order');
+
+
     });
 
     Route::get('/index',)->name('home');
@@ -79,11 +84,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::post('/review/store/{id}',  [RateProductController::class, 'store'])->name('review.store');
         Route::get('/review/show/{id},', [RateProductController::class, 'show'])->name('review.show');
         Route::resource('profile', ProfileController::class);
-        Route::PUT('profile/updateprofile/{id}', [ProfileController::class, 'update'])->name('update.profile');
-        Route::get('/order_place,', [OrderController::class, 'store'])->name('Order.Place');
-        Route::get('/Order/history', [OrderController::class, 'get_User_Orders'])->name('history.order');
-        Route::get('/Order/products/{id}', [OrderController::class, 'getOrder_Product'])->name('product.order');
+        Route::PUT('profile/updateprofile/{id}', [ProfileController::class,'update'])->name('update.profile');
+        Route::get('/order_place,' , [OrderController::class, 'store'])->name('Order.Place');
+        Route::get('/Order/history',[OrderController::class, 'get_User_Orders'])->name('history.order');
+        Route::get('/Order/products/{id}',[OrderController::class, 'getOrder_Product'])->name('product.order');
+        Route::GET('/offer',  [OfferController::class, 'index'])->name('offer');
+
     });
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/session', [PaymentController::class, 'session'])->name('session');
+    Route::get('/success', [PaymentController::class, 'success'])->name('success');
 
     Route::get('/verfiy-mail/{token}', [UserController::class, 'verficationMail']);
 });
