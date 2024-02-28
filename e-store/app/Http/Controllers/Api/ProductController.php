@@ -38,7 +38,7 @@ class ProductController extends Controller
             'Price' => 'required',
             'imge' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
             'offer_id' => 'nullable|required'
             // Add other validation rules for your fields
         ]);
@@ -93,7 +93,7 @@ class ProductController extends Controller
             'Price' => 'required',
             'imge' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'Company_id' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
             'offer_id' => 'nullable|required|exists:offers,id'
             // Add other validation rules for your fields
         ]);
