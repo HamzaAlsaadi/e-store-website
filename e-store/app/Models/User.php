@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class User extends Authenticatable
 {
@@ -23,6 +25,8 @@ class User extends Authenticatable
         'password',
         'phone',
     ];
+    protected $keyType = 'string'; // Set the key type to UUID
+    public $incrementing = false; // Disable auto-incrementing
 
     /**
      * The attributes that should be hidden for serialization.
@@ -60,5 +64,16 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(order::class);
+    }
+    public function Payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
+    public static function boot() {
+        parent::boot();
+        // Auto generate UUID when creating data User
+        static::creating(function ($model) {
+            $model->id = Str::uuid();
+        });
     }
 }

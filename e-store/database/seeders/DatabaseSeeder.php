@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\Offer;
 use Database\Factories\catgoryFactory;
 use Illuminate\Database\Seeder;
 
@@ -28,13 +29,13 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             company::class,
             CatgorySeeder::class,
+            Offerseesers::class,
             AddressUserSeeder::class,
             Product::class,
             PivotOrderProductSeeder::class,
             RateProductSeeder::class,
             PaymentSeeder::class,
-            PillPaymentSeeder::class,
-            CoupponSeeder::class
+            CouponSeeder::class
         ]);
         // address_user::class);
     }

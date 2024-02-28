@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Offer;
+use App\Models\offer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +13,6 @@ class Offerseesers extends Seeder
      */
     public function run(): void
     {
-        Offer::factory()->count(5)->create();
+        offer::factory()->count(5)->create();
     }
 }

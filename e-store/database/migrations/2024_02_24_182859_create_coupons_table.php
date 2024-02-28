@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             // $table->unsignedBigInteger('coupons_id');
             $table->string('code')->unique();
             $table->decimal('discount', 8, 2);

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\offer;
 use Database\Seeders\catgory;
+use Database\Seeders\Offerseesers;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
