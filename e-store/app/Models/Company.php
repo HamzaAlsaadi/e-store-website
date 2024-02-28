@@ -12,8 +12,7 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = ['company_name','company_address'];
-    protected $keyType = 'string'; // Set the key type to UUID
-    public $incrementing = false; // Disable auto-incrementing
+
 
 
     public function category()
@@ -30,11 +29,5 @@ class Company extends Model
     {
         return $this->hasMany(Gsm::class);
     }
-    public static function boot() {
-        parent::boot();
-        // Auto generate UUID when creating data User
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
-    }
+
 }

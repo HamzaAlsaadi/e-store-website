@@ -25,7 +25,7 @@ class Product extends Model
 
     public function offer()
     {
-        return $this->belongsTo(Offer::class);
+        return $this->belongsTo(offer::class);
     }
 
     public function category()
@@ -41,10 +41,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'pivot_order_products')->withPivot('quantity');
     }
-    public function offers()
-    {
-        return $this->belongsTo(Offer::class);
-    }
+
     public static function boot() {
         parent::boot();
         // Auto generate UUID when creating data User

@@ -25,7 +25,7 @@ class ImportCsvRecords extends Command
      */
     public function handle() {
 
-        $filename = base_path('public/modified_file.csv');
+        $filename = base_path('public/GSM_final1.csv');
         if (!file_exists($filename)) {
             $this->error('CSV file not found!'); return;
         }

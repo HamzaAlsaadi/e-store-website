@@ -13,6 +13,6 @@ class Offerseesers extends Seeder
      */
     public function run(): void
     {
-        Offer::factory()->count(5)->create();
+        offer::factory()->count(5)->create();
     }
 }
