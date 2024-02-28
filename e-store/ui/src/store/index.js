@@ -5,6 +5,7 @@ export default createStore({
         productID: 0,
         Order: {},
         counter: 0,
+        count: 0,
         prname: "",
         products: [],
         companyname: "",

@@ -230,7 +230,6 @@ export default {
                         store.state.Order[index]["Price"] *
                         store.state.Order[index]["count"];
                 }
-                console.log(store.state.Orderto);
             }
             console.log(store.state.Order);
         },

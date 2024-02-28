@@ -143,7 +143,6 @@ export default {
                     if (id == store.state.Order[index]["id"]) {
                         store.state.Order[index]["count"]++;
                         console.log(store.state.Order);
-                        return;
                     }
                     // if (id == store.state.Order[index]["id"]) {
                     //     store.state.Order[index]["count"]--;
@@ -158,8 +157,31 @@ export default {
                 img: img,
                 count: 1,
             };
+            if (Object.keys(store.state.Orderto).length > 0) {
+                for (
+                    var indexe = 0;
+                    indexe < Object.keys(store.state.Orderto).length;
+                    indexe++
+                ) {
+                    if (id == store.state.Orderto[indexe]["id"]) {
+                        store.state.Orderto[index]["quantity"]++;
+                        console.log(store.state.Orderto);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
+            }
+            store.state.Orderto[store.state.count] = {
+                price: Price,
+                id: id,
+                quantity: 1,
+            };
+            store.state.count++;
             store.state.counter++;
-            console.log(store.state.Order);
+            console.log(store.state.Orderto);
         },
     },
     beforeMount() {
