@@ -40,7 +40,7 @@ class UserController extends Controller
             $response = ['message' => 'id incorrect'];
         } else {
             $response =  $user;
-        }
+        }return response()->json($response);
         return response()->json($response);
     }
     public function createUser(Request $request)

@@ -1,12 +1,4 @@
 <template>
-    <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-    />
-    <link
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-        rel="stylesheet"
-    />
     <div class="form-gap"></div>
     <div class="container">
         <div class="row">
@@ -26,12 +18,12 @@
                                     method="post"
                                 >
                                     <div class="form-group">
-                                        <div class="input-group">
+                                        <div class="qq">
                                             <input
                                                 id="password"
                                                 name="password"
-                                                placeholder="Password"
-                                                class="form-control"
+                                                placeholder="Password "
+                                                class="form-control text-center"
                                                 type="password"
                                             />
                                         </div>
@@ -40,7 +32,7 @@
                                                 id="password"
                                                 name="password"
                                                 placeholder="RePassword"
-                                                class="form-control"
+                                                class="form-control text-center"
                                                 type="password"
                                             />
                                         </div>
@@ -77,10 +69,50 @@ export default {
 };
 </script>
 <style scoped>
-.form-gap {
-    padding-top: 70px;
+/* style.css */
+body {
+    color: white;
+    font-family: Arial, sans-serif;
 }
-qq. {
-    padding: 0px 0px 0px 0px;
+
+.bebe {
+    background-color: #000;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.panel-default {
+    border-color: white;
+}
+
+.panel-body {
+    color: beige;
+    background-color: #454545;
+    padding: 20px;
+}
+
+h3 {
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+.form-group .qq input {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.form-group input[type="submit"] {
+    background-color: black;
+    border-color: white;
+}
+
+.form-group input[type="submit"]:hover {
+    background: #454545;
 }
 </style>

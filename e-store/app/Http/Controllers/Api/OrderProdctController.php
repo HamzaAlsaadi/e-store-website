@@ -21,6 +21,10 @@ class OrderProdctController extends Controller
             $jsonData = $request->json()->all();
             $cartItems = $jsonData['cartItems'];
 
+            $cartItems = json_decode($request->input('cartItems'), true);
+
+
+
             var_dump($cartItems);
             if ($request->cartItems) {
 

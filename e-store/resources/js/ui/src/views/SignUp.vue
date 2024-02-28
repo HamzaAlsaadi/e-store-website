@@ -2,23 +2,11 @@
     <html lang="en">
         <head>
             <meta charset="UTF-8" />
-            <meta
-                name="description"
-                content=" Today in this blog you will learn how to create a responsive Login & Registration Form in HTML CSS & JavaScript. The blog will cover everything from the basics of creating a Login & Registration in HTML, to styling it with CSS and adding with JavaScript."
-            />
-            <meta
-                name="keywords"
-                content=" 
- Animated Login & Registration Form,Form Design,HTML and CSS,HTML CSS JavaScript,login & registration form,login & signup form,Login Form Design,registration form,Signup Form,HTML,CSS,JavaScript,
-"
-            />
 
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             />
-
-            <title>Login & Signup Form HTML CSS | CodingNepal</title>
             <link rel="stylesheet" href="style.css" />
         </head>
         <HeaderSignUp />
@@ -26,24 +14,27 @@
             <section class="wwrapper">
                 <div class="form signup">
                     <header>Signup</header>
-                    <form action="#">
+                    <form>
                         <input
                             type="text"
                             class="bbb"
                             placeholder="Full name"
                             required
+                            v-model="name"
                         />
                         <input
                             class="bbb"
                             type="text"
                             placeholder="Email address"
                             required
+                            v-model="email"
                         />
                         <input
                             class="bbb"
                             type="password"
                             placeholder="Password"
                             required
+                            v-model="password"
                         />
                         <div class="checkbox">
                             <input type="checkbox" id="signupCheck" />
@@ -51,35 +42,43 @@
                                 >I accept all terms & conditions</label
                             >
                         </div>
-                        <router-link to="/UserAccount" class="qwq"
-                            ><input type="submit" class="bbb" value="Signup"
-                        /></router-link>
+                        ><input
+                            type="button"
+                            @click="register()"
+                            class="bbb"
+                            value="Signup"
+                        />
                     </form>
                 </div>
-
                 <div class="form login">
                     <header>Login</header>
                     <form action="#">
                         <input
+                            v-model="email"
                             class="bbb"
                             type="text"
                             placeholder="Email address"
                             required
                         />
                         <input
+                            v-model="password"
                             class="bbb"
                             type="password"
                             placeholder="Password"
                             required
                         />
+
                         <a href="#"
                             ><router-link to="/ForgotPassword">
                                 Forgot password?</router-link
                             >
                         </a>
-                        <router-link to="/UserAccount" class="qwq"
-                            ><input type="submit" class="bbb" value="Login"
-                        /></router-link>
+                        <input
+                            type="button"
+                            class="bbb"
+                            value="Login"
+                            @click="login()"
+                        />
                     </form>
                 </div>
             </section>
@@ -88,13 +87,76 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderSignUp from "@/components/Header.SignUp.vue";
+import router from "@/router";
 export default {
     name: "SignUp",
+    data() {
+        return {
+            name: "",
+            email: "",
+            password: "",
+            Nationality: "sryia",
+            route: "",
+        };
+    },
     components: {
         HeaderSignUp,
     },
     methods: {
+        register: function () {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/auth/register",
+                data: {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    Nationality: this.Nationality,
+                },
+            })
+                .then(function (response) {
+                    console.log(response);
+
+                    window.alert(" regestir succesful");
+                })
+                .catch(function (error) {
+                    console.log(error);
+
+                    window.alert(error.response.message);
+                });
+        },
+        login() {
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/auth/login",
+                data: {
+                    email: this.email,
+                    password: this.password,
+                },
+            })
+                .then(function (response) {
+                    if (response.status == 200) {
+                        console.log(response.data.type_of_user);
+                        console.log(response.status);
+                        window.alert("LogIn succesful");
+                        window.localStorage.setItem(
+                            "token",
+                            response.data.token
+                        );
+                        if (response.data.type_of_user == 1) {
+                            router.push("/CompanyAdmin");
+                        } else router.push("/UserAccount");
+                    }
+                })
+                .catch(function (error) {
+                    router.push("/SignUp");
+                    alert("Email Or Password invalid");
+                    console.log(error);
+                });
+        },
+
         addActiveClass() {
             const wrapper = this.$el.querySelector(".wwrapper");
             wrapper.classList.add("active");
@@ -267,6 +329,6 @@ form input [type="submit"] {
 }
 
 .link-container {
-    padding: 10px; /* قيمة ال Padding حسب احتياجاتك */
+    padding: 10px;
 }
 </style>

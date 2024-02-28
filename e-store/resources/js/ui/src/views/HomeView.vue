@@ -1,6 +1,6 @@
 <template>
     <!-- Header-->
-    <HeaderPage />
+    <HeaderPage name="ssssss" />
     <!-- AllBroducts-->
     <AllProducts />
     <!-- OtherCompany-->
@@ -9,8 +9,6 @@
     <!-- FooTer -->
 
     <FooTer />
-
-    <router-view />
 </template>
 
 <script>

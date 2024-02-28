@@ -10,133 +10,89 @@ import ProfileView from "../views/ProfileView";
 import DetailsProduct from "../views/DetailsProduct";
 import CheckOut from "../views/CheckOut";
 import ComPare from "../views/Compare";
-import SamSung from "../views/Samsung";
-import ApPle from "../views/Apple";
-import AsUs from "../views/Asus";
-import GooGle from "../views/Google";
-import HoNor from "../views/Honor";
-import HtC from "../views/Htc";
-import HuaWei from "../views/Huawei";
-import InfInix from "../views/Infinix";
-import LenOvo from "../views/Lenovo";
-import AlAg from "../views/Lg";
-import MeIzu from "../views/Meizu";
-import MotoRola from "../views/Motorola";
-import NoKia from "../views/Nokia";
-import OnePlus from "../views/Oneplus";
-import OpPo from "../views/Oppo";
-import ReaLme from "../views/Realme";
-import SoNy from "../views/Sony";
-import TecNo from "../views/Tecno";
-import ViVo from "../views/Vivo";
-import XiaOmi from "../views/Xiaomi";
-import ZtE from "../views/Zte";
+import ComPany from "../views/Company";
+import CompanyAdmin from "../views/CompanyAdmin";
+import LatestProduct from "../views/LatestProduct";
+import Admin from "../views/Admin";
+import OfferProduct from "../views/OfferProduct";
+import AddProduct from "../views/AddProduct";
+import CategoryPage from "../views/CategoryPage";
+import AddCategory from "../views/AddCategory";
+import UsersAdmin from "../views/UsersAdmin";
+import AddCobon from "../views/AddCobon";
+import AddOffer from "../views/AddOffer";
+import TableOfMessage from "../views/TableOfMessage";
+import ContactUs from "../views/ContactUs";
+import FaQ from "../views/FAQ";
 
 const routes = [
     {
-        path: "/Apple",
-        name: "Apple",
-        component: ApPle,
+        path: "/FaQ",
+        name: "FaQ",
+        component: FaQ,
     },
     {
-        path: "/Asus",
-        name: "Asus",
-        component: AsUs,
+        path: "/ContactUs",
+        name: "ContactUs",
+        component: ContactUs,
     },
     {
-        path: "/Google",
-        name: "google",
-        component: GooGle,
+        path: "/TableOfMessage",
+        name: "TableOfMessage",
+        component: TableOfMessage,
     },
     {
-        path: "/Honor",
-        name: "Honor",
-        component: HoNor,
+        path: "/AddOffer",
+        name: "AddOffer",
+        component: AddOffer,
     },
     {
-        path: "/Htc",
-        name: "Htc",
-        component: HtC,
+        path: "/AddCobon",
+        name: "AddCobon",
+        component: AddCobon,
     },
     {
-        path: "/Huawei",
-        name: "Huawei",
-        component: HuaWei,
+        path: "/UsersAdmin",
+        name: "UsersAdmin",
+        component: UsersAdmin,
     },
     {
-        path: "/Infinix",
-        name: "Infinix",
-        component: InfInix,
+        path: "/AddCategory",
+        name: "AddCategory",
+        component: AddCategory,
+    },
+
+    {
+        path: "/AddProduct",
+        name: "AddProduct",
+        component: AddProduct,
+    },
+
+    {
+        path: "/OfferProduct",
+        name: "OfferProduct",
+        component: OfferProduct,
     },
     {
-        path: "/Lenovo",
-        name: "Lenovo",
-        component: LenOvo,
+        path: "/AdmIn",
+        name: "AdmIn",
+        component: Admin,
     },
     {
-        path: "/Lg",
-        name: "Lg",
-        component: AlAg,
+        path: "/LatestProduct",
+        name: "LatestProduct",
+        component: LatestProduct,
     },
     {
-        path: "/Meizu",
-        name: "Meizu",
-        component: MeIzu,
+        path: "/CompanyAdmin",
+        name: "CompanyAdmin",
+        component: CompanyAdmin,
     },
+
     {
-        path: "/Motorola",
-        name: "Motorola",
-        component: MotoRola,
-    },
-    {
-        path: "/Nokia",
-        name: "Nokia",
-        component: NoKia,
-    },
-    {
-        path: "/Oneplus",
-        name: "Oneplus",
-        component: OnePlus,
-    },
-    {
-        path: "/Oppo",
-        name: "Oppo",
-        component: OpPo,
-    },
-    {
-        path: "/Realme",
-        name: "Realme",
-        component: ReaLme,
-    },
-    {
-        path: "/Sony",
-        name: "Sony",
-        component: SoNy,
-    },
-    {
-        path: "/Tecno",
-        name: "Tecno",
-        component: TecNo,
-    },
-    {
-        path: "/Vivo",
-        name: "Vivo",
-        component: ViVo,
-    },
-    {
-        path: "/Xiaomi",
-        name: "Xiaomi",
-        component: XiaOmi,
-    },
-    {
-        path: "/Zte",
-        name: "Zte",
-        component: ZtE,
-    },
-    {
-        path: "/Samsung",
-        name: "Samsung",
-        component: SamSung,
+        path: "/Company",
+        name: "Company",
+        component: ComPany,
     },
     {
         path: "/Compare",
@@ -201,6 +157,11 @@ const routes = [
         path: "/SignUp",
         name: "SignUp",
         component: SignUp,
+    },
+    {
+        path: "/CategoryPage",
+        name: "CategoryPage",
+        component: CategoryPage,
     },
 ];
 

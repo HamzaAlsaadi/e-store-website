@@ -277,14 +277,17 @@ export default {
     color: #fff;
     text-decoration: none;
 }
+
 * {
     margin: 0;
     padding: 0;
 }
+
 a {
     color: #fff;
     text-decoration: none;
 }
+
 .pg-footer {
     font-family: "Roboto", sans-serif;
 }
@@ -293,6 +296,7 @@ a {
     background-color: #000000;
     color: #fff;
 }
+
 .footer-wave-path {
     fill: #fffff2;
 }
@@ -322,6 +326,7 @@ a {
 .footer-logo-link {
     display: inline-block;
 }
+
 .footer-menu {
     margin-top: 30px;
 }
@@ -336,12 +341,14 @@ a {
     margin-top: 0;
     text-transform: uppercase;
 }
+
 .footer-menu-list {
     list-style: none;
     margin-bottom: 0;
     margin-top: 10px;
     padding-left: 0;
 }
+
 .footer-menu-list li {
     margin-top: 5px;
 }
@@ -351,13 +358,16 @@ a {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
 .footer-call-to-action-button:hover {
     background-color: white;
     color: black;
 }
+
 .button:last-of-type {
     margin-right: 0;
 }
+
 .footer-call-to-action-button {
     background-color: #464545;
     border-radius: 21px;
@@ -375,9 +385,11 @@ a {
     cursor: pointer;
     position: relative;
 }
+
 .footer-call-to-action {
     margin-top: 30px;
 }
+
 .footer-call-to-action-title {
     color: #fffff2;
     font-size: 14px;
@@ -388,12 +400,14 @@ a {
     margin-top: 0;
     text-transform: uppercase;
 }
+
 .footer-call-to-action-link-wrapper {
     margin-bottom: 0;
     margin-top: 10px;
     color: #fff;
     text-decoration: none;
 }
+
 .footer-call-to-action-link-wrapper a {
     color: #fff;
     text-decoration: none;
@@ -514,6 +528,7 @@ a {
         position: relative;
     }
 }
+
 @media (min-width: 480px) and (max-width: 599px) {
     /* smartphones, Android phones, landscape iPhone */
     .footer-content {
@@ -524,6 +539,7 @@ a {
         position: relative;
     }
 }
+
 @media (min-width: 600px) and (max-width: 800px) {
     /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
     .footer-content {
@@ -534,12 +550,15 @@ a {
         position: relative;
     }
 }
+
 @media (min-width: 801px) {
     /* tablet, landscape iPad, lo-res laptops ands desktops */
 }
+
 @media (min-width: 1025px) {
     /* big landscape tablets, laptops, and desktops */
 }
+
 @media (min-width: 1281px) {
     /* hi-res laptops and desktops */
 }
@@ -561,6 +580,7 @@ a {
         width: 24.99%;
     }
 }
+
 @media (min-width: 568px) {
     /* .footer-content-column {
       width: 49.99%;

@@ -2,5 +2,18 @@
     <router-view />
 </template>
 <script>
-export default {};
+import store from "@/store";
+export default {
+    setup() {},
+    watch: {
+        $route(to, from) {
+            if (to.path == "/DetailsProduct") {
+                console.log(from);
+                if ("id" in to.query) {
+                    store.state.productID = to.query.id;
+                }
+            }
+        },
+    },
+};
 </script>

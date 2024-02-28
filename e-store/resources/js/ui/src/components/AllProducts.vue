@@ -5,301 +5,120 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
                         <h3>Featured Product</h3>
-                        <h2>Popular Products</h2>
+                        <h2>All Mobile Phone</h2>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-1" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-bag"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-suit-heart-fill"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" v-on:click="Add">
-                                        {{ count }}
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-plus-lg"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><router-link to="/DetailsProduct"
+                <div id="product-1" class="row">
+                    <!-- Single Product -->
+                    <div
+                        v-for="product in $store.state.products"
+                        :key="product.id"
+                        id="product-1"
+                        class="col-md-6 col-lg-4 col-xl-3"
+                    >
+                        <div class="single-product">
+                            <div
+                                class="part-1"
+                                :style="{
+                                    backgroundImage:
+                                        'url(http://127.0.0.1:8000/api/get-image-link/' +
+                                        product.imge +
+                                        ')',
+                                }"
+                            >
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-bag"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
                                             ><svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
                                                 height="16"
                                                 fill="currentColor"
-                                                class="bi bi-arrows-angle-expand"
+                                                class="bi bi-suit-heart-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            @click="
+                                                AddProduct(
+                                                    product.id,
+                                                    product.mobile_name,
+                                                    product.Price,
+                                                    product.imge
+                                                )
+                                            "
+                                            href="#"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-plus-lg"
                                                 viewBox="0 0 16 16"
                                             >
                                                 <path
                                                     fill-rule="evenodd"
-                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
                                                 />
                                             </svg>
-                                        </router-link>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product ------------------------------------------------------------------------>
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            <span class="discount">15% off</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-1" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            <span class="discount">15% off</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-old-price">$79.99</h4>
-                            <h4 class="product-price">$49.99</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-shopping-cart"></i
-                                    ></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><i class="fas fa-expand"></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">Here Product Title</h3>
-                            <h4 class="product-price">$49.99</h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><router-link
+                                                :to="
+                                                    '/DetailsProduct?id=' +
+                                                    product.id
+                                                "
+                                                ><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    class="bi bi-arrows-angle-expand"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
+                                                    />
+                                                </svg>
+                                            </router-link>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">
+                                    {{ product.mobile_name }}
+                                </h3>
+                                <h4 class="product-price">
+                                    {{ product.Price }}$
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,16 +127,69 @@
     </section>
 </template>
 <script>
+import axios from "axios";
+import store from "@/store";
 export default {
     name: "AllProducts",
 
     data() {
-        return { count: 0 };
+        return {
+            img: [],
+            product: {},
+        };
     },
     methods: {
-        Add: function () {
-            this.count++;
+        getorders() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/products/",
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+                    this.product = response.data;
+                    console.log(this.product);
+                    this.img = store.state.products;
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
         },
+        AddProduct(id, name_mobile, Price, img) {
+            if (Object.keys(store.state.Order).length > 0) {
+                for (
+                    var index = 0;
+                    index < Object.keys(store.state.Order).length;
+                    index++
+                ) {
+                    if (id == store.state.Order[index]["id"]) {
+                        store.state.Order[index]["count"]++;
+                        console.log(store.state.Order);
+                        return;
+                    }
+                }
+            }
+            store.state.Order[store.state.counter] = {
+                id: id,
+                name: name_mobile,
+                Price: Price,
+                img: img,
+                count: 1,
+            };
+            store.state.counter++;
+            console.log(store.state.Order);
+        },
+        makepagi() {
+            for (var i = 0; i < 12; i++) {
+                this.products.push(this.productbeforpagi[i]);
+            }
+        },
+    },
+
+    beforeMount() {
+        this.getorders();
     },
 };
 </script>
@@ -330,10 +202,12 @@ body p {
     font-size: 30px;
     font-family: "Arial", sans-serif;
 }
+
 .images {
     display: flex;
     justify-content: space-between;
 }
+
 img {
     width: 100px;
     height: 100px;
@@ -347,13 +221,12 @@ img {
     border-radius: 50%;
     display: inline-block;
 }
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
 body {
     font-family: "Poppins", sans-serif;
     color: #ffffff;
 }
 
-a,
 a:hover {
     text-decoration: none;
     color: inherit;
@@ -389,9 +262,24 @@ a:hover {
     max-height: 290px;
     margin-bottom: 20px;
     overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section-products .single-product .part-1:hover {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.2, 1.2) rotate(5deg);
+    transition: all 0.3s;
 }
 
-.section-products .single-product .part-1::before {
+.section-products .single-product .part-1:hover::before {
     position: absolute;
     content: "";
     top: 0;
@@ -399,6 +287,7 @@ a:hover {
     width: 100%;
     height: 100%;
     z-index: -1;
+    transform: scale(1.2, 1.2) rotate(5deg);
     transition: all 0.3s;
 }
 
@@ -407,9 +296,9 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../assets/product-1.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.3s;
+    transform: scale(1.2, 1.2) rotate(5deg);
 }
 
 .section-products #product-2 .part-1::before {

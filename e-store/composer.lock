@@ -1163,6 +1163,7 @@
                 "mockery/mockery": "^1.5.1",
                 "nyholm/psr7": "^1.2",
                 "orchestra/testbench-core": "^8.18",
+                "orchestra/testbench-core": "^8.18",
                 "pda/pheanstalk": "^4.0",
                 "phpstan/phpstan": "^1.4.7",
                 "phpunit/phpunit": "^10.0.7",
@@ -1280,6 +1281,7 @@
             "require-dev": {
                 "mockery/mockery": "^1.5",
                 "pestphp/pest": "^2.3",
+                "phpstan/phpstan": "^1.11",
                 "phpstan/phpstan": "^1.11",
                 "phpstan/phpstan-mockery": "^1.1"
             },
@@ -3787,7 +3789,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": ">=8.2"
             },
             "type": "library",
             "autoload": {
@@ -3994,11 +3996,11 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "symfony/event-dispatcher-contracts": "^2.5|^3"
             },
             "conflict": {
-                "symfony/dependency-injection": "<5.4",
+                "symfony/dependency-injection": "<6.4",
                 "symfony/service-contracts": "<2.5"
             },
             "provide": {
@@ -4007,13 +4009,13 @@
             },
             "require-dev": {
                 "psr/log": "^1|^2|^3",
-                "symfony/config": "^5.4|^6.0|^7.0",
-                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
-                "symfony/error-handler": "^5.4|^6.0|^7.0",
-                "symfony/expression-language": "^5.4|^6.0|^7.0",
-                "symfony/http-foundation": "^5.4|^6.0|^7.0",
+                "symfony/config": "^6.4|^7.0",
+                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/error-handler": "^6.4|^7.0",
+                "symfony/expression-language": "^6.4|^7.0",
+                "symfony/http-foundation": "^6.4|^7.0",
                 "symfony/service-contracts": "^2.5|^3",
-                "symfony/stopwatch": "^5.4|^6.0|^7.0"
+                "symfony/stopwatch": "^6.4|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -5411,19 +5413,24 @@
         {
             "name": "symfony/service-contracts",
             "version": "v3.4.1",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0"
                 "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/service-contracts/zipball/fe07cbc8d837f60caf7018068e350cc5163681a0",
                 "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/fe07cbc8d837f60caf7018068e350cc5163681a0",
+                "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
+                "psr/container": "^1.1|^2.0"
                 "psr/container": "^1.1|^2.0"
             },
             "conflict": {
@@ -5473,6 +5480,7 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/service-contracts/tree/v3.4.1"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -5488,6 +5496,7 @@
                     "type": "tidelift"
                 }
             ],
+            "time": "2023-12-26T14:02:43+00:00"
             "time": "2023-12-26T14:02:43+00:00"
         },
         {
@@ -5505,7 +5514,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-intl-grapheme": "~1.0",
                 "symfony/polyfill-intl-normalizer": "~1.0",
@@ -5515,11 +5524,11 @@
                 "symfony/translation-contracts": "<2.5"
             },
             "require-dev": {
-                "symfony/error-handler": "^5.4|^6.0|^7.0",
-                "symfony/http-client": "^5.4|^6.0|^7.0",
-                "symfony/intl": "^6.2|^7.0",
+                "symfony/error-handler": "^6.4|^7.0",
+                "symfony/http-client": "^6.4|^7.0",
+                "symfony/intl": "^6.4|^7.0",
                 "symfony/translation-contracts": "^2.5|^3.0",
-                "symfony/var-exporter": "^5.4|^6.0|^7.0"
+                "symfony/var-exporter": "^6.4|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -5674,13 +5683,17 @@
         {
             "name": "symfony/translation-contracts",
             "version": "v3.4.1",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
                 "reference": "06450585bf65e978026bda220cdebca3f867fde7"
+                "reference": "06450585bf65e978026bda220cdebca3f867fde7"
             },
             "dist": {
                 "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/06450585bf65e978026bda220cdebca3f867fde7",
+                "reference": "06450585bf65e978026bda220cdebca3f867fde7",
                 "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/06450585bf65e978026bda220cdebca3f867fde7",
                 "reference": "06450585bf65e978026bda220cdebca3f867fde7",
                 "shasum": ""
@@ -5732,6 +5745,7 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/translation-contracts/tree/v3.4.1"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -5747,6 +5761,7 @@
                     "type": "tidelift"
                 }
             ],
+            "time": "2023-12-26T14:02:43+00:00"
             "time": "2023-12-26T14:02:43+00:00"
         },
         {
@@ -8561,15 +8576,14 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "symfony/deprecation-contracts": "^2.5|^3",
+                "php": ">=8.2",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
-                "symfony/console": "<5.4"
+                "symfony/console": "<6.4"
             },
             "require-dev": {
-                "symfony/console": "^5.4|^6.0|^7.0"
+                "symfony/console": "^6.4|^7.0"
             },
             "bin": [
                 "Resources/bin/yaml-lint"

@@ -29,115 +29,115 @@
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Asus"
+                <router-link to="Samsung"
                     ><img
                         src="@/assets/Image/asus.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Google">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Google.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Honor"
+                <router-link to="Samsung"
                     ><img
                         src="@/assets/Image/Honor.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Htc">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Htc.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Huawei">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Huawei.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Infinix">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Infinix.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Lenovo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Lenovo.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Lg">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Lg.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Meizu">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Meizu.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Motorola">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Motorola.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Nokia">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Nokia.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Oneplus">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Oneplus.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Oppo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Oppo.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Realme">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Realme.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Sony">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Sony.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Tecno">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Tecno.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Vivo">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Vivo.jpg"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Xiaomi">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Xiaomi.png"
                         alt="Image 1"
                         class="image-item"
                 /></router-link>
-                <router-link to="Zte">
+                <router-link to="Samsung">
                     <img
                         src="@/assets/Image/Zte.jpg"
                         alt="Image 1"
@@ -162,7 +162,16 @@
 export default {
     name: "OtherCompany",
     mounted() {
-        const initSlider = () => {
+        this.initSlider();
+        window.addEventListener("resize", this.initSlider);
+        window.addEventListener("load", this.initSlider);
+    },
+    beforeUnmount() {
+        window.removeEventListener("resize", this.initSlider);
+        window.removeEventListener("load", this.initSlider);
+    },
+    methods: {
+        initSlider() {
             const imageList = document.querySelector(
                 ".slider-wrapper .image-list"
             );
@@ -176,7 +185,6 @@ export default {
                 sliderScrollbar.querySelector(".scrollbar-thumb");
             const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
-            // Handle scrollbar thumb drag
             scrollbarThumb.addEventListener("mousedown", (e) => {
                 const startX = e.clientX;
                 const thumbPosition = scrollbarThumb.offsetLeft;
@@ -184,11 +192,9 @@ export default {
                     sliderScrollbar.getBoundingClientRect().width -
                     scrollbarThumb.offsetWidth;
 
-                // Update thumb position on mouse move
                 const handleMouseMove = (e) => {
                     const deltaX = e.clientX - startX;
                     const newThumbPosition = thumbPosition + deltaX;
-                    // Ensure the scrollbar thumb stays within bounds
                     const boundedPosition = Math.max(
                         0,
                         Math.min(maxThumbPosition, newThumbPosition)
@@ -199,16 +205,13 @@ export default {
                     scrollbarThumb.style.left = `${boundedPosition}px`;
                     imageList.scrollLeft = scrollPosition;
                 };
-                // Remove event listeners on mouse up
                 const handleMouseUp = () => {
                     document.removeEventListener("mousemove", handleMouseMove);
                     document.removeEventListener("mouseup", handleMouseUp);
                 };
-                // Add event listeners for drag interaction
                 document.addEventListener("mousemove", handleMouseMove);
                 document.addEventListener("mouseup", handleMouseUp);
             });
-            // Slide images according to the slide button clicks
             slideButtons.forEach((button) => {
                 button.addEventListener("click", () => {
                     const direction = button.id === "prev-slide" ? -1 : 1;
@@ -219,14 +222,12 @@ export default {
                     });
                 });
             });
-            // Show or hide slide buttons based on scroll position
             const handleSlideButtons = () => {
                 slideButtons[0].style.display =
                     imageList.scrollLeft <= 0 ? "none" : "flex";
                 slideButtons[1].style.display =
                     imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
             };
-            // Update scrollbar thumb position based on image scroll
             const updateScrollThumbPosition = () => {
                 const scrollPosition = imageList.scrollLeft;
                 const thumbPosition =
@@ -234,23 +235,22 @@ export default {
                     (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
                 scrollbarThumb.style.left = `${thumbPosition}px`;
             };
-            // Call these two functions when image list scrolls
             imageList.addEventListener("scroll", () => {
                 updateScrollThumbPosition();
                 handleSlideButtons();
             });
-        };
-        window.addEventListener("resize", initSlider);
-        window.addEventListener("load", initSlider);
+        },
     },
 };
 </script>
+
 <style scoped>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     display: flex;
     align-items: center;
@@ -258,13 +258,16 @@ body {
     min-height: 100vh;
     background: #f1f4fd;
 }
+
 .container {
     max-width: 1200px;
     width: 95%;
 }
+
 .slider-wrapper {
     position: relative;
 }
+
 .slider-wrapper .slide-button {
     position: absolute;
     top: 50%;
@@ -283,17 +286,21 @@ body {
     border-radius: 50%;
     transform: translateY(-50%);
 }
+
 .slider-wrapper .slide-button:hover {
     background: #404040;
     color: #404040;
 }
+
 .slider-wrapper .slide-button#prev-slide {
     left: -25px;
     display: none;
 }
+
 .slider-wrapper .slide-button#next-slide {
     right: -25px;
 }
+
 .slider-wrapper .image-list {
     grid-template-columns: repeat(10, 1fr);
     gap: 18px;
@@ -304,20 +311,24 @@ body {
     display: flex;
     scrollbar-width: none;
 }
+
 .slider-wrapper .image-list::-webkit-scrollbar {
     display: none;
 }
+
 .slider-wrapper .image-list .image-item {
     width: 180px;
     height: 180px;
     object-fit: cover;
 }
+
 .container .slider-scrollbar {
     height: 24px;
     width: 100%;
     display: flex;
     align-items: center;
 }
+
 .slider-scrollbar .scrollbar-track {
     background: #ccc;
     width: 100%;
@@ -327,9 +338,11 @@ body {
     border-radius: 4px;
     position: relative;
 }
+
 .slider-scrollbar:hover .scrollbar-track {
     height: 4px;
 }
+
 .slider-scrollbar .scrollbar-thumb {
     position: absolute;
     background: #000;
@@ -340,11 +353,13 @@ body {
     cursor: grab;
     border-radius: inherit;
 }
+
 .slider-scrollbar .scrollbar-thumb:active {
     cursor: grabbing;
     height: 8px;
     top: -2px;
 }
+
 .slider-scrollbar .scrollbar-thumb::after {
     content: "";
     position: absolute;
@@ -353,29 +368,35 @@ body {
     top: -10px;
     bottom: -10px;
 }
+
 /* Styles for mobile and tablets */
 @media only screen and (max-width: 1023px) {
     .slider-wrapper .slide-button {
         display: none !important;
     }
+
     .slider-wrapper .image-list {
         gap: 10px;
         margin-bottom: 15px;
         scroll-snap-type: x mandatory;
     }
+
     .slider-wrapper .image-list .image-item {
         width: 280px;
         height: 380px;
     }
+
     .slider-scrollbar .scrollbar-thumb {
         width: 20%;
     }
 }
+
 .section-products .header h2 {
     font-size: 2.2rem;
     font-weight: 400;
     color: #444444;
 }
+
 h2 {
     padding: 20px;
 }
