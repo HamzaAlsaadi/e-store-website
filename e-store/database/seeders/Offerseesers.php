@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Offer;
+use App\Models\offer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
