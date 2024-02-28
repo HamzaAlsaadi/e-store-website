@@ -24,7 +24,7 @@
                     <h6 class="mb-0">Shopping cart</h6>
                     <div class="d-flex justify-content-between">
                         <span
-                            >You have
+                            >You have FF
                             {{ Object.keys($store.state.Order).length }} items
                             in your cart</span
                         >
