@@ -88,26 +88,28 @@
                                                 {{ company.company_name }}
                                             </option>
                                         </select>
-                                        <select class="btn bg-white">
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcompany"
+                                            @change="getsearchcompany()"
+                                        >
                                             <option
-                                                style=""
-                                                v-for="(
-                                                    company, index
-                                                ) in companys"
+                                                v-for="company in companys"
                                                 :key="company.id"
-                                                :value="index"
+                                                :value="company.company_name"
                                             >
                                                 {{ company.company_name }}
                                             </option>
                                         </select>
-                                        <select class="btn bg-white">
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcompany"
+                                            @change="getsearchcompany()"
+                                        >
                                             <option
-                                                style=""
-                                                v-for="(
-                                                    company, index
-                                                ) in companys"
+                                                v-for="company in companys"
                                                 :key="company.id"
-                                                :value="index"
+                                                :value="company.company_name"
                                             >
                                                 {{ company.company_name }}
                                             </option>
@@ -345,6 +347,7 @@ export default {
             categorys: [],
             prname: "",
             prcompany: "",
+            showSelect: "",
         };
     },
     methods: {
