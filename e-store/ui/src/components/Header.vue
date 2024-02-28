@@ -67,7 +67,7 @@
                                     <button
                                         class="btn bg-white"
                                         type="button"
-                                        @click="getsearchdata()"
+                                        @click="getserch()"
                                     >
                                         <i class="fa fa-search"></i>
                                     </button>
@@ -90,21 +90,21 @@
                                         </select>
                                         <select
                                             class="form-select custom-select-sm rounded"
-                                            v-model="prcompany"
-                                            @change="getsearchcompany()"
+                                            v-model="prcategory"
+                                            @change="getsearchcategory()"
                                         >
                                             <option
-                                                v-for="company in companys"
-                                                :key="company.id"
-                                                :value="company.company_name"
+                                                v-for="category in categorys"
+                                                :key="category.id"
+                                                :value="category.name"
                                             >
-                                                {{ company.company_name }}
+                                                {{ category.name }}
                                             </option>
                                         </select>
                                         <select
                                             class="form-select custom-select-sm rounded"
                                             v-model="prcompany"
-                                            @change="getsearchcompany()"
+                                            @change="getsearchcategory()"
                                         >
                                             <option
                                                 v-for="company in companys"
@@ -348,6 +348,7 @@ export default {
             prname: "",
             prcompany: "",
             showSelect: "",
+            prcategory: "",
         };
     },
     methods: {
@@ -382,6 +383,7 @@ export default {
             })
                 .then((response) => {
                     this.categorys = response.data;
+                    store.state.products = response.data;
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -444,6 +446,68 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        getsearchcategory() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCategory?category=" +
+                    this.prcategory,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcompanyproduct() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCompany?company=" +
+                    this.prcompany +
+                    "&&product=" +
+                    this.prname,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcategoryproduct() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCategory?category=" +
+                    this.prcategory +
+                    "&&product=" +
+                    this.prname,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getserch() {
+            if (this.prcompany == "" && this.prcategory == "") {
+                this.getsearchdata();
+            } else if (this.prcategory == "") {
+                this.getsearchcompanyproduct();
+            } else this.getsearchcategoryproduct();
         },
     },
     beforeMount() {

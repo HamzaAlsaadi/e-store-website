@@ -55,56 +55,66 @@
                             </h5>
                         </div>
                         <div class="col-md-5 my-auto">
-                            <form role="search">
+                            <form role="search" class="search-form">
                                 <div class="input-group">
                                     <input
-                                        style="width: 430px"
                                         type="search"
                                         placeholder="Search your product"
                                         class="form-control"
                                         v-model="prname"
+                                        @click="toggleSelectVisibility"
                                     />
                                     <button
                                         class="btn bg-white"
                                         type="button"
-                                        @click="getsearchdata()"
+                                        @click="getserch()"
                                     >
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <select
-                                        class="btn bg-white"
-                                        v-model="prcompany"
-                                        @change="getsearchcompany()"
+                                    <div
+                                        class="mt-3 select-group"
+                                        v-show="showSelect"
                                     >
-                                        <option
-                                            style=""
-                                            v-for="company in companys"
-                                            :key="company.id"
-                                            :value="company.company_name"
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcompany"
+                                            @change="getsearchcompany()"
                                         >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
-                                    <select class="btn bg-white">
-                                        <option
-                                            style=""
-                                            v-for="(company, index) in companys"
-                                            :key="company.id"
-                                            :value="index"
+                                            <option
+                                                v-for="company in companys"
+                                                :key="company.id"
+                                                :value="company.company_name"
+                                            >
+                                                {{ company.company_name }}
+                                            </option>
+                                        </select>
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcategory"
+                                            @change="getsearchcategory()"
                                         >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
-                                    <select class="btn bg-white">
-                                        <option
-                                            style=""
-                                            v-for="(company, index) in companys"
-                                            :key="company.id"
-                                            :value="index"
+                                            <option
+                                                v-for="category in categorys"
+                                                :key="category.id"
+                                                :value="category.name"
+                                            >
+                                                {{ category.name }}
+                                            </option>
+                                        </select>
+                                        <select
+                                            class="form-select custom-select-sm rounded"
+                                            v-model="prcompany"
+                                            @change="getsearchcategory()"
                                         >
-                                            {{ company.company_name }}
-                                        </option>
-                                    </select>
+                                            <option
+                                                v-for="company in companys"
+                                                :key="company.id"
+                                                :value="company.company_name"
+                                            >
+                                                {{ company.company_name }}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -253,11 +263,8 @@
                                             <li
                                                 class="position-static menu-item-has-children"
                                             >
-                                                <a class="nav-link" href="#"
-                                                    ><router-link
-                                                        to="/AllCategories"
-                                                        >All Company
-                                                    </router-link>
+                                                <a class="nav-link" href="#">
+                                                    All Company
                                                 </a>
                                                 <div class="mega-box">
                                                     <div class="content">
@@ -384,9 +391,16 @@ export default {
             categorys: [],
             prname: "",
             prcompany: "",
+            showSelect: "",
         };
     },
     methods: {
+        toggleSelectVisibility() {
+            this.showSelect = !this.showSelect;
+        },
+        hideSelect() {
+            this.showSelect = false;
+        },
         getidcategory(id) {
             store.state.categoryid = id;
         },
@@ -478,6 +492,68 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        getsearchcategory() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCategory?category=" +
+                    this.prcategory,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcompanyproduct() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCompany?company=" +
+                    this.prcompany +
+                    "&&product=" +
+                    this.prname,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getsearchcategoryproduct() {
+            axios({
+                method: "get",
+                url:
+                    "http://127.0.0.1:8000/api/Serach/searchByCategory?category=" +
+                    this.prcategory +
+                    "&&product=" +
+                    this.prname,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                    console.log(store.state.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getserch() {
+            if (this.prcompany == "" && this.prcategory == "") {
+                this.getsearchdata();
+            } else if (this.prcategory == "") {
+                this.getsearchcompanyproduct();
+            } else this.getsearchcategoryproduct();
         },
     },
     beforeMount() {
@@ -687,5 +763,33 @@ header {
         font-size: 12px;
         padding: 8px 10px;
     }
+}
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    width: calc(60% - 40px);
+}
+
+.form-select {
+    height: 35px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.input-group input[type="search"],
+.input-group button,
+.select-group {
+    height: 35px;
+    margin-bottom: 10px;
+    margin-top: 11px;
 }
 </style>

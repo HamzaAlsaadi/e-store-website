@@ -5,16 +5,28 @@
             <div class="box">
                 <div class="images">
                     <div class="img-holder active">
-                        <img :src="imges + products.imge" />
+                        <img
+                            :src="imges + products.imge"
+                            style="width: 500px; height: 400px"
+                        />
                     </div>
                     <div class="img-holder">
-                        <img :src="imges + products.imge" />
+                        <img
+                            :src="imges + products.imge"
+                            style="width: 164px; height: 150px"
+                        />
                     </div>
                     <div class="img-holder">
-                        <img :src="imges + products.imge" />
+                        <img
+                            :src="imges + products.imge"
+                            style="width: 164px; height: 150px"
+                        />
                     </div>
                     <div class="img-holder">
-                        <img :src="imges + products.imge" />
+                        <img
+                            :src="imges + products.imge"
+                            style="width: 164px; height: 150px"
+                        />
                     </div>
                 </div>
                 <div class="basic-info">

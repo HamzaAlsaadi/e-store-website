@@ -24,7 +24,6 @@
                     <img :src="imges + company.image" />
                 </router-link>
             </ul>
-            {{ company.image }}
 
             <button
                 id="next-slide"
@@ -57,11 +56,12 @@ export default {
         // this.initSlider();
         // window.addEventListener("resize", this.initSlider);
         // window.addEventListener("load", this.initSlider);
+
+        // beforeUnmount() {
+        //     window.removeEventListener("resize", this.initSlider);
+        //     window.removeEventListener("load", this.initSlider);
+        //
     },
-    // beforeUnmount() {
-    //     window.removeEventListener("resize", this.initSlider);
-    //     window.removeEventListener("load", this.initSlider);
-    // },
     methods: {
         getcompany() {
             axios({

@@ -18,29 +18,34 @@
                     class="col-md-6 col-lg-4 col-xl-3"
                 >
                     <div class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
+                        <div
+                            class="part-1"
+                            :style="{
+                                backgroundImage:
+                                    'url(http://127.0.0.1:8000/api/get-image-link/' +
+                                    product.imge +
+                                    ')',
+                            }"
+                        >
+                            <span class="new">NEW</span>
 
                             <ul>
                                 <li>
-                                    <a href="#">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-bag"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-                                            />
-                                        </svg>
-                                    </a>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-bag"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                                        />
+                                    </svg>
                                 </li>
-
                                 <li>
-                                    <a
+                                    <svg
                                         @click="
                                             AddProduct(
                                                 product.id,
@@ -49,45 +54,36 @@
                                                 product.imge
                                             )
                                         "
-                                        href="#"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-plus-lg"
+                                        viewBox="0 0 16 16"
                                     >
-                                        <svg
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                                        />
+                                    </svg>
+                                </li>
+                                <li>
+                                    <router-link
+                                        :to="'/DetailsProduct?id=' + product.id"
+                                        ><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
                                             height="16"
                                             fill="currentColor"
-                                            class="bi bi-plus-lg"
+                                            class="bi bi-arrows-angle-expand"
                                             viewBox="0 0 16 16"
                                         >
                                             <path
                                                 fill-rule="evenodd"
-                                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                                                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
                                             />
                                         </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><router-link
-                                            :to="
-                                                '/DetailsProduct?id=' +
-                                                product.id
-                                            "
-                                            ><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                class="bi bi-arrows-angle-expand"
-                                                viewBox="0 0 16 16"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
-                                                />
-                                            </svg>
-                                        </router-link>
-                                    </a>
+                                    </router-link>
                                 </li>
                             </ul>
                         </div>
@@ -128,7 +124,6 @@ export default {
                 .then((response) => {
                     this.productbeforpagi = response.data;
                     this.products = response.data;
-                    this.makepagi();
                 })
                 .catch(function (error) {
                     window.alert(error.response);
@@ -182,10 +177,12 @@ body p {
     font-size: 30px;
     font-family: "Arial", sans-serif;
 }
+
 .images {
     display: flex;
     justify-content: space-between;
 }
+
 img {
     width: 100px;
     height: 100px;
@@ -199,13 +196,12 @@ img {
     border-radius: 50%;
     display: inline-block;
 }
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
 body {
     font-family: "Poppins", sans-serif;
     color: #ffffff;
 }
 
-a,
 a:hover {
     text-decoration: none;
     color: inherit;
@@ -241,9 +237,24 @@ a:hover {
     max-height: 290px;
     margin-bottom: 20px;
     overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section-products .single-product .part-1:hover {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.2, 1.2) rotate(5deg);
+    transition: all 0.3s;
 }
 
-.section-products .single-product .part-1::before {
+.section-products .single-product .part-1:hover::before {
     position: absolute;
     content: "";
     top: 0;
@@ -251,6 +262,7 @@ a:hover {
     width: 100%;
     height: 100%;
     z-index: -1;
+    transform: scale(1.2, 1.2) rotate(5deg);
     transition: all 0.3s;
 }
 
@@ -259,9 +271,9 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../assets/product-1.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.3s;
+    transform: scale(1.2, 1.2) rotate(5deg);
 }
 
 .section-products #product-2 .part-1::before {
@@ -317,7 +329,7 @@ a:hover {
     margin-right: 4px;
 }
 
-.section-products .single-product .part-1 ul li a {
+.section-products .single-product .part-1 ul li svg {
     display: inline-block;
     width: 40px;
     height: 40px;

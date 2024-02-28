@@ -6,7 +6,13 @@
             <div>
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-                        <h2></h2>
+                        <h2>
+                            {{
+                                this.category == 0
+                                    ? "Sorry, We Do Not Have This Category"
+                                    : ""
+                            }}
+                        </h2>
                     </div>
                 </div>
             </div>
