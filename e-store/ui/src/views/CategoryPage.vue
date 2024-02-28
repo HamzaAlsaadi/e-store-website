@@ -182,8 +182,6 @@ export default {
                 img: img,
                 count: 1,
             };
-            store.state.counter++;
-            console.log(store.state.Order);
         },
     },
 

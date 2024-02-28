@@ -264,7 +264,7 @@
                                                                                     category.id
                                                                                 "
                                                                                 v-if="
-                                                                                    category.Company_id ===
+                                                                                    category.company_id ===
                                                                                     company.id
                                                                                 "
                                                                             >
