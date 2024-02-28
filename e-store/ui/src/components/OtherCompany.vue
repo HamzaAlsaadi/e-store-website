@@ -15,135 +15,17 @@
             >
                 .
             </button>
-            <ul class="image-list">
-                <router-link to="Samsung"
-                    ><img
-                        src="@/assets/Image/Samsung.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-
-                <router-link to="Apple">
-                    <img
-                        src="@/assets/Image/apple.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung"
-                    ><img
-                        src="@/assets/Image/asus.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
+            <ul
+                class="image-list"
+                v-for="company in companys"
+                :key="company.id"
+            >
                 <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Google.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung"
-                    ><img
-                        src="@/assets/Image/Honor.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Htc.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Huawei.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Infinix.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Lenovo.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Lg.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Meizu.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Motorola.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Nokia.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Oneplus.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Oppo.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Realme.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Sony.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Tecno.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Vivo.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Xiaomi.png"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
-                <router-link to="Samsung">
-                    <img
-                        src="@/assets/Image/Zte.jpg"
-                        alt="Image 1"
-                        class="image-item"
-                /></router-link>
+                    <img :src="imges + company.image" />
+                </router-link>
             </ul>
+            {{ company.image }}
+
             <button
                 id="next-slide"
                 class="slide-button material-symbols-rounded"
@@ -159,87 +41,112 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 export default {
     name: "OtherCompany",
+    data() {
+        return {
+            imges: "http://127.0.0.1:8000/api/get-image-link/",
+
+            companys: {},
+        };
+    },
     mounted() {
-        this.initSlider();
-        window.addEventListener("resize", this.initSlider);
-        window.addEventListener("load", this.initSlider);
+        this.getcompany();
+
+        // this.initSlider();
+        // window.addEventListener("resize", this.initSlider);
+        // window.addEventListener("load", this.initSlider);
     },
-    beforeUnmount() {
-        window.removeEventListener("resize", this.initSlider);
-        window.removeEventListener("load", this.initSlider);
-    },
+    // beforeUnmount() {
+    //     window.removeEventListener("resize", this.initSlider);
+    //     window.removeEventListener("load", this.initSlider);
+    // },
     methods: {
-        initSlider() {
-            const imageList = document.querySelector(
-                ".slider-wrapper .image-list"
-            );
-            const slideButtons = document.querySelectorAll(
-                ".slider-wrapper .slide-button"
-            );
-            const sliderScrollbar = document.querySelector(
-                ".container .slider-scrollbar"
-            );
-            const scrollbarThumb =
-                sliderScrollbar.querySelector(".scrollbar-thumb");
-            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
-
-            scrollbarThumb.addEventListener("mousedown", (e) => {
-                const startX = e.clientX;
-                const thumbPosition = scrollbarThumb.offsetLeft;
-                const maxThumbPosition =
-                    sliderScrollbar.getBoundingClientRect().width -
-                    scrollbarThumb.offsetWidth;
-
-                const handleMouseMove = (e) => {
-                    const deltaX = e.clientX - startX;
-                    const newThumbPosition = thumbPosition + deltaX;
-                    const boundedPosition = Math.max(
-                        0,
-                        Math.min(maxThumbPosition, newThumbPosition)
-                    );
-                    const scrollPosition =
-                        (boundedPosition / maxThumbPosition) * maxScrollLeft;
-
-                    scrollbarThumb.style.left = `${boundedPosition}px`;
-                    imageList.scrollLeft = scrollPosition;
-                };
-                const handleMouseUp = () => {
-                    document.removeEventListener("mousemove", handleMouseMove);
-                    document.removeEventListener("mouseup", handleMouseUp);
-                };
-                document.addEventListener("mousemove", handleMouseMove);
-                document.addEventListener("mouseup", handleMouseUp);
-            });
-            slideButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    const direction = button.id === "prev-slide" ? -1 : 1;
-                    const scrollAmount = imageList.clientWidth * direction;
-                    imageList.scrollBy({
-                        left: scrollAmount,
-                        behavior: "smooth",
-                    });
+        getcompany() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Company",
+            })
+                .then((response) => {
+                    this.companys = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
                 });
-            });
-            const handleSlideButtons = () => {
-                slideButtons[0].style.display =
-                    imageList.scrollLeft <= 0 ? "none" : "flex";
-                slideButtons[1].style.display =
-                    imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
-            };
-            const updateScrollThumbPosition = () => {
-                const scrollPosition = imageList.scrollLeft;
-                const thumbPosition =
-                    (scrollPosition / maxScrollLeft) *
-                    (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
-                scrollbarThumb.style.left = `${thumbPosition}px`;
-            };
-            imageList.addEventListener("scroll", () => {
-                updateScrollThumbPosition();
-                handleSlideButtons();
-            });
         },
+        // initSlider() {
+        //     const imageList = document.querySelector(
+        //         ".slider-wrapper .image-list"
+        //     );
+        //     const slideButtons = document.querySelectorAll(
+        //         ".slider-wrapper .slide-button"
+        //     );
+        //     const sliderScrollbar = document.querySelector(
+        //         ".container .slider-scrollbar"
+        //     );
+        //     const scrollbarThumb =
+        //         sliderScrollbar.querySelector(".scrollbar-thumb");
+        //     const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+
+        //     scrollbarThumb.addEventListener("mousedown", (e) => {
+        //         const startX = e.clientX;
+        //         const thumbPosition = scrollbarThumb.offsetLeft;
+        //         const maxThumbPosition =
+        //             sliderScrollbar.getBoundingClientRect().width -
+        //             scrollbarThumb.offsetWidth;
+
+        //         const handleMouseMove = (e) => {
+        //             const deltaX = e.clientX - startX;
+        //             const newThumbPosition = thumbPosition + deltaX;
+        //             const boundedPosition = Math.max(
+        //                 0,
+        //                 Math.min(maxThumbPosition, newThumbPosition)
+        //             );
+        //             const scrollPosition =
+        //                 (boundedPosition / maxThumbPosition) * maxScrollLeft;
+
+        //             scrollbarThumb.style.left = `${boundedPosition}px`;
+        //             imageList.scrollLeft = scrollPosition;
+        //         };
+        //         const handleMouseUp = () => {
+        //             document.removeEventListener("mousemove", handleMouseMove);
+        //             document.removeEventListener("mouseup", handleMouseUp);
+        //         };
+        //         document.addEventListener("mousemove", handleMouseMove);
+        //         document.addEventListener("mouseup", handleMouseUp);
+        //     });
+        //     slideButtons.forEach((button) => {
+        //         button.addEventListener("click", () => {
+        //             const direction = button.id === "prev-slide" ? -1 : 1;
+        //             const scrollAmount = imageList.clientWidth * direction;
+        //             imageList.scrollBy({
+        //                 left: scrollAmount,
+        //                 behavior: "smooth",
+        //             });
+        //         });
+        //     });
+        //     const handleSlideButtons = () => {
+        //         slideButtons[0].style.display =
+        //             imageList.scrollLeft <= 0 ? "none" : "flex";
+        //         slideButtons[1].style.display =
+        //             imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
+        //     };
+        //     const updateScrollThumbPosition = () => {
+        //         const scrollPosition = imageList.scrollLeft;
+        //         const thumbPosition =
+        //             (scrollPosition / maxScrollLeft) *
+        //             (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
+        //         scrollbarThumb.style.left = `${thumbPosition}px`;
+        //     };
+        //     imageList.addEventListener("scroll", () => {
+        //         updateScrollThumbPosition();
+        //         handleSlideButtons();
+        //     });
+        // },
     },
 };
 </script>

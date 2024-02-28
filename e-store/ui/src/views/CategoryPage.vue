@@ -3,11 +3,7 @@
     <HeaderAllCategories />
     <section class="section-products">
         <div class="container">
-            <div
-                v-for="product in category"
-                :key="product.id"
-                class="row justify-content-center text-center"
-            >
+            <div>
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
                         <h2></h2>
