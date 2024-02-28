@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rate_products', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->integer('number_of_rate_for_product');
             // $table->text('comment');
             $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
