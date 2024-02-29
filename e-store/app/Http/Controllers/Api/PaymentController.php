@@ -13,7 +13,7 @@ class PaymentController extends Controller
     {
         $this->validate($request, [
             'amount' => 'required|integer',
-            'currency' => 'required|string|in:usd', // Adjust as needed
+            'currency' => 'required|string|in:usd'
         ]);
 
         try {
