@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\OrderProdctController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PillController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -115,7 +116,7 @@ Route::get('/offers', [OfferController::class, 'allOffers']);
 Route::get('/show/offer/{id}', [OfferController::class, 'show_precent_offer']);
 
 
-
+Route::post('/create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
 
 
 
