@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','Company_id'];
+    protected $fillable = ['name','company_id'];
+    protected $keyType = 'string'; // Set the key type to UUID
+    public $incrementing = false; // Disable auto-incrementing
 
     public function company()
     {
@@ -16,6 +19,13 @@ class Category extends Model
     }
     public function product()
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(Product::class);
+    }
+    public static function boot() {
+        parent::boot();
+        // Auto generate UUID when creating data User
+        static::creating(function ($model) {
+            $model->id = Str::uuid();
+        });
     }
 }

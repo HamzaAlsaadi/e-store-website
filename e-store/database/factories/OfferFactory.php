@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\offer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,8 @@ class OfferFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-        ];
+            'percent_of_discount' => fake()->randomElement(['10', '15', '50']),
+            'expiration_date' => fake()->dateTimeThisDecade()->format('Y-m-d'),        ];
+
     }
 }

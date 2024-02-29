@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Payment extends Model
+class Gsm extends Model
 {
     use HasFactory;
-    protected $fillable=['order_id','user_id','stripe_payment_id'];
+    protected $fillable=['name_phone','image_phone','url_phone','networt_technology','sim','demenation','weight'
+    ,'build','size','display','resoulation','chiapest'
+    ,'cpu','gpu','camera','camera_f','feature_camera'
+    ,'video','sensores','battarey','charghing','usb','model'
+    ,'price','colores','company_id'];
     protected $keyType = 'string'; // Set the key type to UUID
     public $incrementing = false; // Disable auto-incrementing
 
-    public function order()
+    public function company()
     {
-         return $this->belongsTo(Order::class,'order_id');
-    }
-    public function user()
-    {
-         return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
     public static function boot() {
         parent::boot();
@@ -29,4 +29,5 @@ class Payment extends Model
             $model->id = Str::uuid();
         });
     }
+
 }

@@ -13,6 +13,6 @@ class PivotOrderProductSeeder extends Seeder
      */
     public function run(): void
     {
-        PivotOrderProduct::factory()->count(50)->create();
+        PivotOrderProduct::factory()->count(5)->create();
     }
 }
