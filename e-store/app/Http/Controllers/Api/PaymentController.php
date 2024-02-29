@@ -9,24 +9,36 @@ use Stripe\PaymentIntent;
 
 class PaymentController extends Controller
 {
-    public function createPaymentIntent(Request $request)
+    public function purchase(Request $request)
     {
-        $this->validate($request, [
-            'amount' => 'required|integer',
-            'currency' => 'required|string|in:usd', // Adjust as needed
-        ]);
-
+        $user = auth()->user()->id;
         try {
-            Stripe::setApiKey(config('services.stripe.secret'));
+            //create new customer on stripe dashboard or if exists get him
+            $user->createOrGetStripeCustomer();
 
-            $paymentIntent = PaymentIntent::create([
-                'amount' => $request->amount,
-                'currency' => $request->currency,
-            ]);
+            $payment = $user->charge(
+                $request->input('amount'),
+                $request->input('payment_method_id')
+            );
 
-            return response()->json(['client_secret' => $paymentIntent->client_secret]);
+            $payment = $payment->asStripePaymentIntent();
+
+            $order = $user->orders()
+                ->create([
+
+                    'total' => $payment->charges->data[0]->amount,
+                    'user_id' => auth()->user()->id
+                ]);
+
+            foreach (json_decode($request->input('cart'), true) as $item) {
+                $order->products()
+                    ->attach($item['id'], ['quantity' => $item['quantity']]);
+            }
+
+            $order->load('products');
+            return $order;
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 }

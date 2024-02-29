@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -55,10 +56,7 @@ class User extends Authenticatable
         return $this->hasMany(RateProduct::class);
     }
 
-    public function problem()
-    {
-        return $this->hasMany(Problem::class);
-    }
+
     public function orders()
     {
         return $this->hasMany(order::class);
@@ -67,5 +65,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
-
 }
