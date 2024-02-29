@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
@@ -11,7 +12,7 @@ class PaymentController extends Controller
 {
     public function purchase(Request $request)
     {
-        $user = auth()->user()->id;
+        $user = User::find(auth()->user()->id);
         try {
             //create new customer on stripe dashboard or if exists get him
             $user->createOrGetStripeCustomer();
