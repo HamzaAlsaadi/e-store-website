@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Api\AcessController;
 use App\Http\Controllers\Api\CatgoryContoller;
 use App\Http\Controllers\Api\CobonDiscountController;
@@ -124,7 +125,7 @@ Route::get('/offers', [OfferController::class, 'allOffers']);
 Route::get('/show/offer/{id}', [OfferController::class, 'show_precent_offer']);
 
 
-Route::post('/create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
+// Route::post('/create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
 
 
 
