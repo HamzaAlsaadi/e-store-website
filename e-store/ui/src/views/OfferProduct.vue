@@ -18,7 +18,7 @@
                     id="product-1"
                 >
                     <div
-                        v-if="product.offer_id != 0"
+                        v-if="product.offer_id != 3"
                         id="product-2"
                         class="single-product"
                     >
