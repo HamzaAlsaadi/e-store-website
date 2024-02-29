@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\payment;
+namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Stripe\Stripe;
@@ -21,7 +21,7 @@ class PaymentController extends Controller
 
     public function session(Request $request)
     {
-      /*  $cartItems = session()->get('cart');
+        $cartItems = session()->get('cart');
         if ($cartItems) {
 
             $totalPrice = 0;
@@ -32,7 +32,7 @@ class PaymentController extends Controller
                 $totalPrice =$totalPrice + $result;
             }};
             $totalPriceRounded = round($totalPrice * 100);
-            $productname='majd';*/
+            $productname='majd';
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $session = \Stripe\Checkout\Session::create([
             'line_items'  => [
@@ -40,11 +40,9 @@ class PaymentController extends Controller
                     'price_data' => [
                         'currency'     => 'USD',
                         'product_data' => [
-                            #"name" => $productname,
-                            "name" => 'trigger',
+                            "name" => $productname,
                         ],
-                        #'unit_amount'  => $totalPriceRounded,
-                        'unit_amount'  => '1500',
+                        'unit_amount'  => $totalPriceRounded,
                     ],
                     'quantity'   => 1,
                 ],
