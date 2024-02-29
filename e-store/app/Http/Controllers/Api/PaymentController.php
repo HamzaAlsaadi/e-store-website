@@ -12,8 +12,8 @@ class PaymentController extends Controller
     public function createPaymentIntent(Request $request)
     {
         $this->validate($request, [
-            'amount' => 'required|integer',
-            'currency' => 'required|string|in:usd'
+            'amount' => 'required',
+            'currency' => 'required'
         ]);
 
         try {
