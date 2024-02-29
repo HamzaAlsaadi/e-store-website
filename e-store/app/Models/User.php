@@ -55,10 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(RateProduct::class);
     }
 
-    public function problem()
-    {
-        return $this->hasMany(Problem::class);
-    }
+
     public function orders()
     {
         return $this->hasMany(order::class);
@@ -67,5 +64,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
-
 }
