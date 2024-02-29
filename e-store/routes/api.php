@@ -127,7 +127,7 @@ Route::get('/show/offer/{id}', [OfferController::class, 'show_precent_offer']);
 
 // Route::post('/create-payment-intent', [PaymentController::class, 'createPaymentIntent']);
 
-Route::post('/purchase', [PaymentController::class, 'purchase']);
+Route::post('/purchase', [PaymentController::class, 'purchase'])->middleware('auth:sanctum');
 
 Route::get('/pill/{userId}/{orderId}', [PillController::class, 'Pill'])->middleware('auth:sanctum');
 
