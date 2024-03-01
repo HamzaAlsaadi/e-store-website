@@ -39,6 +39,7 @@ class AddressController extends Controller
 
     public function update(Request $request)
     {
+        // $uuid = Str::uuid()->toString();
         $AddressUser =  AddressUser::find($request->id);
         if (!$AddressUser) {
             return response()->json(['error' => 'address user not found'], 404);
@@ -57,9 +58,11 @@ class AddressController extends Controller
 
     public function destroy(Request $request)
     {
-        $company = AddressUser::find($request->id);
-        if (!$company) {
+        $address = AddressUser::find($request->id);
+        if (!$address) {
             return response()->json(['error' => 'address user not found'], 404);
         }
+        $address->delete();
+        return response()->json(['message' => 'address deleted successfully'], 200);
     }
 }
