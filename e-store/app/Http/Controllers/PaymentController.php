@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\payment;
+namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Stripe\Stripe;

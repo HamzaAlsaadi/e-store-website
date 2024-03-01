@@ -138,7 +138,7 @@
                             <h6>Total</h6>
                             <p>{{ totalprice }}</p>
                         </div>
-                        <button @click="postorder" class="ml-auto">
+                        <button @click="openWebsite" class="ml-auto">
                             PROCEED TO CHECKOUT
                         </button>
                     </div>
@@ -162,6 +162,7 @@ export default {
         return {
             code: "",
             totalprice: 0,
+
             order: {},
             imges: "http://127.0.0.1:8000/api/get-image-link/",
             cartItems: [
@@ -174,25 +175,14 @@ export default {
         };
     },
     methods: {
-        postorder() {
-            const token = window.localStorage.getItem("token");
-
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/create-order",
-                data: this.cartItems,
-
-                headers: { Authorization: `Bearer ${token}` },
-            })
+        openWebsite() {
+            axios
+                .get("http://127.0.0.1:8000/session")
                 .then((response) => {
-                    this.order = response.data;
-                    console.log(response.data);
+                    window.open(response.data.url, "_blank");
                 })
-                .catch(function (error) {
-                    window.alert(error.response);
-                })
-                .catch(function () {
-                    window.alert("hi");
+                .catch((error) => {
+                    console.error(error);
                 });
         },
         postcobon() {

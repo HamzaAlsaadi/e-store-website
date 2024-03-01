@@ -1,4 +1,5 @@
 <template>
+    <HeaderAllCategories />
     <body>
         <h1 class="beautiful-title">Compare Page</h1>
         <div class="container">
@@ -188,6 +189,7 @@
     </body>
 </template>
 <script>
+import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
 import axios from "axios";
 export default {
     name: "ComPare",
@@ -220,10 +222,10 @@ export default {
             this.phone2 = this.products[phone.value];
         },
     },
-
     beforeMount() {
         this.getaaorders();
     },
+    components: { HeaderAllCategories },
 };
 </script>
 <style scoped>

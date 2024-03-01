@@ -34,13 +34,6 @@
                                 href="#account-info"
                                 >Info</a
                             >
-
-                            <a
-                                class="list-group-item list-group-item-action bg-dark text-white"
-                                data-toggle="list"
-                                href="#account-connections"
-                                >Connections</a
-                            >
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -85,49 +78,6 @@
                                             >
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Male</label
-                                        >
-                                        <br />
-                                        <div
-                                            class="form-check form-check-inline"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="inlineRadioOptions"
-                                                id="inlineRadio1"
-                                                value="option1 "
-                                                style="padding-left: 15px"
-                                            />
-                                            <label
-                                                class="form-check-label text-white"
-                                                for="inlineRadio1"
-                                                style="padding-left: 15px"
-                                            >
-                                                female</label
-                                            >
-                                        </div>
-                                        <div
-                                            class="form-check form-check-inline"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="inlineRadioOptions"
-                                                id="inlineRadio2"
-                                                value="option2"
-                                                style="padding-left: 15px"
-                                            />
-                                            <label
-                                                class="form-check-label text-white"
-                                                for="inlineRadio2"
-                                                style="padding-left: 15px"
-                                                >Male</label
-                                            >
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div
@@ -168,27 +118,13 @@
                                 <div class="card-body pb-2">
                                     <div class="form-group">
                                         <label class="form-label text-white"
-                                            >Birthday</label
+                                            >Nationality</label
                                         >
                                         <input
                                             type="text"
                                             class="form-control"
-                                            value=""
-                                            placeholder="May 3, 1995"
+                                            v-model="user.Nationality"
                                         />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Country</label
-                                        >
-                                        <select class="form-select">
-                                            >
-                                            <option>Syria</option>
-                                            <option selected>oman</option>
-                                            <option>Iraq</option>
-                                            <option>Jordn</option>
-                                            <option>UAE</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <hr class="border-light m-0" />
@@ -199,9 +135,9 @@
                                             >Phone</label
                                         >
                                         <input
+                                            v-model="user.phone"
                                             type="text"
                                             class="form-control"
-                                            value=""
                                             placeholder="+0 (963) 956 7891"
                                         />
                                     </div>
@@ -218,43 +154,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="tab-pane fade" id="account-connections">
-                                <div class="card-body">
-                                    <button
-                                        type="button"
-                                        class="btn btn-twitter text-white btn-dark"
-                                    >
-                                        Connect to <strong>Email</strong>
-                                    </button>
-                                </div>
-                                <hr class="border-light m-0" />
-
-                                <hr class="border-light m-0" />
-                                <div class="card-body">
-                                    <button
-                                        type="button"
-                                        class="btn btn-facebook text-white btn-dark"
-                                    >
-                                        Connect to <strong>Phone Number</strong>
-                                    </button>
-                                </div>
-                                <hr class="border-light m-0" />
-                                <div class="card-body">
-                                    <button
-                                        type="button"
-                                        class="btn btn-instagram text-white btn-dark"
-                                    >
-                                        Connect to <strong>Address</strong>
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center">
                 <button
+                    @click="updateprofile"
                     type="button"
                     class="btn btn-primary btn-dark"
                     style="padding: 15px"
@@ -301,6 +207,29 @@ export default {
             axios({
                 method: "get",
                 url: "http://127.0.0.1:8000/api/user/show-user",
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    this.user = response.data;
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
+        updateprofile() {
+            const token = window.localStorage.getItem("token");
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/user/update-user",
+                data: {
+                    name: this.user.name,
+                    Nationality: this.user.Nationality,
+                    phone: this.user.phone,
+                    id: this.user.id,
+                    email: this.user.email,
+                },
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {

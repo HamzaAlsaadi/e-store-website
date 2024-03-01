@@ -122,8 +122,12 @@
                             <div class="input-field">
                                 <label>imge</label>
                                 <input
-                                    type="text"
-                                    placeholder="Enter your name"
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    id="image"
+                                    class="mx-3"
+                                    @change="changefile"
                                 />
                             </div>
                         </div>
@@ -214,23 +218,29 @@ export default {
                 });
         },
         editcompany() {
-            axios({
-                method: "post",
-                url:
-                    "http://127.0.0.1:8000/api/update-Company?company_name=" +
-                    this.namecompany +
-                    "&company_address=" +
-                    this.address +
-                    "&id=" +
-                    this.idpro,
-            })
+            const formData = new FormData();
+            // get the item
+            const imgFile = document.querySelector("#image");
+            // append data
+            formData.append("company_name", this.namecompany);
+            formData.append("company_address", this.address);
+            formData.append("image", imgFile.files[0]);
+            console.log(formData);
+
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/update-company",
+
+                    formData
+                )
                 .then((response) => {
                     console.log(response);
                     alert(response.data);
                 })
-                .catch(function (error) {
+                .catch(function (error, response) {
                     console.log(error.data);
                     console.log(error.response);
+                    console.log(response);
                 })
                 .catch(function () {
                     window.alert("hi");

@@ -1,5 +1,4 @@
 <template>
-    <!-- Header All Categories-->
     <HeaderAllCategories />
     <section class="section-products">
         <div class="container">
@@ -9,51 +8,26 @@
                         <h2>{{ company.company_name }}</h2>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div
-                    v-for="product in $store.state.products"
-                    :key="product.id"
-                    id="product-1"
-                    class="col-md-6 col-lg-4 col-xl-3"
-                >
-                    <div class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-bag"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-suit-heart-fill"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
+                <div id="product-1" class="row">
+                    <!-- Single Product -->
+                    <div
+                        v-for="product in $store.state.products"
+                        :key="product.id"
+                        id="product-1"
+                        class="col-md-6 col-lg-4 col-xl-3"
+                    >
+                        <div class="single-product">
+                            <div
+                                class="part-1"
+                                :style="{
+                                    backgroundImage:
+                                        'url(http://127.0.0.1:8000/api/get-image-link/' +
+                                        product.imge +
+                                        ')',
+                                }"
+                            >
+                                <ul>
+                                    <li
                                         @click="
                                             AddProduct(
                                                 product.id,
@@ -62,9 +36,32 @@
                                                 product.imge
                                             )
                                         "
-                                        href="#"
                                     >
+                                        <router-link to="/CheckOut">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-bag"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                                                />
+                                            </svg>
+                                        </router-link>
+                                    </li>
+                                    <li>
                                         <svg
+                                            @click="
+                                                AddProduct(
+                                                    product.id,
+                                                    product.mobile_name,
+                                                    product.Price,
+                                                    product.imge
+                                                )
+                                            "
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
                                             height="16"
@@ -77,11 +74,9 @@
                                                 d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
                                             />
                                         </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><router-link
+                                    </li>
+                                    <li>
+                                        <router-link
                                             :to="
                                                 '/DetailsProduct?id=' +
                                                 product.id
@@ -100,21 +95,25 @@
                                                 />
                                             </svg>
                                         </router-link>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">
-                                {{ product.mobile_name }}
-                            </h3>
-                            <h4 class="product-price">{{ product.Price }}$</h4>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="part-2">
+                                <h3 class="product-title">
+                                    {{ product.mobile_name }}
+                                </h3>
+                                <h4 class="product-price">
+                                    {{ product.Price }}$
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Header All Categories-->
+
     <FooTer />
 </template>
 <script>
@@ -230,14 +229,11 @@ img {
     display: inline-block;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-
 body {
     font-family: "Poppins", sans-serif;
     color: #ffffff;
 }
 
-a,
 a:hover {
     text-decoration: none;
     color: inherit;
@@ -273,9 +269,24 @@ a:hover {
     max-height: 290px;
     margin-bottom: 20px;
     overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section-products .single-product .part-1:hover {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.2, 1.2) rotate(5deg);
+    transition: all 0.3s;
 }
 
-.section-products .single-product .part-1::before {
+.section-products .single-product .part-1:hover::before {
     position: absolute;
     content: "";
     top: 0;
@@ -283,6 +294,7 @@ a:hover {
     width: 100%;
     height: 100%;
     z-index: -1;
+    transform: scale(1.2, 1.2) rotate(5deg);
     transition: all 0.3s;
 }
 
@@ -291,9 +303,9 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../assets/product-1.jpg") no-repeat center;
     background-size: cover;
     transition: all 0.3s;
+    transform: scale(1.2, 1.2) rotate(5deg);
 }
 
 .section-products #product-2 .part-1::before {
@@ -349,7 +361,7 @@ a:hover {
     margin-right: 4px;
 }
 
-.section-products .single-product .part-1 ul li a {
+.section-products .single-product .part-1 ul li svg {
     display: inline-block;
     width: 40px;
     height: 40px;
