@@ -87,7 +87,7 @@ class OrderProdctController extends Controller
         return response()->json($ordersInfo);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $order = Order::with('user')->find($id);
 

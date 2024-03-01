@@ -102,6 +102,7 @@ Route::post('/auth/login', [UserController::class, 'loginUser']);
 
 
 Route::post('/create-order', [OrderProdctController::class, 'createOrder'])->middleware('auth:sanctum');
+Route::post('/show-order/{id}', [OrderProdctController::class, 'show'])->middleware('auth:sanctum');
 Route::post('/order-time-range', [OrderProdctController::class, 'getOrdersInTimeRange'])->middleware('auth:sanctum');
 Route::apiResource('/order', OrderProdctController::class)->middleware('auth:sanctum');
 
