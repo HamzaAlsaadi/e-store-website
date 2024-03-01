@@ -350,18 +350,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
-                                    ><router-link to="LatestProduct"
-                                        >Regex</router-link
+                                    ><router-link to="AnotherWeb"
+                                        >Another Web</router-link
                                     ></a
                                 >
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"
-                                    ><router-link to="LatestProduct"
-                                        >NLP</router-link
-                                    ></a
-                                >
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
                                     ><router-link to="Compare"

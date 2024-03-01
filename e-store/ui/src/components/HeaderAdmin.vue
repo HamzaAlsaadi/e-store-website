@@ -220,6 +220,13 @@
                                     ></a
                                 >
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"
+                                    ><router-link to="/OrderAdmin"
+                                        >Order</router-link
+                                    ></a
+                                >
+                            </li>
                         </ul>
                     </div>
                 </div>

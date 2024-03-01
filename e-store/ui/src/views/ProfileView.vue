@@ -25,12 +25,6 @@
                             <a
                                 class="list-group-item list-group-item-action bg-dark text-white"
                                 data-toggle="list"
-                                href="#account-change-password"
-                                >Change password</a
-                            >
-                            <a
-                                class="list-group-item list-group-item-action bg-dark text-white"
-                                data-toggle="list"
                                 href="#account-info"
                                 >Info</a
                             >
@@ -80,40 +74,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="tab-pane fade"
-                                id="account-change-password"
-                            >
-                                <div class="card-body pb-2">
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Current password</label
-                                        >
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >New password</label
-                                        >
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label text-white"
-                                            >Repeat new password</label
-                                        >
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
                             <div class="tab-pane fade" id="account-info">
                                 <div class="card-body pb-2">
                                     <div class="form-group">
@@ -126,10 +86,6 @@
                                             v-model="user.Nationality"
                                         />
                                     </div>
-                                </div>
-                                <hr class="border-light m-0" />
-                                <div class="card-body pb-2">
-                                    <h6 class="mb-4 text-white">Contacts</h6>
                                     <div class="form-group">
                                         <label class="form-label text-white"
                                             >Phone</label
@@ -141,17 +97,54 @@
                                             placeholder="+0 (963) 956 7891"
                                         />
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                                <hr class="border-light m-0" />
+                                <div class="card-body pb-2">
+                                    <h6 class="mb-4 text-white">Contacts</h6>
+
+                                    <div
+                                        class="form-group"
+                                        v-for="addre in address"
+                                        :key="addre.id"
+                                    >
                                         <label class="form-label text-white"
-                                            >Address</label
-                                        >
+                                            >Name Of The City
+                                        </label>
                                         <input
+                                            v-model="addre.name_of_the_city"
                                             type="text"
                                             class="form-control"
-                                            value=""
-                                            placeholder="Syria/Damascus/Masakn Barzeh"
+                                            placeholder="Name Of The City"
                                         />
+                                        <label class="form-label text-white"
+                                            >Number Of The Street</label
+                                        >
+                                        <input
+                                            v-model="addre.number_of_the_street"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Number Of The Street"
+                                        />
+                                        <label class="form-label text-white">
+                                            Number Of Building</label
+                                        >
+                                        <input
+                                            v-model="addre.number_of_building"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder=" Number Of Building"
+                                        />
+
+                                        <hr />
                                     </div>
+                                    <button
+                                        @click="updateaddress"
+                                        type="button"
+                                        class="btn btn-primary btn-dark"
+                                        style="padding: 15px"
+                                    >
+                                        Update Address
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +175,7 @@
 import axios from "axios";
 export default {
     data() {
-        return { user: {} };
+        return { user: {}, address: {} };
     },
     methods: {
         veryfi() {
@@ -218,6 +211,22 @@ export default {
                     console.log(error);
                 });
         },
+        getaddress() {
+            const token = window.localStorage.getItem("token");
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/show-address-user",
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    this.address = response.data;
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
         updateprofile() {
             const token = window.localStorage.getItem("token");
             axios({
@@ -242,9 +251,58 @@ export default {
                     console.log(error);
                 });
         },
+        updateaddress() {
+            const token = window.localStorage.getItem("token");
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/update-address-user",
+                data: {
+                    name_of_the_city: this.address.name_of_the_city,
+                    number_of_the_street: this.address.number_of_the_street,
+                    number_of_building: this.address.number_of_building,
+                    user_id: this.user.id,
+                    id: this.address.id,
+                },
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    this.address = response.data;
+                    console.log(response.data);
+                    console.log(this.address.id);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
+        createaddress() {
+            const token = window.localStorage.getItem("token");
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/create-address-user",
+                data: {
+                    name_of_the_city: this.address.name_of_the_city,
+                    number_of_the_street: this.address.number_of_the_street,
+                    number_of_building: this.address.number_of_building,
+                    user_id: this.user.id,
+                    id: this.address.id,
+                },
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((response) => {
+                    this.address = response.data;
+                    console.log(response.data);
+                    console.log(this.address.id);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                    console.log(error);
+                });
+        },
     },
     mounted() {
         this.getprofile();
+        this.getaddress();
     },
 };
 </script>

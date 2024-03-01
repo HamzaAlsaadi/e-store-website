@@ -25,8 +25,20 @@ import TableOfMessage from "../views/TableOfMessage";
 import ContactUs from "../views/ContactUs";
 import FaQ from "../views/FAQ";
 import AnotherWeb from "../views/AnotherWeb";
+import OrderAdmin from "../views/OrderAdmin";
+import PayMent from "../views/Payment";
 
 const routes = [
+    {
+        path: "/PayMent",
+        name: "PayMent",
+        component: PayMent,
+    },
+    {
+        path: "/OrderAdmin",
+        name: "OrderAdmin",
+        component: OrderAdmin,
+    },
     {
         path: "/AnotherWeb",
         name: "AnotherWeb",

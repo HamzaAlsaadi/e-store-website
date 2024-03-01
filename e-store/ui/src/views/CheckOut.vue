@@ -1,7 +1,4 @@
 <template>
-    <!-- Header All Categories-->
-
-    <!-- تحميل Bootstrap CSS فقط -->
     <link
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         rel="stylesheet"
@@ -142,7 +139,9 @@
                             <p>{{ totalprice }}</p>
                         </div>
                         <button @click="postorder" class="ml-auto">
-                            PROCEED TO CHECKOUT
+                            <router-link class="ml-auto" to="/PayMent"
+                                >PROCEED TO CHECKOUT</router-link
+                            >
                         </button>
                     </div>
                 </div>
@@ -150,10 +149,6 @@
         </section>
     </section>
     <FooTer />
-    <div class="card" id="card">
-        <input type="number" v-model="amount" />
-        <button @click="handleSubmit" type="submit">Pay</button>
-    </div>
 </template>
 <script>
 import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
@@ -172,6 +167,7 @@ export default {
             code: "",
             totalprice: 0,
             see: "",
+            discount: "",
 
             order: {},
             imges: "http://127.0.0.1:8000/api/get-image-link/",
@@ -220,25 +216,26 @@ export default {
             const data = {
                 cartItems: store.state.Orderto,
             };
+            const a = data;
+
             const token = window.localStorage.getItem("token");
 
-            axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/create-order",
-                data: data,
-
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/create-order",
+                    { cartItems: JSON.stringify(a) },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
                 .then((response) => {
-                    console.log(response.data);
+                    store.state.idorder = response.data;
+                    console.log(response);
+                    console.log(data);
                 })
-                .catch(function (error) {
+                .catch((error) => {
                     console.log(store.state.Orderto);
-
                     console.log(error);
-                })
-                .catch(function () {
-                    window.alert("hi");
                 });
         },
         postcobon() {
@@ -258,7 +255,7 @@ export default {
                     console.log(response.data);
                 })
                 .catch(function (error) {
-                    window.alert(error.response);
+                    console.log(error);
                 })
                 .catch(function () {
                     window.alert("hi");

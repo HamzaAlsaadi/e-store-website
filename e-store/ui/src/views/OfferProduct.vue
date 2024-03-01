@@ -17,123 +17,127 @@
                     :key="product.id"
                     id="product-1"
                 >
-                    <div
-                        v-if="product.offer_id != 3"
-                        id="product-2"
-                        class="single-product"
-                    >
+                    <div v-for="offer in offers" :key="offer.id">
                         <div
-                            class="part-1"
-                            :style="{
-                                backgroundImage: 'url(' + product.imge + ')',
-                            }"
+                            v-if="product.offer_id == offer.id"
+                            id="product-2"
+                            class="single-product"
                         >
-                            <span
-                                class="discount"
-                                v-if="product.offer_id == idoffer"
-                                >{{ counter.percent_of_discount }} % off</span
+                            <div
+                                class="part-1"
+                                :style="{
+                                    backgroundImage:
+                                        'url(' + product.imge + ')',
+                                }"
                             >
+                                <span
+                                    class="discount"
+                                    v-if="product.offer_id == idoffer"
+                                    >{{ counter.percent_of_discount }} %
+                                    off</span
+                                >
 
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-bag"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-suit-heart-fill"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        @click="
-                                            AddProduct(
-                                                product.id,
-                                                product.mobile_name,
-                                                product.Price,
-                                                product.imge
-                                            )
-                                        "
-                                        href="#"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            fill="currentColor"
-                                            class="bi bi-plus-lg"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
-                                            />
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        ><router-link
-                                            :to="
-                                                '/DetailsProduct?id=' +
-                                                product.id
-                                            "
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-bag"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
                                             ><svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
                                                 height="16"
                                                 fill="currentColor"
-                                                class="bi bi-arrows-angle-expand"
+                                                class="bi bi-suit-heart-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            @click="
+                                                AddProduct(
+                                                    product.id,
+                                                    product.mobile_name,
+                                                    product.Price,
+                                                    product.imge
+                                                )
+                                            "
+                                            href="#"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-plus-lg"
                                                 viewBox="0 0 16 16"
                                             >
                                                 <path
                                                     fill-rule="evenodd"
-                                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
+                                                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
                                                 />
                                             </svg>
-                                        </router-link>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><router-link
+                                                :to="
+                                                    '/DetailsProduct?id=' +
+                                                    product.id
+                                                "
+                                                ><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    class="bi bi-arrows-angle-expand"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"
+                                                    />
+                                                </svg>
+                                            </router-link>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <div class="part-2">
-                            <h3 class="product-title">
-                                {{ product.mobile_name }}
-                            </h3>
-                            <h4 class="product-old-price">
-                                ${{ product.Price }}
-                            </h4>
-                            <h4 class="product-price">
-                                ${{
-                                    ((100 - counter.percent_of_discount) *
-                                        product.Price) /
-                                    100
-                                }}
-                            </h4>
+                            <div class="part-2">
+                                <h3 class="product-title">
+                                    {{ product.mobile_name }}
+                                </h3>
+                                <h4 class="product-old-price">
+                                    ${{ product.Price }}
+                                </h4>
+                                <h4 class="product-price">
+                                    ${{
+                                        ((100 - counter.percent_of_discount) *
+                                            product.Price) /
+                                        100
+                                    }}
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,6 +162,7 @@ export default {
             img: [],
             product: {},
             idoffer: 1,
+            offers: {},
             counter: {},
         };
     },
@@ -170,6 +175,22 @@ export default {
                 .then((response) => {
                     this.counter = response.data;
                     console.log(this.counter);
+                })
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
+        getalloffer() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/offers/",
+            })
+                .then((response) => {
+                    this.offers = response.data;
+                    console.log(this.product);
                 })
                 .catch(function (error) {
                     window.alert(error.response);

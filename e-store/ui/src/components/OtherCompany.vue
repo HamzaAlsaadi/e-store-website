@@ -21,7 +21,7 @@
                 :key="company.id"
             >
                 <router-link to="Samsung">
-                    <img class="image-item" :src="imges + company.image" />
+                    <img :src="imges + company.image" />
                 </router-link>
             </ul>
 
@@ -53,13 +53,14 @@ export default {
     mounted() {
         this.getcompany();
 
-        this.initSlider();
-        window.addEventListener("resize", this.initSlider);
-        window.addEventListener("load", this.initSlider);
-    },
-    beforeUnmount() {
-        window.removeEventListener("resize", this.initSlider);
-        window.removeEventListener("load", this.initSlider);
+        // this.initSlider();
+        // window.addEventListener("resize", this.initSlider);
+        // window.addEventListener("load", this.initSlider);
+
+        // beforeUnmount() {
+        //     window.removeEventListener("resize", this.initSlider);
+        //     window.removeEventListener("load", this.initSlider);
+        //
     },
     methods: {
         getcompany() {
@@ -69,7 +70,6 @@ export default {
             })
                 .then((response) => {
                     this.companys = response.data;
-                    console.log(response.data);
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -78,82 +78,75 @@ export default {
                     window.alert("hi");
                 });
         },
-        initSlider() {
-            const imageList = document.querySelector(
-                ".slider-wrapper .image-list"
-            );
+        // initSlider() {
+        //     const imageList = document.querySelector(
+        //         ".slider-wrapper .image-list"
+        //     );
+        //     const slideButtons = document.querySelectorAll(
+        //         ".slider-wrapper .slide-button"
+        //     );
+        //     const sliderScrollbar = document.querySelector(
+        //         ".container .slider-scrollbar"
+        //     );
+        //     const scrollbarThumb =
+        //         sliderScrollbar.querySelector(".scrollbar-thumb");
+        //     const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
-            if (!imageList) {
-                console.error(
-                    'The element ".slider-wrapper .image-list" could not be found in the DOM.'
-                );
-                return;
-            }
-            const slideButtons = document.querySelectorAll(
-                ".slider-wrapper .slide-button"
-            );
-            const sliderScrollbar = document.querySelector(
-                ".container .slider-scrollbar"
-            );
-            const scrollbarThumb =
-                sliderScrollbar.querySelector(".scrollbar-thumb");
-            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+        //     scrollbarThumb.addEventListener("mousedown", (e) => {
+        //         const startX = e.clientX;
+        //         const thumbPosition = scrollbarThumb.offsetLeft;
+        //         const maxThumbPosition =
+        //             sliderScrollbar.getBoundingClientRect().width -
+        //             scrollbarThumb.offsetWidth;
 
-            scrollbarThumb.addEventListener("mousedown", (e) => {
-                const startX = e.clientX;
-                const thumbPosition = scrollbarThumb.offsetLeft;
-                const maxThumbPosition =
-                    sliderScrollbar.getBoundingClientRect().width -
-                    scrollbarThumb.offsetWidth;
+        //         const handleMouseMove = (e) => {
+        //             const deltaX = e.clientX - startX;
+        //             const newThumbPosition = thumbPosition + deltaX;
+        //             const boundedPosition = Math.max(
+        //                 0,
+        //                 Math.min(maxThumbPosition, newThumbPosition)
+        //             );
+        //             const scrollPosition =
+        //                 (boundedPosition / maxThumbPosition) * maxScrollLeft;
 
-                const handleMouseMove = (e) => {
-                    const deltaX = e.clientX - startX;
-                    const newThumbPosition = thumbPosition + deltaX;
-                    const boundedPosition = Math.max(
-                        0,
-                        Math.min(maxThumbPosition, newThumbPosition)
-                    );
-                    const scrollPosition =
-                        (boundedPosition / maxThumbPosition) * maxScrollLeft;
-
-                    scrollbarThumb.style.left = `${boundedPosition}px`;
-                    imageList.scrollLeft = scrollPosition;
-                };
-                const handleMouseUp = () => {
-                    document.removeEventListener("mousemove", handleMouseMove);
-                    document.removeEventListener("mouseup", handleMouseUp);
-                };
-                document.addEventListener("mousemove", handleMouseMove);
-                document.addEventListener("mouseup", handleMouseUp);
-            });
-            slideButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    const direction = button.id === "prev-slide" ? -1 : 1;
-                    const scrollAmount = imageList.clientWidth * direction;
-                    imageList.scrollBy({
-                        left: scrollAmount,
-                        behavior: "smooth",
-                    });
-                });
-            });
-            const handleSlideButtons = () => {
-                slideButtons[0].style.display =
-                    imageList.scrollLeft <= 0 ? "none" : "flex";
-                slideButtons[1].style.display =
-                    imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
-            };
-            const updateScrollThumbPosition = () => {
-                const scrollPosition = imageList.scrollLeft;
-                const thumbPosition =
-                    (scrollPosition / maxScrollLeft) *
-                    (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
-                scrollbarThumb.style.left = `${thumbPosition}px`;
-            };
-            imageList.addEventListener("scroll", () => {
-                updateScrollThumbPosition();
-                handleSlideButtons();
-            });
-        },
+        //             scrollbarThumb.style.left = `${boundedPosition}px`;
+        //             imageList.scrollLeft = scrollPosition;
+        //         };
+        //         const handleMouseUp = () => {
+        //             document.removeEventListener("mousemove", handleMouseMove);
+        //             document.removeEventListener("mouseup", handleMouseUp);
+        //         };
+        //         document.addEventListener("mousemove", handleMouseMove);
+        //         document.addEventListener("mouseup", handleMouseUp);
+        //     });
+        //     slideButtons.forEach((button) => {
+        //         button.addEventListener("click", () => {
+        //             const direction = button.id === "prev-slide" ? -1 : 1;
+        //             const scrollAmount = imageList.clientWidth * direction;
+        //             imageList.scrollBy({
+        //                 left: scrollAmount,
+        //                 behavior: "smooth",
+        //             });
+        //         });
+        //     });
+        //     const handleSlideButtons = () => {
+        //         slideButtons[0].style.display =
+        //             imageList.scrollLeft <= 0 ? "none" : "flex";
+        //         slideButtons[1].style.display =
+        //             imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
+        //     };
+        //     const updateScrollThumbPosition = () => {
+        //         const scrollPosition = imageList.scrollLeft;
+        //         const thumbPosition =
+        //             (scrollPosition / maxScrollLeft) *
+        //             (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
+        //         scrollbarThumb.style.left = `${thumbPosition}px`;
+        //     };
+        //     imageList.addEventListener("scroll", () => {
+        //         updateScrollThumbPosition();
+        //         handleSlideButtons();
+        //     });
+        // },
     },
 };
 </script>
