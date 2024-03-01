@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AcessController;
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\CatgoryContoller;
 use App\Http\Controllers\Api\CobonDiscountController;
 use App\Http\Controllers\Api\CodeCheckController;
@@ -60,7 +61,10 @@ Route::post('update-Company', [CompanyController::class, 'update']);
 Route::post('delete-Company', [CompanyController::class, 'destroy']);
 Route::get('product-of-company/{companyId}', [CompanyController::class, 'getCompanyProducts']);
 
-
+Route::get('show-address-user', [AddressController::class, 'show']);
+Route::post('create-address-user', [AddressController::class, 'store']);
+Route::post('update-address-user', [AddressController::class, 'update']);
+Route::post('delete-address-user', [AddressController::class, 'destroy']);
 
 Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv'])->middleware('auth:sanctum');;
 
