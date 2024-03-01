@@ -28,14 +28,12 @@ class OrderProdctController extends Controller
         */
 
         try {
-            $jsonData = $request->json()->all();
-            $cartItems = $jsonData['cartItems'];
+            // print_r($request->cartItems);
 
-            $cartItems = json_decode($request->input('cartItems'), true);
+            $str_json = json_encode($request->cartItems); //array to json string conversion
 
+            $cartItems = json_decode($str_json, true);
 
-
-            var_dump($cartItems);
             if ($request->cartItems) {
 
                 $totalPrice = 0;
