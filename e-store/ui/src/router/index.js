@@ -24,8 +24,14 @@ import AddOffer from "../views/AddOffer";
 import TableOfMessage from "../views/TableOfMessage";
 import ContactUs from "../views/ContactUs";
 import FaQ from "../views/FAQ";
+import AnotherWeb from "../views/AnotherWeb";
 
 const routes = [
+    {
+        path: "/AnotherWeb",
+        name: "AnotherWeb",
+        component: AnotherWeb,
+    },
     {
         path: "/FaQ",
         name: "FaQ",

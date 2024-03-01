@@ -125,9 +125,9 @@
                                     type="file"
                                     name="image"
                                     accept="image/*"
-                                    id="image"
+                                    id="imagee"
                                     class="mx-3"
-                                    @change="changefile"
+                                    @change="changefilea"
                                 />
                             </div>
                         </div>
@@ -176,6 +176,12 @@ export default {
             this.img = file;
             console.log(this.img);
         },
+        changefilea() {
+            const input = document.getElementById("imagee");
+            const file = input.files;
+            this.img = file;
+            console.log(this.img);
+        },
         editData(qw) {
             this.isPopupVisible = true;
             this.idpro = qw;
@@ -220,8 +226,10 @@ export default {
         editcompany() {
             const formData = new FormData();
             // get the item
-            const imgFile = document.querySelector("#image");
+            const imgFile = document.querySelector("#imagee");
             // append data
+            formData.append("id", this.idpro);
+
             formData.append("company_name", this.namecompany);
             formData.append("company_address", this.address);
             formData.append("image", imgFile.files[0]);
@@ -229,7 +237,7 @@ export default {
 
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/update-company",
+                    "http://127.0.0.1:8000/api/update-Company",
 
                     formData
                 )

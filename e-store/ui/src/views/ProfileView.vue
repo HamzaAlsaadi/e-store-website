@@ -221,7 +221,7 @@ export default {
         updateprofile() {
             const token = window.localStorage.getItem("token");
             axios({
-                method: "get",
+                method: "post",
                 url: "http://127.0.0.1:8000/api/user/update-user",
                 data: {
                     name: this.user.name,
@@ -235,6 +235,7 @@ export default {
                 .then((response) => {
                     this.user = response.data;
                     console.log(response.data);
+                    console.log(this.user.name);
                 })
                 .catch(function (error) {
                     window.alert(error.response);

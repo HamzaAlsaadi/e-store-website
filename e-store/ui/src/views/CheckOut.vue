@@ -138,7 +138,7 @@
                             <h6>Total</h6>
                             <p>{{ totalprice }}</p>
                         </div>
-                        <button @click="openWebsite" class="ml-auto">
+                        <button @click="postorder" class="ml-auto">
                             PROCEED TO CHECKOUT
                         </button>
                     </div>
@@ -147,11 +147,16 @@
         </section>
     </section>
     <FooTer />
+    <div class="card" id="card">
+        <input type="number" v-model="amount" />
+        <button @click="handleSubmit" type="submit">Pay</button>
+    </div>
 </template>
 <script>
 import HeaderAllCategories from "@/components/HeaderAllCategories.vue";
 import FooTer from "@/components/footer.vue";
 import axios from "axios";
+import Stripe from "@vue-stripe/vue-stripe";
 
 import store from "@/store";
 export default {
@@ -160,9 +165,9 @@ export default {
 
     data() {
         return {
+            amount: 0,
             code: "",
             totalprice: 0,
-
             order: {},
             imges: "http://127.0.0.1:8000/api/get-image-link/",
             cartItems: [
@@ -175,14 +180,56 @@ export default {
         };
     },
     methods: {
-        openWebsite() {
-            axios
-                .get("http://127.0.0.1:8000/session")
+        async handleSubmit() {
+            const { data } = await axios.post(
+                "http://127.0.0.1:8000/api/createPaymentIntent",
+                {
+                    amount: this.amount * 100, // Convert amount to cents
+                    currency: "usd",
+                }
+            );
+
+            const stripe = Stripe(
+                "pk_test_51OnzmLDbdangSdamoA2FNIkxwKIp9OtbxJOyQOdaWxWF9G6BAdboamYZD764nPKWIOoTermWP76AvJYAuqeDCPHA00TX7TIczo"
+            );
+            console.log(stripe);
+
+            const elements = stripe.elements();
+            const card = elements.create("card");
+
+            const result = await stripe.confirmCardPayment(data.clientSecret, {
+                payment_method: {
+                    card,
+                },
+            });
+
+            if (result.error) {
+                console.error(result.error.message);
+            } else {
+                // Payment succeeded
+                console.log(result.paymentIntent);
+            }
+        },
+
+        postorder() {
+            const token = window.localStorage.getItem("token");
+
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/create-order",
+                data: this.cartItems,
+
+                headers: { Authorization: `Bearer ${token}` },
+            })
                 .then((response) => {
-                    window.open(response.data.url, "_blank");
+                    this.order = response.data;
+                    console.log(response.data);
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch(function (error) {
+                    window.alert(error.response);
+                })
+                .catch(function () {
+                    window.alert("hi");
                 });
         },
         postcobon() {

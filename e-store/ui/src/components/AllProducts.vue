@@ -161,6 +161,21 @@ export default {
                     //     return;
                     // }
                 }
+                for (
+                    var indexe = 0;
+                    indexe < Object.keys(store.state.Orderto).length;
+                    indexe++
+                ) {
+                    if (id == store.state.Orderto[indexe]["id"]) {
+                        store.state.Orderto[indexe]["count"]++;
+                        console.log(store.state.Orderto);
+                        return;
+                    }
+                    // if (id == store.state.Order[index]["id"]) {
+                    //     store.state.Order[index]["count"]--;
+                    //     return;
+                    // }
+                }
             }
             store.state.Order[store.state.counter] = {
                 id: id,
@@ -169,8 +184,14 @@ export default {
                 img: img,
                 count: 1,
             };
+            store.state.Orderto[store.state.count] = {
+                id: id,
+                price: Price,
+                count: 1,
+            };
 
             store.state.counter++;
+            store.state.count++;
         },
     },
     beforeMount() {
