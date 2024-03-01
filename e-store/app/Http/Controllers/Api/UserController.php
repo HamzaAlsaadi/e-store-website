@@ -40,7 +40,8 @@ class UserController extends Controller
             $response = ['message' => 'id incorrect'];
         } else {
             $response =  $user;
-        }return response()->json($response);
+        }
+        return response()->json($response);
         return response()->json($response);
     }
     public function createUser(Request $request)
@@ -137,6 +138,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'Nationality' => 'required',
+            'phone' => 'required',
+            'email' => 'required'
             // Add validation rules for other fields
         ]);
         $user->update($request->all());
