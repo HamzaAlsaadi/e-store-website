@@ -4,11 +4,12 @@
         <div class="container">
             <div class="search-bar text-center">
                 <input
+                    v-model="name"
                     type="search"
                     placeholder="Search your product"
                     class="search"
                 />
-                <button class="search-button">
+                <button @click="getorders" class="search-button">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -273,6 +274,35 @@ export default {
     components: {
         HeaderAllCategories,
         FooTer,
+    },
+    data() {
+        return {
+            name: "",
+            gsm: {},
+            arena: {},
+            products: [],
+        };
+    },
+    methods: {
+        getorders() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/IR?mobile_name=" + this.name,
+            })
+                .then((response) => {
+                    this.products = response.data;
+                    this.gsm = this.products[0];
+                    this.arena = this.products[1];
+                    console.log(this.gsm);
+                    console.log(this.arena);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
     },
 };
 </script>

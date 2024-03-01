@@ -11,7 +11,7 @@ export default createStore({
         companyname: "",
         companyid: 0,
         categoryid: 0,
-        Orderto: {},
+        Orderto: [],
     },
     getters: {},
     mutations: {},

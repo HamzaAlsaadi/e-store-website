@@ -66,6 +66,7 @@
                                     if (
                                         $store.state.Order[index]['count'] > 0
                                     ) {
+                                        $store.state.Orderto[index]['count']--;
                                         $store.state.Order[index]['count']--;
                                     }
                                     total_price();
@@ -87,6 +88,8 @@
                             <button
                                 @click="
                                     $store.state.Order[index]['count']++;
+                                    $store.state.Orderto[index]['count']++;
+
                                     total_price();
                                 "
                                 class="btn btn-primary"
@@ -168,6 +171,8 @@ export default {
             amount: 0,
             code: "",
             totalprice: 0,
+            see: "",
+
             order: {},
             imges: "http://127.0.0.1:8000/api/get-image-link/",
             cartItems: [
@@ -212,21 +217,25 @@ export default {
         },
 
         postorder() {
+            const data = {
+                cartItems: store.state.Orderto,
+            };
             const token = window.localStorage.getItem("token");
 
             axios({
                 method: "post",
                 url: "http://127.0.0.1:8000/api/create-order",
-                data: this.cartItems,
+                data: data,
 
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => {
-                    this.order = response.data;
                     console.log(response.data);
                 })
                 .catch(function (error) {
-                    window.alert(error.response);
+                    console.log(store.state.Orderto);
+
+                    console.log(error);
                 })
                 .catch(function () {
                     window.alert("hi");
@@ -275,16 +284,25 @@ export default {
             console.log(index);
             if (Object.keys(store.state.Order).length == 1) {
                 delete store.state.Order[i];
+                delete store.state.Orderto[i];
+
                 this.total_price();
                 store.state.counter--;
+                store.state.count--;
+
                 console.log(store.state.Order);
                 return;
             }
             for (i = 0; i < Object.keys(store.state.Order).length - 1; i++) {
                 store.state.Order[i] = store.state.Order[i + 1];
+                store.state.Orderto[i] = store.state.Orderto[i + 1];
             }
             delete store.state.Order[i];
+            delete store.state.Orderto[i];
+
             store.state.counter--;
+            store.state.count--;
+
             this.total_price();
         },
         checkout() {

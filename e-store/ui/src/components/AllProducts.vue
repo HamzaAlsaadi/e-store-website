@@ -154,20 +154,7 @@ export default {
                     if (id == store.state.Order[index]["id"]) {
                         store.state.Order[index]["count"]++;
                         console.log(store.state.Order);
-                        return;
-                    }
-                    // if (id == store.state.Order[index]["id"]) {
-                    //     store.state.Order[index]["count"]--;
-                    //     return;
-                    // }
-                }
-                for (
-                    var indexe = 0;
-                    indexe < Object.keys(store.state.Orderto).length;
-                    indexe++
-                ) {
-                    if (id == store.state.Orderto[indexe]["id"]) {
-                        store.state.Orderto[indexe]["count"]++;
+                        store.state.Orderto[index]["count"]++;
                         console.log(store.state.Orderto);
                         return;
                     }
@@ -192,6 +179,7 @@ export default {
 
             store.state.counter++;
             store.state.count++;
+            console.log(store.state.Orderto);
         },
     },
     beforeMount() {
