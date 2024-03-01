@@ -13,6 +13,7 @@ use App\Http\Controllers\RateProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -87,4 +88,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     });
 
     Route::get('/verfiy-mail/{token}', [UserController::class, 'verficationMail']);
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/session', [PaymentController::class, 'session'])->name('session');
+    Route::get('/success', [PaymentController::class, 'success'])->name('success');
 });

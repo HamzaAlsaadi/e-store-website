@@ -13,8 +13,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
 
         \app\Console\Commands\ImportCsvRecords::class,
+        \app\Console\Commands\ImportMoboRecords::class,
 
     ];
+
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
