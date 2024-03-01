@@ -40,7 +40,7 @@ class OrderProdctController extends Controller
                 $cartCount = 0;
                 if (is_iterable($cartItems)) {
                     foreach ($cartItems as $cartItem) {
-                        $totalPrice += $cartItem["price"] + $cartItem["quantity"];
+                        $totalPrice += $cartItem["price"] * $cartItem["quantity"];
                         $cartCount += $cartItem["quantity"];
                     };
                 }
