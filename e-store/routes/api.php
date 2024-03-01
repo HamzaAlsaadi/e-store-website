@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CodeCheckController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\infromationRetiavl;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\OrderProdctController;
 use App\Http\Controllers\Api\PaymentController;
@@ -77,6 +78,7 @@ Route::post('delete-address-user', [AddressController::class, 'destroy']);
 Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv'])->middleware('auth:sanctum');;
 
 
+Route::get('/IR', [infromationRetiavl::class, 'IR']);
 
 Route::get('Serach/searchByName', [SerachController::class, 'searchByName']);
 Route::get('Serach/searchByPrice', [SerachController::class, 'searchByPrice']);
