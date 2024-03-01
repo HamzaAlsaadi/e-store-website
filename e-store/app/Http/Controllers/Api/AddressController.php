@@ -15,20 +15,13 @@ class AddressController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $address = AddressUser::where('user_id', $user->id)->first();
+        // print($user->id);
+        $address = AddressUser::all()->where('user_id', $user->id);
 
         return response()->json($address, 200);
     }
 
-    public function show($id)
-    {
-        $address = AddressUser::find($id);
-        if (!$address) {
-            return response()->json(['message' => 'user not found'], 404);
-        }
 
-        return response()->json($address, 200);
-    }
 
 
 
@@ -44,9 +37,9 @@ class AddressController extends Controller
         return response()->json($AddressUser, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $AddressUser = AddressUser::find($request->id);
+        $AddressUser =  AddressUser::find($request->id);
         if (!$AddressUser) {
             return response()->json(['error' => 'address user not found'], 404);
         }
@@ -56,7 +49,9 @@ class AddressController extends Controller
             'number_of_building' => 'required',
             'user_id' => 'required',
         ]);
+        // $AddressUser->update($validatedData);
         $AddressUser->update($validatedData);
+
         return response()->json($AddressUser, 200);
     }
 

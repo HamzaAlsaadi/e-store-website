@@ -70,12 +70,12 @@ Route::post('update-Company', [CompanyController::class, 'update']);
 Route::post('delete-Company', [CompanyController::class, 'destroy']);
 Route::get('product-of-company/{companyId}', [CompanyController::class, 'getCompanyProducts']);
 
-Route::get('show-address-user', [AddressController::class, 'show']);
-Route::post('create-address-user', [AddressController::class, 'store']);
-Route::post('update-address-user', [AddressController::class, 'update']);
-Route::post('delete-address-user', [AddressController::class, 'destroy']);
+Route::get('show-address-user', [AddressController::class, 'index'])->middleware('auth:sanctum');;
+Route::post('create-address-user', [AddressController::class, 'store'])->middleware('auth:sanctum');;
+Route::post('update-address-user', [AddressController::class, 'update'])->middleware('auth:sanctum');;
+Route::post('delete-address-user', [AddressController::class, 'destroy'])->middleware('auth:sanctum');;
 
-Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv'])->middleware('auth:sanctum');;
+Route::post('/user/store/product/csv', [StoreCsvController::class, 'importCsv'])->middleware('auth:sanctum');
 
 
 Route::get('/IR', [infromationRetiavl::class, 'IR']);
