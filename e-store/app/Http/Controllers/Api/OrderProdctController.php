@@ -59,7 +59,7 @@ class OrderProdctController extends Controller
                         ]);
                     }
                 }
-                return response()->json(true, 200);
+                return response()->json($order_id, 200);
             } else {
                 return response()->json(false, 201);
             }
