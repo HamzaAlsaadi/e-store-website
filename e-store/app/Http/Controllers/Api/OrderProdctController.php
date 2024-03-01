@@ -37,13 +37,13 @@ class OrderProdctController extends Controller
             if ($request->cartItems) {
 
                 $totalPrice = 0;
-                $cartCount = 0;
-                if (is_iterable($cartItems)) {
-                    foreach ($cartItems as $cartItem) {
-                        $totalPrice += $cartItem["price"] * $cartItem["quantity"];
-                        $cartCount += $cartItem["quantity"];
-                    };
-                }
+                // $cartCount = 0;
+                // if (is_iterable($cartItems)) {
+                foreach ($cartItems as $cartItem) {
+                    $totalPrice += $cartItem["price"] * $cartItem["quantity"];
+                    // $cartCount += $cartItem["quantity"];
+                };
+                // }
                 $order = Order::create([
                     'user_id' => Auth::user()->id,
                     'total_price' => $totalPrice,
