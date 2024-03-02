@@ -66,6 +66,11 @@ class OrderProdctController extends Controller
                     foreach ($cartItems as $cartItem) {
                         $totalPrice += $cartItem["price"] + $cartItem["quantity"];
                         $cartCount += $cartItem["quantity"];
+                // $cartCount = 0;
+                if (is_iterable($cartItems)) {
+                    foreach ($cartItems as $cartItem) {
+                        $totalPrice += $cartItem["price"] * $cartItem["quantity"];
+                        // $cartCount += $cartItem["quantity"];
                     };
                 }
                 $order = Order::create([
@@ -111,7 +116,7 @@ class OrderProdctController extends Controller
         return response()->json($ordersInfo);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
         $order = Order::with('user')->find($id);
 
