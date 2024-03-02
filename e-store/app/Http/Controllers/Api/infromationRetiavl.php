@@ -13,9 +13,18 @@ class infromationRetiavl extends Controller
     {
         $searchTerm = $request->input('mobile_name');
 
-        $product_Gsm = Gsm::where('name_phone', 'like', "%$searchTerm%")->get();
-        $product_mobo = Mobolist::where('name', 'like', "%$searchTerm%")->get();
+        $product_Gsm = Gsm::where('name_phone', 'like', "%$searchTerm%")->first();
+        $product_mobo = Mobolist::where('name', 'like', "%$searchTerm%")->first();
 
-        return response()->json([$product_Gsm, $product_mobo], 200);
+
+        if (isset($product_Gsm) && isset($product_mobo)) {
+            return response()->json([$product_Gsm, $product_mobo], 200);
+        } else if (isset($product_Gsm) && (!isset($product_mobo))) {
+            return response()->json([[], $product_mobo], 200);
+        } else if ((!isset($product_Gsm)) && (isset($product_mobo))) {
+            return response()->json([$product_Gsm, []], 200);
+        } else {
+            return response()->json([[], []], 200);
+        }
     }
 }
