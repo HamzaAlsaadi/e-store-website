@@ -213,9 +213,9 @@ export default {
         },
 
         postorder() {
-            const data = {
-                cartItems: store.state.Orderto,
-            };
+            store.state.Orderto.totalPrice = this.totalprice;
+            const data = store.state.Orderto;
+
             const a = data;
 
             const token = window.localStorage.getItem("token");
@@ -223,7 +223,7 @@ export default {
             axios
                 .post(
                     "http://127.0.0.1:8000/api/create-order",
-                    { cartItems: JSON.stringify(a) },
+                    JSON.stringify(a),
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -250,6 +250,20 @@ export default {
                     this.code,
                 headers: { Authorization: `Bearer ${token}` },
             })
+                .then((response) => {
+                    this.discount = response.data;
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then((response) => {
+                    this.discount = response.data;
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
                 .then((response) => {
                     this.discount = response.data;
                     console.log(response.data);

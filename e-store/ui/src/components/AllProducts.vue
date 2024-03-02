@@ -154,7 +154,7 @@ export default {
                     if (id == store.state.Order[index]["id"]) {
                         store.state.Order[index]["count"]++;
                         console.log(store.state.Order);
-                        store.state.Orderto[index]["count"]++;
+                        store.state.Orderto[index]["quantity"]++;
                         console.log(store.state.Orderto);
                         return;
                     }
@@ -174,7 +174,8 @@ export default {
             store.state.Orderto[store.state.count] = {
                 id: id,
                 price: Price,
-                count: 1,
+                quantity: 1,
+                totalPrice: 15,
             };
 
             store.state.counter++;

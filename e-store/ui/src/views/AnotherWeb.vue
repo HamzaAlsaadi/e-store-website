@@ -20,112 +20,104 @@
                         <tr>
                             <th class="text-center">Product Image</th>
                             <td>
-                                <img
-                                    src="src\assets\product-1.jpg"
-                                    id="img1"
-                                    alt=""
-                                />
+                                <img :src="gsm.image_phone" id="img1" alt="" />
                             </td>
                         </tr>
                         <tr>
-                            <th>Name iphone</th>
-                            <td>N/A</td>
+                            <th>Name Phone</th>
+                            <td>{{ gsm.name_phone }}</td>
                         </tr>
                         <tr>
-                            <th>Company</th>
-                            <td>N/A</td>
+                            <th>networt_technology</th>
+                            <td>{{ gsm.networt_technology }}</td>
                         </tr>
                         <tr>
                             <th>Price</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.sim }}</td>
                         </tr>
                         <tr>
                             <th class="text-center">Netwoek technology</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.demenation }}</td>
                         </tr>
                         <tr>
                             <th>SIM</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.display }}</td>
                         </tr>
                         <tr>
                             <th>Demenation</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.resoulation }}</td>
                         </tr>
                         <tr>
                             <th>Weight</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.weight }}</td>
                         </tr>
                         <tr>
                             <th>Bulid</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.size }}</td>
                         </tr>
                         <tr>
                             <th>Size</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.build }}</td>
                         </tr>
                         <tr>
                             <th>Display</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.chiapest }}</td>
                         </tr>
                         <tr>
                             <th>Resoulation</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.cpu }}</td>
                         </tr>
                         <tr>
                             <th>Chiapest</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.gpu }}</td>
                         </tr>
                         <tr>
                             <th>Cpu</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.camera }}</td>
                         </tr>
                         <tr>
                             <th>GPY</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.camera_f }}</td>
                         </tr>
                         <tr>
                             <th>Camera</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.feature_camera }}</td>
                         </tr>
                         <tr>
                             <th>Camera f</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.video }}</td>
                         </tr>
                         <tr>
                             <th>Feature Camera</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.sensores }}</td>
                         </tr>
                         <tr>
                             <th>Video</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.battarey }}</td>
                         </tr>
                         <tr>
                             <th>Sensores</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.charghing }}</td>
                         </tr>
                         <tr>
                             <th>Battarey</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.usb }}</td>
                         </tr>
                         <tr>
                             <th>Charghing</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.model }}</td>
                         </tr>
                         <tr>
                             <th>Usb</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.price }}</td>
                         </tr>
                         <tr>
                             <th>model</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.colores }}</td>
                         </tr>
                         <tr>
                             <th>Colores</th>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <th>Timestamps</th>
-                            <td>N/A</td>
+                            <td>{{ gsm.company_id }}</td>
                         </tr>
                     </table>
                 </div>
@@ -144,119 +136,112 @@
                         </tr>
                         <tr>
                             <th>Product Name</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.name }}</td>
                         </tr>
                         <tr>
                             <th>Company</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.resolution_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Product Price</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.price }}</td>
                         </tr>
                         <tr>
                             <th class="text-center">Display Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.display_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Resolution Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.number_of_cameras_in_phone }}</td>
                         </tr>
-                        <tr>
-                            <th>Number Of Camera</th>
-                            <td>N/A</td>
-                        </tr>
+
                         <tr>
                             <th>PPI Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.ppi_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Inches Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.inches_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Camera Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.camera_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Capacity Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.capacity_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.date }}</td>
                         </tr>
                         <tr>
                             <th>Screen Size</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.chipset_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Chipset</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.process_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Process Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.processer_type }}</td>
                         </tr>
                         <tr>
                             <th>Process Type</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.gpu_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Gpu Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.os }}</td>
                         </tr>
                         <tr>
                             <th>OS</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.space_limit_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Space limit Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.UFS }}</td>
                         </tr>
                         <tr>
                             <th>UFS</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.microsd_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Microsd Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.speakers_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Speakers Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.fingerprint_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Fingerprint Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.other_sensors_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Other Sensors Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.weight_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Weight Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.sim_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Sim Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.usb_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Usb Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.bluetooth_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Bluetooth Pattern</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.refresh_rate_pattern }}</td>
                         </tr>
                         <tr>
                             <th>Refresh Rate Pattern</th>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <th>Timestamps</th>
-                            <td>N/A</td>
+                            <td>{{ MOBO.company_id }}</td>
                         </tr>
                     </table>
                 </div>
@@ -279,7 +264,7 @@ export default {
         return {
             name: "",
             gsm: {},
-            arena: {},
+            MOBO: {},
             products: [],
         };
     },
@@ -292,7 +277,7 @@ export default {
                 .then((response) => {
                     this.products = response.data;
                     this.gsm = this.products[0];
-                    this.arena = this.products[1];
+                    this.MOBO = this.products[1];
                     console.log(this.gsm);
                     console.log(this.arena);
                 })

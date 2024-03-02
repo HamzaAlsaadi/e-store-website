@@ -28,22 +28,46 @@ class OrderProdctController extends Controller
         */
 
         try {
+            $cartItems = json_decode($request->getContent(), true);
+
+            $totalPrice = 0;
+
+            if (is_array($cartItems)) {
+                foreach ($cartItems as $cartItem) {
+                    $totalPrice += $cartItem["price"] * $cartItem["quantity"];
+                }
+            }
+            $order = Order::create([
+                'user_id' => Auth::user()->id,
+                'total_price' => $totalPrice,
+            ]);
+            $order_id = $order->id;
+            foreach ($cartItems as $cartItem) {
+                PivotOrderProduct::create([
+                    "product_id" => $cartItem["id"],
+                    "quantity" => $cartItem["quantity"],
+                    "order_id" => $order_id
+                ]);
+            }
+
+            return response()->json( $order_id, 200);
+
             // print_r($request->cartItems);
 
-            $str_json = json_encode($request->cartItems); //array to json string conversion
+          /*/  $str_json = json_encode($request->cartItems); //array to json string conversion
 
             $cartItems = json_decode($str_json, true);
 
             if ($request->cartItems) {
 
                 $totalPrice = 0;
-                // $cartCount = 0;
-                // if (is_iterable($cartItems)) {
-                foreach ($cartItems as $cartItem) {
-                    $totalPrice += $cartItem["price"] * $cartItem["quantity"];
-                    // $cartCount += $cartItem["quantity"];
-                };
-                // }
+                $cartCount = 0;
+                if (is_iterable($cartItems)) {
+                    foreach ($cartItems as $cartItem) {
+                        $totalPrice += $cartItem["price"] + $cartItem["quantity"];
+                        $cartCount += $cartItem["quantity"];
+                    };
+                }
                 $order = Order::create([
                     'user_id' => Auth::user()->id,
                     'total_price' => $totalPrice,
@@ -62,7 +86,7 @@ class OrderProdctController extends Controller
                 return response()->json($order_id, 200);
             } else {
                 return response()->json(false, 201);
-            }
+            }*/
         } catch (\Exception $e) {
             print($e);
             return response()->json('there a problem recheck the data you send');
