@@ -55,7 +55,7 @@ class CatgoryContoller extends Controller
             return response()->json(['error' => 'Category not found'], 404);
         }
         $this->validate($request, [
-            'name' => 'required|unique:categories,name',
+            'name' => 'required',
             'company_id' => 'required',
             // Add validation rules for other fields
         ]);
