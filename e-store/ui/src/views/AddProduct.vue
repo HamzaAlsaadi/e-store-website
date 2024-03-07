@@ -319,7 +319,14 @@
                         </div>
                         <div class="input-field">
                             <label>imge</label>
-                            <input type="text" placeholder="Enter your name" />
+                            <input
+                                type="file"
+                                name="image"
+                                accept="image/*"
+                                id="image1"
+                                class="mx-3"
+                                @change="changefile1"
+                            />
                         </div>
                     </div>
                     <button @click="cancelEdit">Cancel</button>
@@ -373,6 +380,12 @@ export default {
     methods: {
         changecsv(event) {
             this.csv = event.target.files[0];
+        },
+        changefile1() {
+            const input = document.getElementById("image1");
+            const file = input.files;
+            this.img = file;
+            console.log(this.img);
         },
         changefile() {
             const input = document.getElementById("image");
@@ -456,7 +469,7 @@ export default {
             formData.append("Price", this.price);
             formData.append("imge", imgFile.files[0]);
             formData.append("category_id", this.catid);
-            formData.append("Company_id", this.comid);
+            formData.append("company_id", this.comid);
             formData.append("offer_id", this.offerid);
             console.log(formData);
 

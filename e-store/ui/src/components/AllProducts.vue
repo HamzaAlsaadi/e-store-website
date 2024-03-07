@@ -221,14 +221,19 @@ body {
     font-family: "Poppins", sans-serif;
     color: #ffffff;
 }
+.part-1 {
+    border-radius: 30px;
+}
 
-a:hover {
+a {
     text-decoration: none;
     color: inherit;
+    border-radius: 30px;
 }
 
 .section-products {
     padding: 80px 0 54px;
+    border-radius: 10px;
 }
 
 .section-products .header {

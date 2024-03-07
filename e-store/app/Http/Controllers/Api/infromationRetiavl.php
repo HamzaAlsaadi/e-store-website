@@ -19,10 +19,14 @@ class infromationRetiavl extends Controller
 
         if (isset($product_Gsm) && isset($product_mobo)) {
             return response()->json([$product_Gsm, $product_mobo], 200);
+
         } else if (isset($product_Gsm) && (!isset($product_mobo))) {
-            return response()->json([[], $product_mobo], 200);
+            $product_mobo = Mobolist::find('0270ce88-9f72-4c4b-a13e-6999c18dbc6e');
+
+            return response()->json([$product_mobo, $product_Gsm], 200);
         } else if ((!isset($product_Gsm)) && (isset($product_mobo))) {
-            return response()->json([$product_Gsm, []], 200);
+            $product_Gsm = Gsm::find('0012a6b3-ac27-464a-aa9c-138c46c16fdc');
+            return response()->json([$product_Gsm, $product_mobo], 200);
         } else {
             return response()->json([[], []], 200);
         }

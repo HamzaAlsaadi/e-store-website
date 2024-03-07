@@ -101,19 +101,26 @@
                                                 {{ category.name }}
                                             </option>
                                         </select>
-                                        <select
-                                            class="form-select custom-select-sm rounded"
-                                            v-model="prcompany"
-                                            @change="getsearchcategory()"
+                                        <div
+                                            class="d-flex align-items-center price"
                                         >
-                                            <option
-                                                v-for="company in companys"
-                                                :key="company.id"
-                                                :value="company.company_name"
-                                            >
-                                                {{ company.company_name }}
-                                            </option>
-                                        </select>
+                                            <p>Price</p>
+                                            <input
+                                                v-model="min_price"
+                                                type="number"
+                                                placeholder="Min"
+                                                class="m-2 custom-select-sm rounde"
+                                                style="width: 50px"
+                                            />
+
+                                            <input
+                                                v-model="max_price"
+                                                type="number"
+                                                placeholder="Max"
+                                                class="custom-select-sm rounde"
+                                                style="width: 50px"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -336,6 +343,8 @@ export default {
     name: "HeaderPage",
     data() {
         return {
+            minValue: "",
+            maxValue: "",
             companies: [],
             companys: [],
             categorys: [],
@@ -343,9 +352,25 @@ export default {
             prcompany: "",
             showSelect: "",
             prcategory: "",
+            min_price: 0,
+            max_price: 0,
         };
     },
+    watch: {
+        // Watch for changes in minValue and maxValue and enforce positive values
+        minValue(newValue) {
+            this.enforcePositiveValue(newValue, "minValue");
+        },
+        maxValue(newValue) {
+            this.enforcePositiveValue(newValue, "maxValue");
+        },
+    },
     methods: {
+        enforcePositiveValue(value, field) {
+            if (value < 0) {
+                this[field] = "";
+            }
+        },
         toggleSelectVisibility() {
             this.showSelect = !this.showSelect;
         },
@@ -497,11 +522,28 @@ export default {
                 });
         },
         getserch() {
+            this.getprice();
             if (this.prcompany == "" && this.prcategory == "") {
                 this.getsearchdata();
             } else if (this.prcategory == "") {
                 this.getsearchcompanyproduct();
             } else this.getsearchcategoryproduct();
+        },
+        getprice() {
+            axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/api/Serach/searchByPrice",
+                min_price: this.min_price,
+                max_price: this.max_price,
+            })
+                .then((response) => {
+                    store.state.products = response.data;
+
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     beforeMount() {
@@ -531,7 +573,12 @@ export default {
     padding: 14px 16px;
     text-decoration: none;
 }
-
+.price {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    height: 35px;
+}
 .dropdown-content {
     display: none;
     position: absolute;

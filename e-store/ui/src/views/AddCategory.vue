@@ -56,7 +56,7 @@
                         <tr v-for="element in categorys" :key="element.id">
                             <td>{{ element.id }}</td>
                             <td>{{ element.name }}</td>
-                            <td>{{ element.Company_id }}</td>
+                            <td>{{ element.company_id }}</td>
                             <td>{{ element.created_at }}</td>
                             <td>{{ element.updated_at }}</td>
 
@@ -111,7 +111,7 @@
                         <button
                             type="button"
                             class="nextbtn"
-                            @click="saveEdit()"
+                            @click="saveEdit() + editcategory()"
                         >
                             Save
                         </button>
@@ -144,8 +144,9 @@ export default {
         };
     },
     methods: {
-        editData() {
+        editData(qw) {
             this.isPopupVisible = true;
+            this.idpro = qw;
         },
         cancelEdit() {
             this.isPopupVisible = false;
@@ -154,14 +155,42 @@ export default {
             console.log("save ok");
             this.isPopupVisible = false;
         },
+        editcategory() {
+            const formData = new FormData();
+            // get the item
+            // append data
+            formData.append("id", this.idpro);
 
+            formData.append("company_id", this.idcategory);
+            formData.append("name", this.namecategory);
+            console.log(formData);
+
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/update-catgory",
+
+                    formData
+                )
+                .then((response) => {
+                    console.log(response);
+                    alert(response.data);
+                })
+                .catch(function (error, response) {
+                    console.log(error.data);
+                    console.log(error.response);
+                    console.log(response);
+                })
+                .catch(function () {
+                    window.alert("hi");
+                });
+        },
         Addcategory() {
             axios({
                 method: "post",
                 url: "http://127.0.0.1:8000/api/create-catgory",
                 data: {
                     name: this.namecategory,
-                    Company_id: this.idcategory,
+                    company_id: this.idcategory,
                 },
             })
                 .then((response) => {
